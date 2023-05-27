@@ -1,0 +1,14 @@
+{
+  "site": {
+    "title": "Next.js",
+		"desc": "Francias ca"
+  },
+	"nav": {
+		"home": "Home"
+	},
+	"theme": {
+		"light": "light",
+		"dark": "dark",
+		"system": "system"
+	}
+}
