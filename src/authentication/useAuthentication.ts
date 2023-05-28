@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { AuthenticationState, LoginUsecase, noAuthentication } from "./Authentication"
-import { login as supabaseLogin } from "./SupabaseAuthClient"
+import { login as supabaseLogin } from "./SupabaseClient"
 
 type UseAuthentication = {
   login: (login: LoginUsecase) => Promise<void>
