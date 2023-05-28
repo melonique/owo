@@ -18,10 +18,10 @@ const Login = ({}) => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit, onError)} validated={validated}>
-      <div className="text-center mb-3">
+      <div className="text-center mb-1">
         <p>Sign in with:</p>
 
-        <div className='d-flex justify-content-around mb-3'>
+        <div className='d-flex justify-content-around mb-1'>
           <Button variant='link'><FaFacebookF /></Button>
           <Button variant='link'><FaTwitter /></Button>
           <Button variant='link'><FaGoogle /></Button>
@@ -31,22 +31,22 @@ const Login = ({}) => {
         <p>or:</p>
       </div>
 
-      <Form.Group className="mb-4" controlId="formBasicEmail">
+      <Form.Group className="mb-2" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" {...register('email', { required: true })}/>
       </Form.Group>
 
-      <Form.Group className="mb-4" controlId="formBasicPassword">
+      <Form.Group className="mb-2" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" {...register('password')} />
       </Form.Group>
 
-      <Form.Group className="d-flex justify-content-between mb-4">
+      <Form.Group className="d-flex justify-content-between mb-2">
         <Form.Check type="checkbox" label="Remember me" {...register('remember')}/>
         <Card.Link href="#">Forgot password?</Card.Link>
       </Form.Group>
 
-      <Button variant="primary" type="submit" className="mb-4 w-100">
+      <Button variant="primary" type="submit" className="mb-2 w-100">
         Sign In
       </Button>
 
