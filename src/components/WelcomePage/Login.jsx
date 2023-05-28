@@ -9,8 +9,8 @@ const Login = ({}) => {
   const { register, handleSubmit } = useForm();
   const [validated, setValidated] = useState(false);
 
-  const onSubmit = async ({ email, passowrd, remember }) => {
-    await login({email, passowrd});
+  const onSubmit = async ({ email, password, remember }) => {
+    await login({email, password});
   }
   const onError = () => {
     setValidated(true);
