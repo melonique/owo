@@ -1,9 +1,13 @@
+import useAuthentication from '@/authentication/useAuthentication';
 import React, { useState } from 'react';
 import { Container, Form, Button, Nav, Card, Tab, Row, Col } from 'react-bootstrap';
 import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
 
-function WelcomePage() {
+const WelcomePage = () => {
   const [activeKey, setActiveKey] = useState('login');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuthentication();
 
   return (
     <Container className="d-flex justify-content-center align-items-center">
@@ -26,7 +30,10 @@ function WelcomePage() {
               <Col>
                 <Tab.Content>
                   <Tab.Pane eventKey="login">
-                    <Form>
+                    <Form onSubmit={async (e) => {
+                      e.preventDefault();
+                      await login({email, password});
+                    }}>
                       <div className="text-center mb-3">
                         <p>Sign in with:</p>
 
@@ -42,12 +49,12 @@ function WelcomePage() {
 
                       <Form.Group className="mb-4" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.currentTarget.value)} />
                       </Form.Group>
 
                       <Form.Group className="mb-4" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.currentTarget.value)} />
                       </Form.Group>
 
                       <Form.Group className="d-flex justify-content-between mb-4">
