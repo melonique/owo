@@ -2,19 +2,20 @@
 import React from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 
-const GalleryItem = ({}) => (
+
+const GalleryItem = ({ listing : { id, owner, title, description, images, price, availability, location, type }}) => (
   <Card className="mb-3">
     <Card.Img
       variant="top"
-      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/belt.webp"
+      src={"http://placekitten.com/600/400"}
     />
     <Card.Body>
-      <Badge>New</Badge>
-      <Card.Title><a href="#!">Product name</a></Card.Title>
+      <Badge>{type}</Badge>
+      <Card.Title><a href="#!">{title}</a></Card.Title>
       <Card.Text>
         <a href="#!">Category</a>
       </Card.Text>
-      <Card.Text>$61.99</Card.Text>
+      <Card.Text>${price}</Card.Text>
     </Card.Body>
   </Card>
 );
