@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Header = ({}) => (
-  <div>Whats up homies</div>
+  <div></div>
 );
 
 Header.propTypes = {};
