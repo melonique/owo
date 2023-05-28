@@ -16,6 +16,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <p className="text-center mt-2 mb-3"><a className="btn btn-secondary" href="https://owo-r7g4k.ondigitalocean.app/" target="_blank">VIEW LANDING PAGE</a></p>
       <Header />
       <WelcomePage />
     </>
