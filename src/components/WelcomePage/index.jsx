@@ -2,12 +2,25 @@ import useAuthentication from '@/authentication/useAuthentication';
 import React, { useState } from 'react';
 import { Container, Form, Button, Nav, Card, Tab, Row, Col } from 'react-bootstrap';
 import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
+import { useForm } from 'react-hook-form';
 
 const WelcomePage = () => {
   const [activeKey, setActiveKey] = useState('login');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const { login } = useAuthentication();
+
+
+  const { register: registerLogin, handleSubmit: handleSubmitLogin } = useForm();
+  const { register: registerRegister, handleSubmit: handleSubmitRegister } = useForm();
+
+  const onSubmitLogin = async ({ email, passowrd, remember }) => {
+    await login({email, passowrd});
+  };
+
+  const onSubmitRegister = data => {
+    console.log(data);
+  };
+
+
 
   return (
     <Container className="d-flex justify-content-center align-items-center">
@@ -30,10 +43,7 @@ const WelcomePage = () => {
               <Col>
                 <Tab.Content>
                   <Tab.Pane eventKey="login">
-                    <Form onSubmit={async (e) => {
-                      e.preventDefault();
-                      await login({email, password});
-                    }}>
+                    <Form onSubmit={handleSubmitLogin(onSubmitLogin)}>
                       <div className="text-center mb-3">
                         <p>Sign in with:</p>
 
@@ -49,16 +59,16 @@ const WelcomePage = () => {
 
                       <Form.Group className="mb-4" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.currentTarget.value)} />
+                        <Form.Control type="email" placeholder="Enter email" {...registerLogin('email')}/>
                       </Form.Group>
 
                       <Form.Group className="mb-4" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.currentTarget.value)} />
+                        <Form.Control type="password" placeholder="Password" {...registerLogin('password')} />
                       </Form.Group>
 
                       <Form.Group className="d-flex justify-content-between mb-4">
-                        <Form.Check type="checkbox" label="Remember me" />
+                        <Form.Check type="checkbox" label="Remember me" {...registerLogin('remember')}/>
                         <Card.Link href="#">Forgot password?</Card.Link>
                       </Form.Group>
 
@@ -71,7 +81,7 @@ const WelcomePage = () => {
                   </Tab.Pane>
 
                   <Tab.Pane eventKey="register">
-                    <Form>
+                    <Form onSubmit={handleSubmitRegister(onSubmitRegister)}>
                       <div className="text-center mb-3">
                         <p>Sign up with:</p>
 
@@ -87,26 +97,30 @@ const WelcomePage = () => {
 
                       <Form.Group className="mb-4" controlId="formBasicName">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter name" />
+                        <Form.Control type="text" placeholder="Enter name" {...registerRegister('name')} />
                       </Form.Group>
 
                       <Form.Group className="mb-4" controlId="formBasicUsername">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" placeholder="Enter username" />
+                        <Form.Control type="text" placeholder="Enter username" {...registerRegister('username')} />
                       </Form.Group>
 
                       <Form.Group className="mb-4" controlId="formBasicEmailReg">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control type="email" placeholder="Enter email" {...registerRegister('email')} />
                       </Form.Group>
 
                       <Form.Group className="mb-4" controlId="formBasicPasswordReg">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="password" placeholder="Password" {...registerRegister('password')} />
+                      </Form.Group>
+                      <Form.Group className="mb-4" controlId="formBasicPasswordReg">
+                        <Form.Label>Password repeat</Form.Label>
+                        <Form.Control type="password" placeholder="Password" {...registerRegister('password2')} />
                       </Form.Group>
 
                       <Form.Group className='d-flex justify-content-center mb-4'>
-                        <Form.Check type='checkbox' label='I have read and agree to the terms' />
+                        <Form.Check type='checkbox' label='I have read and agree to the terms' {...registerRegister('tos')}/>
                       </Form.Group>
 
                       <Button variant="primary" type="submit" className="mb-4 w-100">
