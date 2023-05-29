@@ -1,1 +1,6 @@
-@import "./quartz.bootstrap.min.css";
+@import "./owo.bootstrap.css";
+
+body{
+  min-height: 100%;
+  background-color: #1acc8d;
+}
