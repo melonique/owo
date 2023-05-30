@@ -1,14 +1,16 @@
+import useAuthentication from '@/authentication/useAuthentication';
 import React, { useState } from 'react';
 import { Container, Form, Button, Nav, Card, Tab, Row, Col } from 'react-bootstrap';
 import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
 const RegisterForm = ({}) => {
+  const { register: registerUser } = useAuthentication();
   const { register, handleSubmit } = useForm();
   const [validated, setValidated] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async ({ email, password, username, name }) => {
+    await registerUser({ email, password, username, name })
   }
   const onError = () => {
     setValidated(true);

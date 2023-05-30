@@ -21,9 +21,18 @@ export const errorWhileAuthenticating = (error: any): ErrorWhileAuthenticating =
 
 export type AuthenticationState = NoAuthentication | Authenticated | ErrorWhileAuthenticating
 
-export type LoginUsecase = {
+export type LoginRequest = {
     email: string
     password: string
 }
 
-export type LoginResult = Authenticated | ErrorWhileAuthenticating
+export type LoginResponse = Authenticated | ErrorWhileAuthenticating
+
+export type RegisterRequest = {
+    email: string
+    password: string
+    name: string
+    username: string
+}
+
+export type RegisterResponse = Authenticated | ErrorWhileAuthenticating
