@@ -19,7 +19,7 @@ const Listings = () => {
         {listings.map((listing) => {
           return (
             <Col key={listing.id} md={4} lg={4}>
-            <Item listing={listing} />
+              <Item listing={listing} />
             </Col>
             )
         })}

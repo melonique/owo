@@ -4,13 +4,19 @@ export type NoAuthentication = {
 
 export const noAuthentication = (): NoAuthentication => ({ tag: 'NoAuthentication' })
 
-type Authenticated = {
-    tag: 'Authenticated',
-    session: any,
-    user: any
+export type User = {
+    id: string
+    email: string
+    name: string
+    username: string
 }
 
-export const authenticated = (session: any, user: any): Authenticated => ({ tag: 'Authenticated', session, user })
+type Authenticated = {
+    tag: 'Authenticated',
+    user: User
+}
+
+export const authenticated = (user: User): Authenticated => ({ tag: 'Authenticated', user })
 
 type ErrorWhileAuthenticating = {
     tag: 'ErrorWhileAuthenticating',

@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { AuthenticationState, LoginRequest, RegisterRequest, noAuthentication } from "./Authentication"
+import { AuthenticationState, LoginRequest, RegisterRequest, User, noAuthentication } from "./Authentication"
 import { login as supabaseLogin, register as supabaseRegister } from "./AuthenticationClient"
 
 type UseAuthentication = {
   login: (login: LoginRequest) => Promise<void>
   register: (register: RegisterRequest) => Promise<void>,
-  userLoggedIn: boolean,
+  user: User | undefined,
 }
 
 const useAuthentication = (): UseAuthentication => {
@@ -24,7 +24,7 @@ const useAuthentication = (): UseAuthentication => {
     return {
       login,
       register,
-      userLoggedIn: state.tag === 'Authenticated',
+      user: state.tag === 'Authenticated' ? state.user : undefined,
     }
 }
 
