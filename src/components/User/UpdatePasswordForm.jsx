@@ -4,12 +4,12 @@ import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
 const UpdatePasswordForm = () => {
-  const {  } = useAuthentication()
+  const { updatePassword } = useAuthentication()
   const { register, handleSubmit } = useForm()
   const [validated, setValidated] = useState(false)
 
   const onSubmit = async ({ password }) => {
-    await registerUser({ email, password, username, name })
+    await updatePassword({ password })
   }
   const onError = () => {
     setValidated(true);

@@ -5,16 +5,17 @@ import { updatePassword as supabaseUpdatePassword } from "./UserInformationClien
 import { UpdatePasswordRequest } from "./UserInformation"
 
 type UseAuthentication = {
-  login: (login: LoginRequest) => Promise<void>
-  register: (register: RegisterRequest) => Promise<void>,
+  login: (request: LoginRequest) => Promise<void>
+  register: (request: RegisterRequest) => Promise<void>,
+  updatePassword: (request: UpdatePasswordRequest) => Promise<void>,
   user: User | undefined,
 }
 
 const useAuthentication = (): UseAuthentication => {
     const [state, setState] = useState<AuthenticationState>(noAuthentication())
 
-    const login = async (login: LoginRequest): Promise<void> => {
-      const authState = await supabaseLogin(login)
+    const login = async (request: LoginRequest): Promise<void> => {
+      const authState = await supabaseLogin(request)
       setState(authState)
     }
 
@@ -32,6 +33,7 @@ const useAuthentication = (): UseAuthentication => {
     return {
       login,
       register,
+      updatePassword,
       user: state.tag === 'Authenticated' ? state.user : undefined,
     }
 }
