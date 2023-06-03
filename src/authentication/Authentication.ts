@@ -42,3 +42,10 @@ export type RegisterRequest = {
 }
 
 export type RegisterResponse = Authenticated | ErrorWhileAuthenticating
+
+export const fromAuthenticationResponseToUser = (userData: any): User => ({
+    id: userData['id'],
+    email: userData['email'],
+    name: userData['user_metadata']['name'],
+    username: userData['user_metadata']['username'],
+})
