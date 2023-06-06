@@ -17,7 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <p className="text-center mt-2 mb-3">
-        <a className="btn btn-outline-primary" href="https://owo-r7g4k.ondigitalocean.app/" target="_blank">VIEW LANDING PAGE</a>
+        <a className="btn btn-outline-primary" href="https://owo.quebec/" target="_blank">VIEW LANDING PAGE</a>
       </p>
       <Header />
       <WelcomePage />
