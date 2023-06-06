@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 
 
-const InputText = ({ name, label, rules, placeholder, register, errors, type = 'text' }) => {
+const Input = ({ name, label, rules, placeholder, register, errors, type = 'text' }) => {
 
   return (
     <Form.Group className="mb-3" controlname={name}>
@@ -23,4 +23,4 @@ const InputText = ({ name, label, rules, placeholder, register, errors, type = '
 }
 
 
-export default InputText;
+export default Input;

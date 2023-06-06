@@ -1,18 +1,11 @@
+import React from 'react';
+import { Button } from 'react-bootstrap';
 import useAuthentication from '@/authentication/useAuthentication';
-import React, { useState } from 'react';
-import { Container, Form, Button, Nav, Card, Tab, Row, Col } from 'react-bootstrap';
-import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
-import { useForm } from 'react-hook-form';
-import InputText from '@/components/Form/InputText';
+import { Form, Input } from '@/components';
 
 
 const RegisterForm = ({ }) => {
   const { register: registerUser } = useAuthentication();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty, isSubmitted }
-  } = useForm({ reValidateMode: "onChange" });
 
 
   const onSubmit = async ({ email, password, username, name }) => {
@@ -20,8 +13,8 @@ const RegisterForm = ({ }) => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className={isDirty || isSubmitted ? 'was-validated' : ''} noValidate>
-      {/*
+    <Form onSubmit={onSubmit} >
+      {/* import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
       <div className="text-center mb-1">
         <p>Sign up with:</p>
 
@@ -37,73 +30,63 @@ const RegisterForm = ({ }) => {
       */}
 
 
-      <InputText
+      <Input
         name="name"
         label="Nom complet"
+        placeholder="Entrez votre nom"
         rules={{
           required: "Entrez votre nom",
         }}
-        placeholder="Entrez votre nom"
-        register={register}
-        errors={errors}
       />
 
-      <InputText
+      <Input
         name="username"
         label="Username"
+        placeholder="Entrez un nom d'utilisateur"
         rules={{
           required: "Entrez un nom d'utilisateur",
         }}
-        placeholder="Entrez un nom d'utilisateur"
-        register={register}
-        errors={errors}
       />
-      <InputText
+      <Input
         name="email"
         type="email"
         label="Courriel"
+        placeholder="Entrez votre courriel"
         rules={{
           required: "Entrez votre courriel",
           pattern: { value: /\S+@\S+\.\S+/, message: "Entered value does not match email format" }
         }}
-        placeholder="Entrez votre courriel"
-        register={register}
-        errors={errors}
       />
 
-      <InputText
+      <Input
         name="password"
         type="password"
         label="Password"
         rules={{
           required: "Entrez un mot de passe",
         }}
-        register={register}
-        errors={errors}
       />
-      <InputText
+      <Input
         name="password2"
         type="password"
         label="Password"
         rules={{
           required: "Entrez un mot de passe",
           validate: {
-            validate: (val) => {
-              if (watch('password') != val) {
+            validate: (val, values) => {
+              if (values.password != val) {
                 return "Your passwords do no match";
               }
             },
           }
         }}
-        register={register}
-        errors={errors}
       />
 
-
+  {/*
       <Form.Group className='d-flex justify-content-center mb-2'>
         <Form.Check type='checkbox' label='I have read and agree to the terms' {...register('tos')} />
       </Form.Group>
-
+  */}
       <Button variant="primary" type="submit" className="mb-2 w-100">
         Sign Up
       </Button>
