@@ -1,23 +1,20 @@
+import React from 'react';
+import { Button } from 'react-bootstrap';
 import useAuthentication from '@/authentication/useAuthentication';
-import React, { useState } from 'react';
-import { Container, Form, Button, Nav, Card, Tab, Row, Col } from 'react-bootstrap';
-import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
-import { useForm } from 'react-hook-form';
+import { Form, Input } from '@/components';
 
-const RegisterForm = ({}) => {
+
+const RegisterForm = ({ }) => {
   const { register: registerUser } = useAuthentication();
-  const { register, handleSubmit } = useForm();
-  const [validated, setValidated] = useState(false);
+
 
   const onSubmit = async ({ email, password, username, name }) => {
     await registerUser({ email, password, username, name })
   }
-  const onError = () => {
-    setValidated(true);
-  }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)} validated={validated}>
+    <Form onSubmit={onSubmit} >
+      {/* import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
       <div className="text-center mb-1">
         <p>Sign up with:</p>
 
@@ -30,35 +27,66 @@ const RegisterForm = ({}) => {
 
         <p>or:</p>
       </div>
+      */}
 
-      <Form.Group className="mb-2" controlId="formBasicName">
-        <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter name" {...register('name')} />
-      </Form.Group>
 
-      <Form.Group className="mb-2" controlId="formBasicUsername">
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="text" placeholder="Enter username" {...register('username')} />
-      </Form.Group>
+      <Input
+        name="name"
+        label="Nom complet"
+        placeholder="Entrez votre nom"
+        rules={{
+          required: "Entrez votre nom",
+        }}
+      />
 
-      <Form.Group className="mb-2" controlId="formBasicEmailReg">
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" {...register('email')} />
-      </Form.Group>
+      <Input
+        name="username"
+        label="Username"
+        placeholder="Entrez un nom d'utilisateur"
+        rules={{
+          required: "Entrez un nom d'utilisateur",
+        }}
+      />
+      <Input
+        name="email"
+        type="email"
+        label="Courriel"
+        placeholder="Entrez votre courriel"
+        rules={{
+          required: "Entrez votre courriel",
+          pattern: { value: /\S+@\S+\.\S+/, message: "Entered value does not match email format" }
+        }}
+      />
 
-      <Form.Group className="mb-2" controlId="formBasicPasswordReg">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" {...register('password')} />
-      </Form.Group>
-      <Form.Group className="mb-2" controlId="formBasicPasswordReg">
-        <Form.Label>Password repeat</Form.Label>
-        <Form.Control type="password" placeholder="Password" {...register('password2')} />
-      </Form.Group>
+      <Input
+        name="password"
+        type="password"
+        label="Password"
+        rules={{
+          required: "Entrez un mot de passe",
+        }}
+      />
+      <Input
+        name="password2"
+        type="password"
+        label="Password"
+        rules={{
+          required: "Entrez un mot de passe",
+          validate: {
+            validate: (val, values) => {
+              if (values.password != val) {
+                return "Your passwords do no match";
+              }
+            },
+          }
+        }}
+      />
 
+  {/*
       <Form.Group className='d-flex justify-content-center mb-2'>
-        <Form.Check type='checkbox' label='I have read and agree to the terms' {...register('tos')}/>
+        <Form.Check type='checkbox' label='I have read and agree to the terms' {...register('tos')} />
       </Form.Group>
-
+  */}
       <Button variant="primary" type="submit" className="mb-2 w-100">
         Sign Up
       </Button>

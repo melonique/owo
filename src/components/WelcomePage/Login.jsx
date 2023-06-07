@@ -1,23 +1,19 @@
+import React from 'react';
+import { Button } from 'react-bootstrap';
 import useAuthentication from '@/authentication/useAuthentication';
-import React, { useState } from 'react';
-import { Container, Form, Button, Nav, Card, Tab, Row, Col } from 'react-bootstrap';
-import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
-import { useForm } from 'react-hook-form';
+import { Form, Input } from '@/components';
 
-const Login = ({}) => {
+
+const Login = ({ }) => {
   const { login } = useAuthentication();
-  const { register, handleSubmit } = useForm();
-  const [validated, setValidated] = useState(false);
 
   const onSubmit = async ({ email, password, remember }) => {
-    await login({email, password});
-  }
-  const onError = () => {
-    setValidated(true);
+    await login({ email, password });
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)} validated={validated}>
+    <Form onSubmit={onSubmit} >
+      {/* import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
       <div className="text-center mb-1">
         <p>Sign in with:</p>
 
@@ -30,27 +26,41 @@ const Login = ({}) => {
 
         <p>or:</p>
       </div>
+      */}
 
-      <Form.Group className="mb-2" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" {...register('email', { required: true })}/>
-      </Form.Group>
+      <Input
+        name="email"
+        type="email"
+        label="Courriel"
+        placeholder="Entrez votre courriel"
+        rules={{
+          required: "Entrez votre courriel",
+          pattern: { value: /\S+@\S+\.\S+/, message: "Entered value does not match email format" }
+        }}
+      />
 
-      <Form.Group className="mb-2" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" {...register('password')} />
-      </Form.Group>
+      <Input
+        name="password"
+        type="password"
+        label="Password"
+        rules={{
+          required: "Entrez votre mot de passe"
+        }}
+      />
 
-      <Form.Group className="d-flex justify-content-between mb-2">
-        <Form.Check type="checkbox" label="Remember me" {...register('remember')}/>
+      {/*
+      <BForm.Group className="d-flex justify-content-between mb-2">
+        <BForm.Check
+          type="checkbox"
+          label="Remember me" {...register('remember')}
+        />
         <Card.Link href="#">Forgot password?</Card.Link>
-      </Form.Group>
+      </BForm.Group>
+      */}
 
       <Button variant="primary" type="submit" className="mb-2 w-100">
         Sign In
       </Button>
-
-      <Card.Text className="text-center">Not a member? <Card.Link href="#">Register</Card.Link></Card.Text>
     </Form>
   )
 }

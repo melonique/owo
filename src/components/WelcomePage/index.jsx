@@ -11,7 +11,7 @@ const WelcomePage = () => {
   const [activeKey, setActiveKey] = useState('login');
 
   return (
-    <Container className="d-flex justify-content-center align-items-center mt-3 bg-feature">
+    <Container className="d-flex justify-content-center align-items-center mt-5 bg-feature">
       <Card style={{ width: '30rem' }} className="border-primary">
         <Card.Body>
           <Tab.Container activeKey={activeKey} onSelect={(k) => setActiveKey(k)}>
@@ -32,8 +32,8 @@ const WelcomePage = () => {
                 <Tab.Content>
                   <Tab.Pane eventKey="login">
                     <Login />
+                    <Card.Text className="text-center">Not a member? <Card.Link href="#" onClick={() => setActiveKey('register')}>Register</Card.Link></Card.Text>
                   </Tab.Pane>
-
                   <Tab.Pane eventKey="register">
                     <RegisterForm />
                   </Tab.Pane>
