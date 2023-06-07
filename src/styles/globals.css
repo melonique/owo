@@ -4,3 +4,15 @@ body{
   min-height: 100%;
   background-color: #1acc8d;
 }
+
+
+.bottom-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  /* Adjust as needed */
+}
+.bottom-navbar a{
+  color: #fff;
+}
