@@ -2,13 +2,14 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import useAuthentication from '@/authentication/useAuthentication';
 import { Checkbox, Form, Input } from '@/components';
-
+import { useRouter } from 'next/router';
 
 const Login = ({ }) => {
+  const router = useRouter();
   const { error, login } = useAuthentication();
 
-  const onSubmit = async ({ email, password, remember }) => {
-    await login({ email, password });
+  const onSubmit = async ({ email, password }) => {
+    await login({ email, password }, () => router.push('/profile'));
   }
 
   return (

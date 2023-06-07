@@ -1,11 +1,21 @@
+import { useRouter } from "next/router"
+import { User } from "@/authentication/Authentication"
 import useAuthentication from "@/authentication/useAuthentication"
+import { useEffect } from "react"
 
-const UserProfile = () => {
+type UserProfileProps = {
+    user: User
+}
+
+const UserProfile: React.FC<UserProfileProps> = () => {
+    const router = useRouter()
     const { user } = useAuthentication()
 
-    if (!user) {
-        return null
-    }
+    useEffect(() => {
+        if (!user) {
+            router.replace('/')
+        }
+    }, [user])
 
     return (
         <div>

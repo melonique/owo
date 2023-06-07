@@ -1,11 +1,11 @@
-import { useState } from "react"
-import { AuthenticationState, LoginRequest, RegisterRequest, ResponseError, User, noAuthentication } from "./Authentication"
+import { LoginRequest, RegisterRequest, ResponseError, User } from "./Authentication"
 import { login as supabaseLogin, register as supabaseRegister } from "./AuthenticationClient"
 import { updatePassword as supabaseUpdatePassword } from "./UserInformationClient"
 import { UpdatePasswordRequest } from "./UserInformation"
+import { useAuthenticationContext } from "./AuthenticationContext"
 
 type UseAuthentication = {
-  login: (request: LoginRequest) => Promise<void>
+  login: (request: LoginRequest, onSuccess?: () => void) => Promise<void>,
   register: (request: RegisterRequest) => Promise<void>,
   updatePassword: (request: UpdatePasswordRequest) => Promise<void>,
   user: User | undefined,
@@ -13,11 +13,14 @@ type UseAuthentication = {
 }
 
 const useAuthentication = (): UseAuthentication => {
-    const [state, setState] = useState<AuthenticationState>(noAuthentication())
+    const { state, setState } = useAuthenticationContext()
 
-    const login = async (request: LoginRequest): Promise<void> => {
+    const login = async (request: LoginRequest, onSuccess?: () => void): Promise<void> => {
       const authState = await supabaseLogin(request)
       setState(authState)
+      if (authState.tag === 'Authenticated') {
+        onSuccess?.()
+      }
     }
 
     const register = async (request: RegisterRequest): Promise<void> => {
