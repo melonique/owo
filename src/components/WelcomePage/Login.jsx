@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import useAuthentication from '@/authentication/useAuthentication';
-import { Form, Input } from '@/components';
+import { Checkbox, Form, Input } from '@/components';
 
 
 const Login = ({ }) => {
@@ -48,15 +48,10 @@ const Login = ({ }) => {
         }}
       />
 
-      {/*
-      <BForm.Group className="d-flex justify-content-between mb-2">
-        <BForm.Check
-          type="checkbox"
-          label="Remember me" {...register('remember')}
-        />
-        <Card.Link href="#">Forgot password?</Card.Link>
-      </BForm.Group>
-      */}
+      <Checkbox
+        name="remember"
+        label="Remember me"
+      />
 
       <Button variant="primary" type="submit" className="mb-2 w-100">
         Sign In

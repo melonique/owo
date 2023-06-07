@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import useAuthentication from '@/authentication/useAuthentication';
-import { Form, Input } from '@/components';
+import { Checkbox, Form, Input } from '@/components';
 
 
 const RegisterForm = ({ }) => {
@@ -82,11 +82,14 @@ const RegisterForm = ({ }) => {
         }}
       />
 
-  {/*
-      <Form.Group className='d-flex justify-content-center mb-2'>
-        <Form.Check type='checkbox' label='I have read and agree to the terms' {...register('tos')} />
-      </Form.Group>
-  */}
+      <Checkbox 
+        name="tos"
+        label="I have read and agree to the terms" 
+        rules={{
+          required: "Acceptez les conditions d'utilisation",
+        }}
+      />
+
       <Button variant="primary" type="submit" className="mb-2 w-100">
         Sign Up
       </Button>
