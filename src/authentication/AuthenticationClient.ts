@@ -1,17 +1,21 @@
 import { supabase } from '@/config/SupabaseClient'
-import { LoginResponse, LoginRequest, authenticated, errorWhileAuthenticating, RegisterRequest, RegisterResponse, fromAuthenticationResponseToUser, fromAuthErrorToMessage } from '../authentication/Authentication'
+import { LoginResponse, LoginRequest, authenticated, errorWhileAuthenticating, RegisterRequest, RegisterResponse, fromAuthenticationResponseToUser, fromAuthErrorToMessage, confirmEmail } from '../authentication/Authentication'
 import { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
 export const login = async (request: LoginRequest): Promise<LoginResponse> => {
     const { data, error } = await supabase.auth.signInWithPassword(request)
 
-    return error || !data ? errorWhileAuthenticating(fromAuthErrorToMessage(error)) : authenticated(fromAuthenticationResponseToUser(data.user))
+    return error ? errorWhileAuthenticating(fromAuthErrorToMessage(error)) : authenticated(fromAuthenticationResponseToUser(data.user))
 }
 
 export const register = async (request: RegisterRequest): Promise<RegisterResponse> => {
     const { data, error } = await supabase.auth.signUp(fromRequestToSignup(request))
 
-    return error || !data ? errorWhileAuthenticating(fromAuthErrorToMessage(error)) : authenticated(fromAuthenticationResponseToUser(data.user))
+    if (!data || !data.session) {
+        return confirmEmail()
+    }
+
+    return error ? errorWhileAuthenticating(fromAuthErrorToMessage(error)) : authenticated(fromAuthenticationResponseToUser(data.user))
 }
 
 const fromRequestToSignup = (request: RegisterRequest): SignUpWithPasswordCredentials => ({
