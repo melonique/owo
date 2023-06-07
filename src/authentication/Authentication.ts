@@ -18,12 +18,16 @@ type Authenticated = {
 
 export const authenticated = (user: User): Authenticated => ({ tag: 'Authenticated', user })
 
-type ErrorWhileAuthenticating = {
-    tag: 'ErrorWhileAuthenticating',
-    error: any
+export type ResponseError = {
+    message: string
 }
 
-export const errorWhileAuthenticating = (error: any): ErrorWhileAuthenticating => ({ tag: 'ErrorWhileAuthenticating', error })
+type ErrorWhileAuthenticating = {
+    tag: 'ErrorWhileAuthenticating',
+    error: ResponseError
+}
+
+export const errorWhileAuthenticating = (error: ResponseError): ErrorWhileAuthenticating => ({ tag: 'ErrorWhileAuthenticating', error })
 
 export type AuthenticationState = NoAuthentication | Authenticated | ErrorWhileAuthenticating
 
@@ -48,4 +52,8 @@ export const fromAuthenticationResponseToUser = (userData: any): User => ({
     email: userData['email'],
     name: userData['user_metadata']['name'],
     username: userData['user_metadata']['username'],
+})
+
+export const fromAuthErrorToMessage = (errorData: any): ResponseError => ({
+    message: errorData['message'],
 })

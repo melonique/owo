@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { AuthenticationState, LoginRequest, RegisterRequest, User, noAuthentication } from "./Authentication"
+import { AuthenticationState, LoginRequest, RegisterRequest, ResponseError, User, noAuthentication } from "./Authentication"
 import { login as supabaseLogin, register as supabaseRegister } from "./AuthenticationClient"
 import { updatePassword as supabaseUpdatePassword } from "./UserInformationClient"
 import { UpdatePasswordRequest } from "./UserInformation"
@@ -9,6 +9,7 @@ type UseAuthentication = {
   register: (request: RegisterRequest) => Promise<void>,
   updatePassword: (request: UpdatePasswordRequest) => Promise<void>,
   user: User | undefined,
+  error: ResponseError | undefined,
 }
 
 const useAuthentication = (): UseAuthentication => {
@@ -35,6 +36,7 @@ const useAuthentication = (): UseAuthentication => {
       register,
       updatePassword,
       user: state.tag === 'Authenticated' ? state.user : undefined,
+      error: state.tag === 'ErrorWhileAuthenticating' ? state.error : undefined,
     }
 }
 
