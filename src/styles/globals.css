@@ -16,3 +16,11 @@ body{
 .bottom-navbar a{
   color: #fff;
 }
+
+.breadcrumb{
+  padding: 0;
+  margin-bottom: 0;
+  list-style: none;
+  background: none;
+  border-radius: 0;
+}

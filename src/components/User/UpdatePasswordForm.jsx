@@ -1,6 +1,6 @@
 import useAuthentication from '@/authentication/useAuthentication';
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Card } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
 const UpdatePasswordForm = () => {
@@ -16,20 +16,25 @@ const UpdatePasswordForm = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)} validated={validated}>
-      <Form.Group className="mb-2" controlId="formBasicPasswordReg">
-        <Form.Label>New Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" {...register('password')} />
-      </Form.Group>
-      <Form.Group className="mb-2" controlId="formBasicPasswordReg">
-        <Form.Label>Password repeat</Form.Label>
-        <Form.Control type="password" placeholder="Password" {...register('password2')} />
-      </Form.Group>
+    <Card>
+      <Card.Body>
+        <Card.Title>🔐 Change Password</Card.Title>
+        <Form onSubmit={handleSubmit(onSubmit, onError)} validated={validated}>
+          <Form.Group className="mb-2" controlId="formBasicPasswordReg">
+            <Form.Label>New Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" {...register('password')} />
+          </Form.Group>
+          <Form.Group className="mb-2" controlId="formBasicPasswordReg">
+            <Form.Label>Password repeat</Form.Label>
+            <Form.Control type="password" placeholder="Password" {...register('password2')} />
+          </Form.Group>
 
-      <Button variant="primary" type="submit" className="mb-2 w-100">
-        Change password
-      </Button>
-    </Form>
+          <Button variant="primary" type="submit" className="mb-2 w-100">
+            Change password
+          </Button>
+        </Form>
+      </Card.Body>
+    </Card>
   )
 }
 

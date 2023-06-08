@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 import { User } from "@/authentication/Authentication"
 import useAuthentication from "@/authentication/useAuthentication"
 import { useEffect } from "react"
+import { Profile } from "@/components"
 
 type UserProfileProps = {
     user: User
@@ -20,6 +21,8 @@ const UserProfile: React.FC<UserProfileProps> = () => {
     return (
         <div>
             {JSON.stringify(user)}
+        <Profile />
+
         </div>
     )
 }

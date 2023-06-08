@@ -8,10 +8,10 @@ const BottomNavbar = () => {
   return (
     <Navbar className="justify-content-around bottom-navbar" bg="primary" >
       <div className="nav-item text-center">
-        <Nav.Link href="#home" >
+        <Link href="/listings" >
           <IoIosHome className="icon" />
           <div className="nav-text">Home</div>
-        </Nav.Link>
+        </Link>
       </div>
       <div className="nav-item text-center">
         <Nav.Link href="#notifications">
