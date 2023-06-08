@@ -7,4 +7,3 @@ export const updatePassword = async (request: UpdatePasswordRequest): Promise<Up
 
     return error || !data ? fail(error) : success(fromAuthenticationResponseToUser(data.user))
 }
-

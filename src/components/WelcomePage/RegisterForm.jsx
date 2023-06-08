@@ -9,7 +9,7 @@ const RegisterForm = ({ }) => {
   const { confirmEmail, error, register: registerUser } = useAuthentication();
 
   const onSubmit = async ({ email, password, username, name }) => {
-    await registerUser({ email, password, username, name }, () => router.push('/profile'))
+    await registerUser({ email, password, username, name })
   }
 
   return (

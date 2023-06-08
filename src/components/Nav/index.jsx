@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { IoIosHome, IoMdSearch, IoIosChatbubbles, IoIosPerson, IoIosAddCircle } from 'react-icons/io';
+import Link from 'next/link'
 
 const BottomNavbar = () => {
   return (
@@ -31,10 +32,10 @@ const BottomNavbar = () => {
         </Nav.Link>
       </div>
       <div className="nav-item text-center">
-        <Nav.Link href="#profile">
+        <Link href="/profile">
           <IoIosPerson className="icon" />
           <div className="nav-text">Profile</div>
-        </Nav.Link>
+        </Link>
       </div>
     </Navbar>
   );
