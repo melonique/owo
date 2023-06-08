@@ -18,7 +18,7 @@ const Listings = () => {
       <Row>
         {listings.map((listing) => {
           return (
-            <Col key={listing.id} md={4} lg={4}>
+            <Col key={listing.id} xs={6} sm={6} md={4} lg={4}>
               <Item listing={listing} />
             </Col>
             )

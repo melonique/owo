@@ -10,7 +10,7 @@ const GalleryItem = ({ listing : { id, owner, title, description, images, price,
       src={"http://placekitten.com/600/400"}
     />
     <Card.Body>
-      <Badge>{type}</Badge>
+      <Badge bg="secondary">{type}</Badge>
       <Card.Title><a href="#!">{title}</a></Card.Title>
       <Card.Text>
         <a href="#!">Category</a>
