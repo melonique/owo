@@ -4,9 +4,9 @@ import Badges from './Badges'
 import UpdatePasswordForm from './UpdatePasswordForm'
 
 
-const Profile = ({}) => (
+const Profile = ({}) => {
+  return(
   <>
-
     <Tab.Container id="profile-tabs" defaultActiveKey="#badges">
     <Container>
     <Row>
@@ -88,6 +88,6 @@ const Profile = ({}) => (
     </Tab.Container>
 
   </>
-);
+)}
 
 export default Profile;
