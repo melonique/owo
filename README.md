@@ -36,3 +36,71 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+```
+owo
+├─ .eslintrc.json
+├─ README.md
+├─ jest.config.js
+├─ next.config.js
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ favicon.png
+│  ├─ next.svg
+│  ├─ owo-logo.png
+│  └─ vercel.svg
+├─ src
+│  ├─ authentication
+│  │  ├─ Authentication.ts
+│  │  ├─ AuthenticationClient.ts
+│  │  ├─ AuthenticationContext.tsx
+│  │  ├─ UserInformation.ts
+│  │  ├─ UserInformationClient.ts
+│  │  └─ useAuthentication.ts
+│  ├─ components
+│  │  ├─ Form
+│  │  │  ├─ Checkbox.jsx
+│  │  │  ├─ Form.jsx
+│  │  │  ├─ Input.jsx
+│  │  │  └─ index.js
+│  │  ├─ Gallery
+│  │  │  ├─ Item.jsx
+│  │  │  └─ index.jsx
+│  │  ├─ Header
+│  │  │  └─ index.tsx
+│  │  ├─ Nav
+│  │  │  ├─ Navbar.css
+│  │  │  └─ index.jsx
+│  │  ├─ User
+│  │  │  ├─ Badges.jsx
+│  │  │  ├─ Profile.jsx
+│  │  │  └─ UpdatePasswordForm.jsx
+│  │  ├─ WelcomePage
+│  │  │  ├─ Login.jsx
+│  │  │  ├─ RegisterForm.jsx
+│  │  │  └─ index.jsx
+│  │  └─ index.ts
+│  ├─ config
+│  │  └─ SupabaseClient.ts
+│  ├─ listing
+│  │  ├─ Listing.ts
+│  │  ├─ ListingClient.test.ts
+│  │  ├─ ListingClient.ts
+│  │  └─ useListing.ts
+│  ├─ pages
+│  │  ├─ _app.tsx
+│  │  ├─ _document.tsx
+│  │  ├─ index.tsx
+│  │  ├─ listings
+│  │  │  └─ index.jsx
+│  │  └─ profile
+│  │     └─ index.tsx
+│  └─ styles
+│     ├─ globals.css
+│     ├─ minty.bootstrap.min.css
+│     ├─ owo.bootstrap.css
+│     └─ quartz.bootstrap.min.css
+└─ tsconfig.json
+
+```

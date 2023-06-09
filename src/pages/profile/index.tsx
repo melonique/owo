@@ -1,14 +1,13 @@
+// pages/profile/index.tsx
+
 import { useRouter } from "next/router"
 import { User } from "@/authentication/Authentication"
 import useAuthentication from "@/authentication/useAuthentication"
-import { useEffect } from "react"
+import { useEffect, ReactNode } from "react"
 import { Profile } from "@/components"
+import { PrivateLayout } from "@/components/Layouts"
 
-type UserProfileProps = {
-    user: User
-}
-
-const UserProfile: React.FC<UserProfileProps> = () => {
+const UserProfile = () => {
     const router = useRouter()
     const { user } = useAuthentication()
 
@@ -20,11 +19,15 @@ const UserProfile: React.FC<UserProfileProps> = () => {
 
     return (
         <div>
-            {JSON.stringify(user)}
-        <Profile />
-
+          {JSON.stringify(user)}
+          <Profile />
         </div>
     )
 }
+
+UserProfile.getLayout = function getLayout(page: ReactNode) {
+  return <PrivateLayout>{page}</PrivateLayout>
+}
+
 
 export default UserProfile
