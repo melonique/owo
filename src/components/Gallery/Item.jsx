@@ -3,19 +3,25 @@ import React from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 
 
-const GalleryItem = ({ listing : { id, owner, title, description, images, price, availability, location, type }}) => (
+const GalleryItem = ({ listing : { id, owner, title, description, type, tags }}) => (
   <Card className="mb-3">
     <Card.Img
       variant="top"
       src={"http://placekitten.com/600/400"}
     />
     <Card.Body>
-      <Badge bg="secondary">{type}</Badge>
+
+      {type?.map(label => {
+        return (<Badge key={label} bg="secondary">{label}</Badge>)
+      })}
+
       <Card.Title><a href="#!">{title}</a></Card.Title>
-      <Card.Text>
-        <a href="#!">Category</a>
-      </Card.Text>
-      <Card.Text>${price}</Card.Text>
+      <Card.Subtitle><a href="#!">{description}</a></Card.Subtitle>
+
+      {tags?.map(label => {
+        return (<Card.Text><a href="#!">{label}</a></Card.Text>)
+      })}
+
     </Card.Body>
   </Card>
 );

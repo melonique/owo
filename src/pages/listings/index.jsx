@@ -1,5 +1,5 @@
 import useListing from '@/listing/useListing'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Item from '@/components/Gallery/Item'
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -11,6 +11,10 @@ const Listings = () => {
     await getPage(page)
     setPage(page + 1)
   }
+
+  useEffect(() => {
+    fetchPage()
+  }, [])
 
   return (
     <Container fluid className="text-center">
