@@ -18,7 +18,7 @@ type FetchUsecase = {
 export const fetchListings = async ({ page }: FetchUsecase): Promise<Listing[]> => {
     const [ first, last ] = getRange(page)
 
-    const { data: listing } = await supabase.from('listing').select('*').range(first, last)
+    const { data: listing } = await supabase.from('offer').select('id,owner,created_at,title,description,tags,type').range(first, last)
 
     return listing as Listing[]
 }

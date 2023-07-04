@@ -1,11 +1,9 @@
 export type Listing = {
-    id: string;
-    owner: string;
-    title: string;
-    description?: string;
-    images: string[];
-    price: number;
-    availability: boolean;
-    location?: string;
-    type: 'borrow' | 'lean' | 'rent' | 'sell';
-  }
+  id: string;
+  owner: string;
+  created_at: string;
+  title: string;
+  description: string;
+  tags?: string[];
+  type?: string[];
+}
