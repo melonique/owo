@@ -20,7 +20,7 @@ const Chat: React.FC = () => {
 
 
   return (
-    <Card style={{ height: "100vh" }}>
+    <Card style={{ borderRadius: "15px", height: "100vh" }}>
       <Card.Header className="d-flex justify-content-between align-items-center p-3">
         <h5 className="mb-0">Poster une offre</h5>
       </Card.Header>
