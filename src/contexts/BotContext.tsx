@@ -7,6 +7,19 @@ interface BotContextData {
   userResponses: string[];
 }
 
+/*
+// TODO:
+
+Que les réponses soient ammasées en un objet avec des clef et non un array flat.
+Que les messages aient les option ssuicantes:
+- label (id pour l'objet de réponses et pour l'id de message)
+- ne pas attendre de réponse / passer au prochain message.
+    onSent: "listen" : "speak"
+- appeler une function
+
+*/
+
+
 const BotContext = createContext<BotContextData | undefined>(undefined);
 
 const DEFAULT_QUESTIONS = DEFAULT_BOT_CONFIG.offer.messages;
