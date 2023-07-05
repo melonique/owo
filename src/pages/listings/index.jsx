@@ -2,6 +2,7 @@ import useListing from '@/listing/useListing'
 import { useEffect, useState } from 'react';
 import Item from '@/components/Gallery/Item'
 import { Container, Row, Col } from 'react-bootstrap';
+import { PrivateLayout } from "@/components/Layouts"
 
 const Listings = () => {
   const { listings, getPage } = useListing()
@@ -31,6 +32,10 @@ const Listings = () => {
       <button onClick={fetchPage}>Next!</button>
     </Container>
   );
+}
+
+Listings.getLayout = function getLayout(page) {
+  return <PrivateLayout>{page}</PrivateLayout>
 }
 
 export default Listings

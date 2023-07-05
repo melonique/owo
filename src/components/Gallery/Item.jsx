@@ -19,7 +19,7 @@ const GalleryItem = ({ listing : { id, owner, title, description, type, tags }})
       <Card.Subtitle><a href="#!">{description}</a></Card.Subtitle>
 
       {tags?.map(label => {
-        return (<Card.Text key="label"><a href="#!">{label}</a></Card.Text>)
+        return (<Card.Text key={label}><a href="#!">{label}</a></Card.Text>)
       })}
 
     </Card.Body>

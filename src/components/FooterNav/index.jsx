@@ -20,10 +20,10 @@ const BottomNavbar = () => {
         </Nav.Link>
       </div>
       <div className="nav-item text-center">
-        <Nav.Link href="#sell">
+        <Link href="/offer">
           <IoIosAddCircle className="icon" />
-          <div className="nav-text">Sell</div>
-        </Nav.Link>
+          <div className="nav-text">Offer</div>
+        </Link>
       </div>
       <div className="nav-item text-center">
         <Nav.Link href="#search">

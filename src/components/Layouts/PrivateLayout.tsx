@@ -1,11 +1,12 @@
+import React, { PropsWithChildren } from 'react';
 import { FooterNav, HeaderBar } from '@/components'
 
-export default function PrivateLayout({ children }) {
+const PrivateLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
-      <HeaderBar />
       <main>{children}</main>
       <FooterNav />
     </>
   )
 }
+export default PrivateLayout;

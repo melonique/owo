@@ -1,14 +1,18 @@
-@import "./owo.bootstrap.css";
+ @import "./darkly.bootstrap.css";
+/*  @import "./minty.bootstrap.min.css"; */
+/* @import "./quartz.bootstrap.min.css"; */
+/* @import "./owo.bootstrap.css"; */
+
 
 body{
   min-height: 100%;
-  background-color: #1acc8d;
+/*  background-color: #1acc8d; */
   padding-bottom: 60px;
 }
 
 
 .bottom-navbar {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
   height: 60px;
@@ -24,4 +28,8 @@ body{
   list-style: none;
   background: none;
   border-radius: 0;
+}
+
+.chatWindow{
+  height: calc(100vh - 60px)
 }
