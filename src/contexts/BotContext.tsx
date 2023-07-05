@@ -5,6 +5,7 @@ import { useChat } from "./ChatContext";
 
 interface BotContextData {
   userResponses: string[];
+  resetBot: () => void;
 }
 
 /*
@@ -33,7 +34,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userResponses, setUserResponses] = useState<string[]>([]);
 
-  const { getMessagesByConversationId, currentUser, addMessage } = useChat();
+  const { getMessagesByConversationId, currentUser, addMessage, resetConversations } = useChat();
   const currentMessages = getMessagesByConversationId(botId);
 
   const getMessage = (index: number) => {
@@ -54,7 +55,17 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     return null
   }
 
+  const resetBot = () => {
+    setUserResponses([])
+    setCurrentQuestionIndex(0)
+    resetConversations()
+    const msg = getMessage(0)
+    if (msg) {
+      addMessage(botId, msg);
+    }
+  }
 
+  // send first message
   useEffect(() => {
     const msg = getMessage(0)
     if (msg) {
@@ -62,9 +73,10 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     }
   }, [])
 
+
+  // capture user responses
   useEffect(() => {
     const lastMessage = currentMessages[currentMessages.length - 1]
-
     // if message from current user
     if (lastMessage && lastMessage.user.id === currentUser.id) {
       const newIndex = currentQuestionIndex + 1
@@ -72,8 +84,6 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
       setUserResponses((prevResponses) => [...prevResponses, lastMessage.content]);
       // change for next question
       setCurrentQuestionIndex(newIndex);
-
-
       // delay the sending of the next message
       setTimeout(() => {
         const msg = getMessage(newIndex)
@@ -81,8 +91,6 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
           addMessage(botId, msg);
         }
       }, 1000);
-
-
     }
   }, [currentMessages])
 
@@ -100,7 +108,8 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   return (
     <BotContext.Provider
       value={{
-        userResponses
+        userResponses,
+        resetBot
       }}
     >
       {children}

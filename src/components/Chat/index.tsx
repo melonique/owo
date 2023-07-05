@@ -9,23 +9,19 @@ import ChatMessage from './Message'
 import ChatInput from './Input'
 
 const Chat: React.FC = () => {
-  const { getMessagesByConversationId, currentUser, addMessage } = useChat();
-  const { userResponses } = useBot();
+  const { getMessagesByConversationId, currentUser } = useChat();
+  const { userResponses, resetBot } = useBot();
 
   const currentMessages = getMessagesByConversationId('offer');
 
-
-
-
-  const resetConversation = console.log
 
   return (
     <Card className="chatWindow">
       <Card.Header className="d-flex justify-content-between align-items-center p-3">
         <h5 className="mb-0">Poster une offre</h5>
-        <span onClick={resetConversation}>
+        <Button onClick={resetBot}>
           <BiReset className="icon" />
-        </span>
+        </Button>
       </Card.Header>
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
         {JSON.stringify(userResponses)}

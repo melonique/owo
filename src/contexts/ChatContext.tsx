@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { User, Conversation, Message } from "@/types/UserTypes";
+import { User, Conversation, Message } from "@/types/ChatTypes";
 import { DEFAULT_USERS, DEFAULT_WELCOME_MESSAGE, DEFAULT_CONVERSATIONS, CURRENT_USER } from "@/config/ChatDefaults";
 interface ChatContextData {
   users: User[];
@@ -8,6 +8,7 @@ interface ChatContextData {
   createConversation: (title: string, user: User) => void;
   addMessage: (conversationId: string, message: Message) => void;
   getMessagesByConversationId: (conversationId: string) => Message[];
+  resetConversations: () => void;
 }
 const ChatContext = createContext<ChatContextData>({} as ChatContextData);
 
@@ -96,6 +97,7 @@ export const ChatProvider: React.FC = ({ children }) => {
         createConversation,
         addMessage,
         getMessagesByConversationId: useCallback(getMessagesByConversationId, [conversations]),
+        resetConversations: () => setConversations(DEFAULT_CONVERSATIONS)
       }}
     >
       {children}
