@@ -1,31 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
-import { FaSmile, FaPaperclip, FaPaperPlane } from 'react-icons/fa';
+import { BiReset } from 'react-icons/bi';
 import { useChat } from "@/contexts/ChatContext";
+import { useBot } from "@/contexts/BotContext";
 import { Message } from "@/types/ChatTypes";
 
 import ChatMessage from './Message'
 import ChatInput from './Input'
 
 const Chat: React.FC = () => {
-  const { getMessagesByConversationId, currentUser } = useChat();
-  const id = "offer"
-  const [currentMessages, setCurrentMessages] = useState<Message[]>([]);
+  const { getMessagesByConversationId, currentUser, addMessage } = useChat();
+  const { currentQuestion, recordResponse, userResponses } = useBot();
+  const currentMessages = getMessagesByConversationId('offer');
+
+  useEffect(() => {
+    const lastMessage = currentMessages[currentMessages.length - 1]
+    if (currentQuestion) {
+      if (!lastMessage || (lastMessage && lastMessage.id !== currentQuestion.id)) {
+        addMessage('offer', currentQuestion);
+      }
+    }
+  }, [])
 
 
   useEffect(() => {
-    const messages = getMessagesByConversationId(id);
-    setCurrentMessages(messages);
-  }, [getMessagesByConversationId, id]);
+    const lastMessage = currentMessages[currentMessages.length - 1]
+    if (lastMessage && lastMessage.user.id === currentUser.id){
+      recordResponse(lastMessage.content)
+    }
+  }, [currentMessages])
 
+  const resetConversation = console.log
 
   return (
-    <Card style={{ borderRadius: "15px", height: "100vh" }}>
+    <Card className="chatWindow">
       <Card.Header className="d-flex justify-content-between align-items-center p-3">
         <h5 className="mb-0">Poster une offre</h5>
+        <span onClick={resetConversation}>
+          <BiReset className="icon" />
+        </span>
       </Card.Header>
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
-
+        {JSON.stringify(userResponses)}
         {currentMessages.map((message: Message) => (
           <ChatMessage
             key={message.id}
@@ -37,7 +53,7 @@ const Chat: React.FC = () => {
         ))}
 
       </Card.Body>
-      <Card.Footer className="text-muted d-flex justify-content-start align-items-center p-3">
+      <Card.Footer className="text-muted d-flex justify-content-start align-items-center">
         <ChatInput />
       </Card.Footer>
     </Card>

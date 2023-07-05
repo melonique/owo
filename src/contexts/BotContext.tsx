@@ -1,14 +1,17 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
+import { DEFAULT_BOT_CONFIG  } from '@/config/ChatDefaults'
+import { User, Message } from "@/types/ChatTypes";
 
 interface BotContextData {
-  currentQuestion: string | null;
   userResponses: string[];
   recordResponse: (response: string) => void;
+  currentQuestion: Message | null;
+  botUser: User;
 }
 
 const BotContext = createContext<BotContextData | undefined>(undefined);
 
-const DEFAULT_QUESTIONS = ["What is your name?", "How old are you?", "What's your favorite color?"];
+const DEFAULT_QUESTIONS = DEFAULT_BOT_CONFIG.offer.messages;
 
 interface BotProviderProps {
   children: ReactNode;
@@ -26,6 +29,20 @@ export const BotProvider = ({ children, id }: BotProviderProps) => {
     return null;
   };
 
+  const getNextMessage = () => {
+    const nextQuestion = getNextQuestion()
+    if (nextQuestion) {
+      const newMessage: Message = {
+        id: "m-" + nextQuestion, // Replace with a proper ID generation method
+        user: DEFAULT_BOT_CONFIG.offer.user,
+        content: nextQuestion,
+        timestamp: new Date().toISOString(),
+      };
+      return newMessage
+    }
+    return null
+  }
+
   const recordResponse = (response: string) => {
     setUserResponses((prevResponses) => [...prevResponses, response]);
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -34,9 +51,10 @@ export const BotProvider = ({ children, id }: BotProviderProps) => {
   return (
     <BotContext.Provider
       value={{
-        currentQuestion: getNextQuestion(),
+        currentQuestion: getNextMessage(),
         recordResponse,
         userResponses,
+        botUser: DEFAULT_BOT_CONFIG.offer.user
       }}
     >
       {children}

@@ -22,13 +22,21 @@ export const DEFAULT_WELCOME_MESSAGE = (user) => ({
 
 export const DEFAULT_CONVERSATIONS = [{
   id: "offer",
-  title: 'Say hi!',
+  title: 'Poster une offre',
   user: DEFAULT_USERS[0],
-  messages: [DEFAULT_WELCOME_MESSAGE(DEFAULT_USERS[0])],
+  messages: [],
 }]
 
 export const CURRENT_USER = {
   id: "you",
   username: 'You',
   avatar: 'https://api.multiavatar.com/You.png',
+}
+
+export const DEFAULT_BOT_CONFIG = {
+  'offer' : {
+    id: 'offer',
+    user: DEFAULT_USERS[0],
+    messages: ["What is your name?", "How old are you?", "What's your favorite color?"]
+  }
 }
