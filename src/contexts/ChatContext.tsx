@@ -1,11 +1,10 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState, PropsWithChildren } from "react";
 import { User, Conversation, Message } from "@/types/ChatTypes";
 import { DEFAULT_USERS, DEFAULT_WELCOME_MESSAGE, DEFAULT_CONVERSATIONS, CURRENT_USER } from "@/config/ChatDefaults";
 interface ChatContextData {
   users: User[];
   conversations: Conversation[];
   currentUser: User;
-  createConversation: (title: string, user: User) => void;
   addMessage: (conversationId: string, message: Message) => void;
   getMessagesByConversationId: (conversationId: string) => Message[];
   resetConversations: () => void;
@@ -13,7 +12,7 @@ interface ChatContextData {
 const ChatContext = createContext<ChatContextData>({} as ChatContextData);
 
 
-export const ChatProvider: React.FC = ({ children }) => {
+export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
 
   const [users, setUsers] = useState<User[]>(DEFAULT_USERS);
@@ -27,12 +26,12 @@ export const ChatProvider: React.FC = ({ children }) => {
 
     if (typeof window !== "undefined") {
       if (localStorage.getItem("chatUsers")) {
-        setUsers(JSON.parse(localStorage.getItem("chatUsers")))
+        setUsers(JSON.parse(localStorage.getItem("chatUsers") as string))
       }
     }
     if (typeof window !== "undefined") {
       if (localStorage.getItem("chatConversations")) {
-        setConversations(JSON.parse(localStorage.getItem("chatConversations")))
+        setConversations(JSON.parse(localStorage.getItem("chatConversations") as string))
       }
     }
 
@@ -53,10 +52,10 @@ export const ChatProvider: React.FC = ({ children }) => {
     localStorage.setItem("chatConversations", JSON.stringify(conversations));
   }, [conversations]);
 */
-
+/*
   const createConversation = (title: string, user: User) => {
     const newConversation = {
-      id: conversations.length+1,
+      id: 'm_' + conversations.length + 1,
       title: title,
       user: user,
       messages: [DEFAULT_WELCOME_MESSAGE(user)],
@@ -66,10 +65,10 @@ export const ChatProvider: React.FC = ({ children }) => {
       newConversation,
     ]);
   };
-
+*/
   const addMessage = (conversationId: string, message: Message) => {
     setConversations((prevConversations) => {
-      return prevConversations.map((conversation) => {
+      return prevConversations.map((conversation : Conversation): Conversation => {
         if (conversation.id === conversationId) {
           return {
             ...conversation,
@@ -94,7 +93,6 @@ export const ChatProvider: React.FC = ({ children }) => {
         users,
         currentUser,
         conversations,
-        createConversation,
         addMessage,
         getMessagesByConversationId: useCallback(getMessagesByConversationId, [conversations]),
         resetConversations: () => setConversations(DEFAULT_CONVERSATIONS)

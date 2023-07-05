@@ -19,9 +19,16 @@ export class Message {
 }
 export class Conversation {
   id?: string;
-  title?: string;
-  user?: User;
-  messages?: Message[];
+  title: string;
+  user: User;
+  messages: Message[];
+
+  constructor(user: User, title: string, id?: string) {
+    this.messages = [];
+    this.id = id || 'C-' + Math.floor(Math.random() * 10000)
+    this.title = title
+    this.user = user;
+  }
 }
 
 type onCaptureOptions = 'trigger.end';

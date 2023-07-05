@@ -1,6 +1,7 @@
+import React, { PropsWithChildren } from 'react';
 import { FooterNav, HeaderBar } from '@/components'
 
-export default function PrivateLayout({ children }) {
+const PrivateLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <main>{children}</main>
@@ -8,3 +9,4 @@ export default function PrivateLayout({ children }) {
     </>
   )
 }
+export default PrivateLayout;

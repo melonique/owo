@@ -1,7 +1,7 @@
 import React from "react";
 
 interface MessageProps {
-  avatar: string;
+  avatar?: string;
   content: string;
   timestamp: string;
   isCurrentUser?: boolean;
@@ -15,7 +15,7 @@ const Message: React.FC<MessageProps> = ({
 }) => {
   return (
     <div className={`d-flex flex-row justify-content-${!isCurrentUser ? 'start' : 'end'} ${!isCurrentUser ? 'text-left' : 'text-right'} mb-4`}>
-      {!isCurrentUser && (
+      {!isCurrentUser && avatar && (
         <img
           src={avatar}
           alt="avatar"
@@ -33,7 +33,7 @@ const Message: React.FC<MessageProps> = ({
           {timestamp}
         </p>
       </div>
-      {isCurrentUser && (
+      {isCurrentUser && avatar && (
         <img
           src={avatar}
           alt="avatar"
