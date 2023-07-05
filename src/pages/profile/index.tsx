@@ -10,13 +10,13 @@ import { PrivateLayout } from "@/components/Layouts"
 const UserProfile = () => {
     const router = useRouter()
     const { user } = useAuthentication()
-
+/*
     useEffect(() => {
         if (!user) {
             router.replace('/')
         }
     }, [user])
-
+*/
     return (
         <div>
           <Profile />
