@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { User, Conversation, Message } from "@/types/UserTypes";
 import { DEFAULT_USERS, DEFAULT_WELCOME_MESSAGE, DEFAULT_CONVERSATIONS, CURRENT_USER } from "@/config/ChatDefaults";
 interface ChatContextData {
@@ -11,23 +11,30 @@ interface ChatContextData {
 }
 const ChatContext = createContext<ChatContextData>({} as ChatContextData);
 
-const initialState = {
-  users: typeof window !== "undefined" ? (localStorage.getItem("chatUsers") && JSON.parse(localStorage.getItem("chatUsers"))) || DEFAULT_USERS : DEFAULT_USERS,
-  conversations: typeof window !== "undefined" ? (localStorage.getItem("chatConversations") && JSON.parse(localStorage.getItem("chatConversations"))) || DEFAULT_CONVERSATIONS : DEFAULT_CONVERSATIONS,
-  isAuthenticated: null,
-  user: null
-};
 
 export const ChatProvider: React.FC = ({ children }) => {
 
 
-  const [users, setUsers] = useState<User[]>(initialState.users);
+  const [users, setUsers] = useState<User[]>(DEFAULT_USERS);
 
-  const [conversations, setConversations] = useState<Conversation[]>(initialState.conversations);
+  const [conversations, setConversations] = useState<Conversation[]>(DEFAULT_CONVERSATIONS);
 
   const [currentUser, setCurrentUser] = useState<User>(CURRENT_USER)
 
+
   useEffect(() => {
+
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("chatUsers")) {
+        setUsers(JSON.parse(localStorage.getItem("chatUsers")))
+      }
+    }
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("chatConversations")) {
+        setConversations(JSON.parse(localStorage.getItem("chatConversations")))
+      }
+    }
+
     const storedUsers = localStorage.getItem("chatUsers");
     const storedConversations = localStorage.getItem("chatConversations");
     if (storedUsers && storedConversations) {
@@ -36,10 +43,15 @@ export const ChatProvider: React.FC = ({ children }) => {
     }
   }, []);
 
+/*
   useEffect(() => {
     localStorage.setItem("chatUsers", JSON.stringify(users));
+  }, [users]);
+
+  useEffect(() => {
     localStorage.setItem("chatConversations", JSON.stringify(conversations));
-  }, [users, conversations]);
+  }, [conversations]);
+*/
 
   const createConversation = (title: string, user: User) => {
     const newConversation = {
@@ -57,8 +69,7 @@ export const ChatProvider: React.FC = ({ children }) => {
   const addMessage = (conversationId: string, message: Message) => {
     setConversations((prevConversations) => {
       return prevConversations.map((conversation) => {
-        if (conversation.id == conversationId) {
-          console.log(conversationId, conversation.id)
+        if (conversation.id === conversationId) {
           return {
             ...conversation,
             messages: [...conversation.messages, message],
@@ -84,7 +95,7 @@ export const ChatProvider: React.FC = ({ children }) => {
         conversations,
         createConversation,
         addMessage,
-        getMessagesByConversationId,
+        getMessagesByConversationId: useCallback(getMessagesByConversationId, [conversations]),
       }}
     >
       {children}

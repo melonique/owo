@@ -40,7 +40,7 @@ const ChatInput: React.FC<ChatInputProps> = () => {
   };
 
   return (
-    <div className="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
+    <div className="text-muted d-flex justify-content-start align-items-center">
       <input
         type="text"
         className="form-control form-control-lg"

@@ -19,7 +19,6 @@ const UserProfile = () => {
 
     return (
         <div>
-          {JSON.stringify(user)}
           <Profile />
         </div>
     )
