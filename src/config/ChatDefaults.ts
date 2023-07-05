@@ -1,3 +1,4 @@
+import { Message, User } from '@/types/ChatTypes'
 
 export const DEFAULT_USERS = [{
   id: "offer",
@@ -13,7 +14,7 @@ export const DEFAULT_USERS = [{
   avatar: 'https://api.multiavatar.com/One pager.png',
 }]
 
-export const DEFAULT_WELCOME_MESSAGE = (user) => ({
+export const DEFAULT_WELCOME_MESSAGE = (user: User) => ({
   id: "m-0",
   user,
   content: 'Welcome! Say something :)',
@@ -37,6 +38,10 @@ export const DEFAULT_BOT_CONFIG = {
   'offer' : {
     id: 'offer',
     user: DEFAULT_USERS[0],
-    messages: ["What is your name?", "How old are you?", "What's your favorite color?"]
+    messages: [
+      new Message(DEFAULT_USERS[0], "What is your name?"),
+      new Message(DEFAULT_USERS[0], "How old are you?"),
+      new Message(DEFAULT_USERS[0], "What's your favorite color?")
+    ]
   }
 }

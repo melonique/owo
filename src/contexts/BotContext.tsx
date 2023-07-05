@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, createContext, useContext, useState, ReactNode, useCallback } from "react";
 import { DEFAULT_BOT_CONFIG  } from '@/config/ChatDefaults'
-import { User, Message } from "@/types/ChatTypes";
+import { User, Message, BotMessages } from "@/types/ChatTypes";
 import { useChat } from "./ChatContext";
 
 interface BotContextData {
@@ -8,22 +8,10 @@ interface BotContextData {
   resetBot: () => void;
 }
 
-/*
-// TODO:
-
-Que les réponses soient ammasées en un objet avec des clef et non un array flat.
-Que les messages aient les option ssuicantes:
-- label (id pour l'objet de réponses et pour l'id de message)
-- ne pas attendre de réponse / passer au prochain message.
-    onSent: "listen" : "speak"
-- appeler une function
-
-*/
-
 
 const BotContext = createContext<BotContextData | undefined>(undefined);
 
-const DEFAULT_QUESTIONS = DEFAULT_BOT_CONFIG.offer.messages;
+const DEFAULT_QUESTIONS: BotMessages[] = DEFAULT_BOT_CONFIG.offer.messages;
 
 interface BotProviderProps {
   children: ReactNode;
@@ -37,20 +25,13 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   const { getMessagesByConversationId, currentUser, addMessage, resetConversations } = useChat();
   const currentMessages = getMessagesByConversationId(botId);
 
-  const getMessage = (index: number) => {
+  const getMessage = (index: number): Message | null => {
     // si je ne suis pas au bout de ma liste
     if (index < DEFAULT_QUESTIONS.length) {
 
       const nextQuestion = DEFAULT_QUESTIONS[index]
       // si ma question est pas null ou undefined pareil
-      if (nextQuestion) {
-        return {
-          id: "m-" + nextQuestion, // Replace with a proper ID generation method
-          user: DEFAULT_BOT_CONFIG.offer.user,
-          content: nextQuestion,
-          timestamp: new Date().toISOString(),
-        };
-      }
+      return nextQuestion || null
     }
     return null
   }
@@ -90,6 +71,12 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
         if (msg) {
           addMessage(botId, msg);
         }
+        else {
+          // THIS IS THE END OF THE CONVERSATION!
+          alert('Saving')
+          resetBot();
+        }
+
       }, 1000);
     }
   }, [currentMessages])
