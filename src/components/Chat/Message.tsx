@@ -24,7 +24,7 @@ const Message: React.FC<MessageProps> = ({
       )}
       <div>
         <p
-          className={`small p-2 ${!isCurrentUser ? 'me-3 text-white bg-primary' : 'ms-3'} mb-1 rounded-3`}
+          className={`small p-2 ${!isCurrentUser ? 'me-3 text-white bg-primary' : 'text-primary ms-3'} mb-1 rounded-3`}
           style={{ backgroundColor: !isCurrentUser ? "#007BFF" : "#f5f6f7" }}
         >
           {content}

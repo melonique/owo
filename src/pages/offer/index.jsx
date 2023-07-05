@@ -20,7 +20,7 @@ const Offer = () => {
 
   return (
     <ChatProvider>
-      <BotProvider id="offer">
+      <BotProvider botId="offer">
         <Container fluid className="text-center">
           <Row className="d-flex justify-content-center">
             <Col md="10" lg="8" xl="6">

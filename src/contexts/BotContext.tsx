@@ -1,12 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { useMemo, useEffect, createContext, useContext, useState, ReactNode, useCallback } from "react";
 import { DEFAULT_BOT_CONFIG  } from '@/config/ChatDefaults'
 import { User, Message } from "@/types/ChatTypes";
+import { useChat } from "./ChatContext";
 
 interface BotContextData {
   userResponses: string[];
-  recordResponse: (response: string) => void;
-  currentQuestion: Message | null;
-  botUser: User;
 }
 
 const BotContext = createContext<BotContextData | undefined>(undefined);
@@ -15,46 +13,81 @@ const DEFAULT_QUESTIONS = DEFAULT_BOT_CONFIG.offer.messages;
 
 interface BotProviderProps {
   children: ReactNode;
-  id: string
+  botId: 'offer'
 }
 
-export const BotProvider = ({ children, id }: BotProviderProps) => {
+export const BotProvider = ({ children, botId }: BotProviderProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userResponses, setUserResponses] = useState<string[]>([]);
 
-  const getNextQuestion = () => {
-    if (currentQuestionIndex < DEFAULT_QUESTIONS.length) {
-      return DEFAULT_QUESTIONS[currentQuestionIndex];
-    }
-    return null;
-  };
+  const { getMessagesByConversationId, currentUser, addMessage } = useChat();
+  const currentMessages = getMessagesByConversationId(botId);
 
-  const getNextMessage = () => {
-    const nextQuestion = getNextQuestion()
-    if (nextQuestion) {
-      const newMessage: Message = {
-        id: "m-" + nextQuestion, // Replace with a proper ID generation method
-        user: DEFAULT_BOT_CONFIG.offer.user,
-        content: nextQuestion,
-        timestamp: new Date().toISOString(),
-      };
-      return newMessage
+  const getMessage = (index: number) => {
+    // si je ne suis pas au bout de ma liste
+    if (index < DEFAULT_QUESTIONS.length) {
+
+      const nextQuestion = DEFAULT_QUESTIONS[index]
+      // si ma question est pas null ou undefined pareil
+      if (nextQuestion) {
+        return {
+          id: "m-" + nextQuestion, // Replace with a proper ID generation method
+          user: DEFAULT_BOT_CONFIG.offer.user,
+          content: nextQuestion,
+          timestamp: new Date().toISOString(),
+        };
+      }
     }
     return null
   }
 
-  const recordResponse = (response: string) => {
-    setUserResponses((prevResponses) => [...prevResponses, response]);
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-  };
+
+  useEffect(() => {
+    const msg = getMessage(0)
+    if (msg) {
+      addMessage(botId, msg);
+    }
+  }, [])
+
+  useEffect(() => {
+    const lastMessage = currentMessages[currentMessages.length - 1]
+
+    // if message from current user
+    if (lastMessage && lastMessage.user.id === currentUser.id) {
+      const newIndex = currentQuestionIndex + 1
+      // save its answer
+      setUserResponses((prevResponses) => [...prevResponses, lastMessage.content]);
+      // change for next question
+      setCurrentQuestionIndex(newIndex);
+
+
+      // delay the sending of the next message
+      setTimeout(() => {
+        const msg = getMessage(newIndex)
+        if (msg) {
+          addMessage(botId, msg);
+        }
+      }, 1000);
+
+
+    }
+  }, [currentMessages])
+
+
+/*  useEffect(() => {
+    const msg = getNextMessage()
+    if (msg) {
+      addMessage('offer', getNextMessage());
+    }
+  }, [currentQuestionIndex]) */
+
+
+
 
   return (
     <BotContext.Provider
       value={{
-        currentQuestion: getNextMessage(),
-        recordResponse,
-        userResponses,
-        botUser: DEFAULT_BOT_CONFIG.offer.user
+        userResponses
       }}
     >
       {children}

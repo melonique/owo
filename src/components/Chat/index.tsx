@@ -10,25 +10,12 @@ import ChatInput from './Input'
 
 const Chat: React.FC = () => {
   const { getMessagesByConversationId, currentUser, addMessage } = useChat();
-  const { currentQuestion, recordResponse, userResponses } = useBot();
+  const { userResponses } = useBot();
+
   const currentMessages = getMessagesByConversationId('offer');
 
-  useEffect(() => {
-    const lastMessage = currentMessages[currentMessages.length - 1]
-    if (currentQuestion) {
-      if (!lastMessage || (lastMessage && lastMessage.id !== currentQuestion.id)) {
-        addMessage('offer', currentQuestion);
-      }
-    }
-  }, [])
 
 
-  useEffect(() => {
-    const lastMessage = currentMessages[currentMessages.length - 1]
-    if (lastMessage && lastMessage.user.id === currentUser.id){
-      recordResponse(lastMessage.content)
-    }
-  }, [currentMessages])
 
   const resetConversation = console.log
 
@@ -42,6 +29,7 @@ const Chat: React.FC = () => {
       </Card.Header>
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
         {JSON.stringify(userResponses)}
+
         {currentMessages.map((message: Message) => (
           <ChatMessage
             key={message.id}
