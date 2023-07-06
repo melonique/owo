@@ -2,6 +2,14 @@ import { supabase } from '@/config/SupabaseClient'
 import { LoginResponse, LoginRequest, authenticated, errorWhileAuthenticating, RegisterRequest, RegisterResponse, fromAuthenticationResponseToUser, fromAuthErrorToMessage, confirmEmail } from '../authentication/Authentication'
 import { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
+export const resumeSession = async (): Promise<LoginResponse> => {
+    const { data, error } = await supabase.auth.getSession()
+
+    return error || !data.session || !data.session.user
+        ? errorWhileAuthenticating(fromAuthErrorToMessage(error || 'no session'))
+        : authenticated(fromAuthenticationResponseToUser(data.session.user))
+}
+
 export const login = async (request: LoginRequest): Promise<LoginResponse> => {
     const { data, error } = await supabase.auth.signInWithPassword(request)
 
@@ -10,10 +18,6 @@ export const login = async (request: LoginRequest): Promise<LoginResponse> => {
 
 export const register = async (request: RegisterRequest): Promise<RegisterResponse> => {
     const { data, error } = await supabase.auth.signUp(fromRequestToSignup(request))
-
-    if (!data || !data.session) {
-        return confirmEmail()
-    }
 
     return error ? errorWhileAuthenticating(fromAuthErrorToMessage(error)) : authenticated(fromAuthenticationResponseToUser(data.user))
 }

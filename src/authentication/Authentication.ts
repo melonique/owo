@@ -29,13 +29,7 @@ type ErrorWhileAuthenticating = {
 
 export const errorWhileAuthenticating = (error: ResponseError): ErrorWhileAuthenticating => ({ tag: 'ErrorWhileAuthenticating', error })
 
-type ConfirmEmail = {
-    tag: 'ConfirmEmail'
-}
-
-export const confirmEmail = (): ConfirmEmail => ({ tag: 'ConfirmEmail' })
-
-export type AuthenticationState = NoAuthentication | ConfirmEmail | Authenticated | ErrorWhileAuthenticating
+export type AuthenticationState = NoAuthentication | Authenticated | ErrorWhileAuthenticating
 
 export type LoginRequest = {
     email: string
@@ -51,7 +45,7 @@ export type RegisterRequest = {
     username: string
 }
 
-export type RegisterResponse = Authenticated | ConfirmEmail | ErrorWhileAuthenticating
+export type RegisterResponse = Authenticated | ErrorWhileAuthenticating
 
 export const fromAuthenticationResponseToUser = (userData: any): User => ({
     id: userData['id'],

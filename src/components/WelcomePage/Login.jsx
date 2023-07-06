@@ -15,21 +15,6 @@ const Login = ({ }) => {
   return (
     <>
       <Form onSubmit={onSubmit}>
-        {/* import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
-        <div className="text-center mb-1">
-          <p>Sign in with:</p>
-
-          <div className='d-flex justify-content-around mb-1'>
-            <Button variant='link'><FaFacebookF /></Button>
-            <Button variant='link'><FaTwitter /></Button>
-            <Button variant='link'><FaGoogle /></Button>
-            <Button variant='link'><FaGithub /></Button>
-          </div>
-
-          <p>or:</p>
-        </div>
-        */}
-
         <Input
           name="email"
           type="email"

@@ -6,33 +6,16 @@ import { useRouter } from 'next/router';
 
 const RegisterForm = ({ }) => {
   const router = useRouter();
-  const { confirmEmail, error, register: registerUser } = useAuthentication();
+  const { error, register: registerUser } = useAuthentication();
 
   const onSubmit = async ({ email, password, username, name }) => {
-    await registerUser({ email, password, username, name })
+    await registerUser({ email, password, username, name }, () => router.push('/profile'));
   }
 
   return (
     <>
-      {confirmEmail
-        ? <p>Please validate your registration</p>
-        : <Form onSubmit={onSubmit} >
-        {/* import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
-        <div className="text-center mb-1">
-          <p>Sign up with:</p>
-
-          <div className='d-flex justify-content-around mb-1'>
-            <Button variant='link'><FaFacebookF /></Button>
-            <Button variant='link'><FaTwitter /></Button>
-            <Button variant='link'><FaGoogle /></Button>
-            <Button variant='link'><FaGithub /></Button>
-          </div>
-
-          <p>or:</p>
-        </div>
-        */}
-
-
+      <Form onSubmit={onSubmit} >
+      
         <Input
           name="name"
           label="Nom complet"
@@ -96,7 +79,7 @@ const RegisterForm = ({ }) => {
         <Button variant="primary" type="submit" className="mb-2 w-100">
           Sign Up
         </Button>
-      </Form>}
+      </Form>
 
       {error && (
         <p className="text-danger">

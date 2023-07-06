@@ -2,22 +2,10 @@ import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import { Chat } from '@/components'
 import { BotProvider } from '@/contexts/BotContext'
 import { ChatProvider } from '@/contexts/ChatContext'
-import { useRouter } from "next/router"
-import useAuthentication from "@/authentication/useAuthentication"
-import { useEffect } from "react"
 import { PrivateLayout } from "@/components/Layouts"
 
 
 const Offer = () => {
-  const router = useRouter()
-  const { user } = useAuthentication()
-
-  /* useEffect(() => {
-    if (!user) {
-      router.replace('/')
-    }
-  }, [user]) */
-
   return (
     <ChatProvider>
       <BotProvider botId="offer">
