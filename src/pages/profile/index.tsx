@@ -3,11 +3,11 @@ import { Profile } from "@/components"
 import { PrivateLayout } from "@/components/Layouts"
 
 const UserProfile = () => {
-    return (
-        <div>
-          <Profile />
-        </div>
-    )
+  return (
+    <div>
+      <Profile />
+    </div>
+  )
 }
 
 UserProfile.getLayout = function getLayout(page: ReactNode) {

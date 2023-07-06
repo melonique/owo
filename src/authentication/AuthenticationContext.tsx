@@ -13,7 +13,7 @@ const defaultContextValue: ContextValue = {
 
 const AuthenticationContext = createContext<ContextValue>(defaultContextValue);
 
-export const AuthenticationProvider: React.FC<{ children: any, defaultState: AuthenticationState}> = ({ children, defaultState = noAuthentication() }) => {
+export const AuthenticationProvider: React.FC<{ children: any, defaultState?: AuthenticationState}> = ({ children, defaultState = noAuthentication() }) => {
     const [state, setState] = useState<AuthenticationState>(defaultState)
 
     return (

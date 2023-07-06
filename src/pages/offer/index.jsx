@@ -4,7 +4,6 @@ import { BotProvider } from '@/contexts/BotContext'
 import { ChatProvider } from '@/contexts/ChatContext'
 import { PrivateLayout } from "@/components/Layouts"
 
-
 const Offer = () => {
   return (
     <ChatProvider>
