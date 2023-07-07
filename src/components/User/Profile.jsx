@@ -2,11 +2,14 @@ import { Navbar, Container, Breadcrumb, Row, Col, Card, Tab, ListGroup, Figure }
 import { Link } from "next/link"
 import Badges from './Badges'
 import UpdatePasswordForm from './UpdatePasswordForm'
+import useAuthentication from "@/authentication/useAuthentication"
 
 
 const Profile = ({}) => {
+  const { user } = useAuthentication();
   return(
   <>
+      {JSON.stringify()}
     <Tab.Container id="profile-tabs" defaultActiveKey="#badges">
     <Container>
     <Row>
@@ -14,14 +17,14 @@ const Profile = ({}) => {
         <Card className="mb-4">
           <Card.Body className="text-center">
             <Card.Img
-              src="https://api.multiavatar.com/aabgsf%20dffsa.png"
+              src={"https://api.multiavatar.com/" + user.id + '.png'}
               alt="avatar"
               className="rounded-circle"
               style={{ width: '150px' }}
               fluid
             />
-            <Card.Title className="mt-3 mb-0">User Name</Card.Title>
-              <p className="text-muted mb-1">👁️‍🗨️ Complete Lgal name</p>
+            <Card.Title className="mt-3 mb-0">{user.username}</Card.Title>
+                  <p className="text-muted mb-1">👁️‍🗨️ {user.fullName}</p>
               <p className="text-muted mb-1">👑 Gamified Unlocked Title chosen</p>
               <p className="text-muted">📍 G1K 0H1</p>
               <p className="text-muted"> Rating: <br />⭐️⭐️⭐️⭐️⭐️</p>
