@@ -14,7 +14,7 @@ const Listings = () => {
   }
 
   useEffect(() => {
-    fetchPage()
+    fetchPage(0)
   }, [])
 
   return (

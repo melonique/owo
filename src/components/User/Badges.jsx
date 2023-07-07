@@ -7,7 +7,7 @@ const Badge = ({ name }) => (
       width={171}
       height={180}
       alt={name}
-      src={`https://source.boringavatars.com/bauhaus/h jok ow${name}`}
+      src={`https://source.boringavatars.com/beam/${name}?colors=6D9E37,F9C80E,B3C100,E55934,56CCF2`}
     />
     <Figure.Caption className="text-center">
       {name}
@@ -18,15 +18,17 @@ const Badge = ({ name }) => (
 const Badges = ({}) => (
   <Card className="mb-4">
     <Card.Body>
-      <Card.Title>📝 Stats & Badges</Card.Title>
+      <Card.Title>📝 Stats</Card.Title>
       <Card.Text>
-        Youve  been with us since 2021-01-01, have partcipated in 451 giveway, 52 loans, 32 services, and have 56 reviews.
+        Youve been with us since [USER.creationDate]!
       </Card.Text>
+      <Card.Title>🏆 Badges</Card.Title>
 
       <Row>
         <Col xs={4}>
-          <Badge name="Backer" />
+          <Badge name="Habitus" />
         </Col>
+{/*
 
         <Col xs={4}>
           <Badge name="Verified" />
@@ -55,7 +57,7 @@ const Badges = ({}) => (
         <Col xs={4}>
           <Badge name="Service" />
         </Col>
-
+*/}
       </Row>
     </Card.Body>
   </Card>
