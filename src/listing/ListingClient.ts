@@ -1,5 +1,5 @@
 import { supabase } from "@/config/SupabaseClient";
-import { Listing } from "./Listing";
+import { Listing, UserProfile } from "./Listing";
 
 export const getRange = (page: number): [number, number] => {
     const PAGE_SIZE = 12
@@ -18,7 +18,45 @@ type FetchUsecase = {
 export const fetchListings = async ({ page }: FetchUsecase): Promise<Listing[]> => {
     const [ first, last ] = getRange(page)
 
-    const { data: listing } = await supabase.from('offer').select('id,owner,created_at,title,description,tags,type').range(first, last)
+    const { data: listing } = await supabase
+        .from('offer')
+        .select(`
+            id,
+            created_at,
+            title,
+            description,
+            tags,
+            type,
+            user_profile (
+                id,
+                name,
+                email,
+                created_at,
+                username
+            )
+        `)
+        .range(first, last)
 
-    return listing as Listing[]
+    if (!listing) {
+        return []
+    }
+
+    return listing.map(assembleListing)
+}
+
+const assembleListing = (listing: any): Listing => {
+    return {
+        ...listing,
+        user_profile: singleUserProfile(listing.user_profile)
+    }
+}
+
+const singleUserProfile = (userProfile: any): UserProfile => {
+    return {
+        id: userProfile[0].id,
+        name: userProfile[0].name,
+        email: userProfile[0].email,
+        username: userProfile[0].username,
+        created_at: userProfile[0].created_at
+    }
 }
