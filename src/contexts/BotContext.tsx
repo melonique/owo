@@ -81,7 +81,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     if (!lastMessage) { return; }
 
     const messageIsFromBot = lastMessage.user.id === botId
-
+    const isBotMessage = (message: Message): message is BotMessage => message.user.id === botId
 
     switch (botMode) {
       case 'listen':
@@ -95,11 +95,20 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
         }
         break;
       case 'talk':
-        if(messageIsFromBot){
+        if(isBotMessage(lastMessage)){
           sendBotMessage()
         }
       case 'process':
-          console.log('IS SUPPOSED TO PROCESS SOMETHING')
+        if(isBotMessage(lastMessage)) {
+          const lastLastMessage = currentMessages[currentMessages.length - 2]
+          lastMessage.action?.(lastLastMessage.content)
+            .then((result) => {
+              if (result) {
+                addUserResponse(lastMessage.label, result);
+                sendBotMessage();
+              }
+            })
+        }
       default:
         break;
     }

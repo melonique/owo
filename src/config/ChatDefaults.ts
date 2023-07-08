@@ -1,3 +1,4 @@
+import { followupQuestions } from '@/contexts/PromptAIClient'
 import { BotMessage, Message, User } from '@/types/ChatTypes'
 
 export const DEFAULT_USERS = [{
@@ -41,7 +42,8 @@ export const DEFAULT_BOT_CONFIG = {
     messages: [
       new BotMessage(DEFAULT_USERS[0], 'Bonjour! Je suis l\'assistant owo!'),
       new BotMessage(DEFAULT_USERS[0], "Alors, qu'as-tu à proposer à ta super communauté aujourd'hui? 😊?", 'offer_raw'),
-      new BotMessage(DEFAULT_USERS[0], '... je réfléchit ...', 'offer_followup_chatgpt', 'process'),
+      new BotMessage(DEFAULT_USERS[0], '... je réfléchit ...', 'offer_followup_chatgpt', 'process', followupQuestions ),
+      new BotMessage(DEFAULT_USERS[0], "${offer_followup_chatgpt}", 'offer_raw_2'),
       new BotMessage(DEFAULT_USERS[0], "Ok, veux tu me donner plus de détails, whatever", 'offer_raw_2'),
       new BotMessage(DEFAULT_USERS[0], "Cette offre et pour un pret, une vente ou un don? ou toutes ces réponses?", 'offer_terms_raw')
     ]

@@ -37,10 +37,12 @@ export type BotMode = 'talk' | 'listen' | 'process' | 'end';
 export class BotMessage extends Message {
   label: string;
   mode: BotMode;
+  action?: (content: any) => Promise<any>
 
-  constructor(user: User, content: string, label?: string, mode?: BotMode) {
+  constructor(user: User, content: string, label?: string, mode?: BotMode, action?: (content: any) => Promise<any>) {
     super(user, content)
     this.label = label || '';
     this.mode = mode || (label ? 'listen' : 'talk');
+    this.action = action;
   }
 }
