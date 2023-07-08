@@ -13,8 +13,10 @@ const Message: React.FC<MessageProps> = ({
   timestamp,
   isCurrentUser = false,
 }) => {
+  const date = new Date(timestamp)
+  const text = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
   return (
-    <div className={`d-flex flex-row justify-content-${!isCurrentUser ? 'start' : 'end'} ${!isCurrentUser ? 'text-left' : 'text-right'} mb-4`}>
+    <div className={`chat-message d-flex flex-row justify-content-${!isCurrentUser ? 'start' : 'end'} ${!isCurrentUser ? 'text-left' : 'text-right'}`}>
       {!isCurrentUser && avatar && (
         <img
           src={avatar}
@@ -24,13 +26,13 @@ const Message: React.FC<MessageProps> = ({
       )}
       <div>
         <p
-          className={`small p-2 ${!isCurrentUser ? 'me-3 text-white bg-primary' : 'text-primary ms-3'} mb-1 rounded-3`}
+          className={`small p-2 ${!isCurrentUser ? 'me-3 text-white bg-info' : 'text-primary ms-3'} mb-1 rounded-3`}
           style={{ backgroundColor: !isCurrentUser ? "#007BFF" : "#f5f6f7" }}
         >
           {content}
         </p>
-        <p className={`small ${isCurrentUser ? 'me-3' : 'ms-3'} mb-3 rounded-3 text-muted`}>
-          {timestamp}
+        <p className={`time small rounded-3 text-muted`}>
+          {text}
         </p>
       </div>
       {isCurrentUser && avatar && (

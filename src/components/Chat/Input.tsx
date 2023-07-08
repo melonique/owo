@@ -2,6 +2,7 @@ import React, { useContext, useRef } from "react";
 import { useChat } from "@/contexts/ChatContext";
 import { FaSmile, FaPaperclip, FaPaperPlane } from 'react-icons/fa';
 import { Message, User } from "@/types/ChatTypes";
+import { Button } from 'react-bootstrap'
 
 interface ChatInputProps {
   disabled?: boolean;
@@ -41,12 +42,11 @@ const ChatInput: React.FC<ChatInputProps> = ({ disabled }) => {
   };
 
   return (
-    <div className="text-muted d-flex justify-content-start align-items-center">
+    <div className="chat-input d-flex align-items-center">
       <input
         disabled={disabled}
         type="text"
-        className="form-control form-control-lg"
-        id="exampleFormControlInput2"
+        className="form-control form-control"
         placeholder="Type message"
         onKeyDown={handleKeyDown}
         ref={messageInput}
@@ -59,9 +59,9 @@ const ChatInput: React.FC<ChatInputProps> = ({ disabled }) => {
           <FaPaperclip className="icon" />
         </a>
        */}
-      <a className="ms-3" href="#!">
+      <Button className="ms-3" href="#!">
         <FaPaperPlane className="icon" />
-      </a>
+      </Button>
     </div>
   );
 };

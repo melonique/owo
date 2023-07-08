@@ -40,7 +40,7 @@ export const DEFAULT_BOT_CONFIG = {
     id: 'offer',
     user: DEFAULT_USERS[0],
     messages: [
-      new BotMessage(DEFAULT_USERS[0], 'Bonjour! Je suis l\'assistant owo!'),
+      new BotMessage(DEFAULT_USERS[0], '👋 Bonjour! Je suis l\'assistant owo! 🦾 Mon objectif est de t\'aider a faire ton annonce à la vitesse de l\'éclair! ⚡️'),
       new BotMessage(DEFAULT_USERS[0], "Alors, qu'as-tu à proposer à ta super communauté aujourd'hui? 😊?", 'offer_raw'),
       new BotMessage(DEFAULT_USERS[0], '... je réfléchit ...', 'offer_followup_chatgpt', 'process', followupQuestions ),
       new BotMessage(DEFAULT_USERS[0], "${offer_followup_chatgpt}", 'offer_raw_2'),

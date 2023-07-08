@@ -24,8 +24,6 @@ const Chat: React.FC = () => {
         </Button>
       </Card.Header>
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
-        {JSON.stringify(userResponses)}
-
         {currentMessages.map((message: Message) => (
           <ChatMessage
             key={message.id}
@@ -35,9 +33,8 @@ const Chat: React.FC = () => {
             isCurrentUser={message.user.id == currentUser.id}
           />
         ))}
-
       </Card.Body>
-      <Card.Footer className="text-muted d-flex justify-content-start align-items-center">
+      <Card.Footer>
         <ChatInput disabled={botMode !== 'listen'} />
       </Card.Footer>
     </Card>

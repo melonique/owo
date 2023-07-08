@@ -33,3 +33,20 @@ body{
 .chatWindow{
   height: calc(100vh - 60px)
 }
+
+
+.chat-message.justify-content-start + .chat-message.justify-content-start img,
+.chat-message.justify-content-end + .chat-message.justify-content-end img{
+  opacity: 0;
+}
+
+
+.chat-message.justify-content-start +.chat-message.justify-content-start,
+.chat-message.justify-content-end +.chat-message.justify-content-end {
+  margin-top: -2em;
+}
+
+.chat-input input{
+  width: 80%;
+  margin-right: 2em;
+}
