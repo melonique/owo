@@ -31,17 +31,16 @@ export class Conversation {
   }
 }
 
-type onCaptureOptions = 'trigger.end';
 
-export class BotQuestion extends Message {
+// a bot message apply a status and somehting to do for the bot, on send message.
+export type BotMode = 'talk' | 'listen' | 'process' | 'end';
+export class BotMessage extends Message {
   label: string;
-  onCapture: onCaptureOptions;
+  mode: BotMode;
 
-  constructor(user: User, content: string, label: string) {
+  constructor(user: User, content: string, label?: string, mode?: BotMode) {
     super(user, content)
-    this.onCapture = 'trigger.end' // quand l'utilisateur
-    this.label = label
+    this.label = label || '';
+    this.mode = mode || (label ? 'listen' : 'talk');
   }
 }
-
-export type BotMessages = BotQuestion | Message;

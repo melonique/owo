@@ -1,4 +1,4 @@
-import { Message, User } from '@/types/ChatTypes'
+import { BotMessage, Message, User } from '@/types/ChatTypes'
 
 export const DEFAULT_USERS = [{
   id: "offer",
@@ -39,9 +39,11 @@ export const DEFAULT_BOT_CONFIG = {
     id: 'offer',
     user: DEFAULT_USERS[0],
     messages: [
-      new Message(DEFAULT_USERS[0], "What is your name?"),
-      new Message(DEFAULT_USERS[0], "How old are you?"),
-      new Message(DEFAULT_USERS[0], "What's your favorite color?")
+      new BotMessage(DEFAULT_USERS[0], 'Bonjour! Je suis l\'assistant owo!'),
+      new BotMessage(DEFAULT_USERS[0], "Alors, qu'as-tu à proposer à ta super communauté aujourd'hui? 😊?", 'offer_raw'),
+      new BotMessage(DEFAULT_USERS[0], '... je réfléchit ...', 'offer_followup_chatgpt', 'process'),
+      new BotMessage(DEFAULT_USERS[0], "Ok, veux tu me donner plus de détails, whatever", 'offer_raw_2'),
+      new BotMessage(DEFAULT_USERS[0], "Cette offre et pour un pret, une vente ou un don? ou toutes ces réponses?", 'offer_terms_raw')
     ]
   }
 }

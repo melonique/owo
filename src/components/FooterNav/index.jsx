@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { IoIosHome, IoMdSearch, IoIosChatbubbles, IoIosPerson, IoIosAddCircle } from 'react-icons/io';
+import { IoIosApps, IoMdSearch, IoIosChatbubbles, IoIosPerson, IoIosAddCircle } from 'react-icons/io';
 import Link from 'next/link'
 
 const BottomNavbar = () => {
@@ -9,14 +9,14 @@ const BottomNavbar = () => {
     <Navbar className="justify-content-around bottom-navbar" bg="primary" >
       <div className="nav-item text-center">
         <Link href="/listings" >
-          <IoIosHome className="icon" />
-          <div className="nav-text">Home</div>
+          <IoIosApps className="icon" />
+          <div className="nav-text">Listings</div>
         </Link>
       </div>
       <div className="nav-item text-center">
         <Nav.Link href="#notifications">
           <IoIosChatbubbles className="icon" />
-          <div className="nav-text">Message</div>
+          <div className="nav-text">Messages</div>
         </Nav.Link>
       </div>
       <div className="nav-item text-center">

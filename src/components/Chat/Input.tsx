@@ -4,9 +4,10 @@ import { FaSmile, FaPaperclip, FaPaperPlane } from 'react-icons/fa';
 import { Message, User } from "@/types/ChatTypes";
 
 interface ChatInputProps {
+  disabled?: boolean;
 }
 
-const ChatInput: React.FC<ChatInputProps> = () => {
+const ChatInput: React.FC<ChatInputProps> = ({ disabled }) => {
   const { addMessage, currentUser } = useChat();
   const id = "offer"
   const messageInput = useRef<HTMLInputElement>(null);
@@ -42,6 +43,7 @@ const ChatInput: React.FC<ChatInputProps> = () => {
   return (
     <div className="text-muted d-flex justify-content-start align-items-center">
       <input
+        disabled={disabled}
         type="text"
         className="form-control form-control-lg"
         id="exampleFormControlInput2"

@@ -2,7 +2,7 @@ import useListing from '@/listing/useListing'
 import { useEffect, useState } from 'react';
 import Item from '@/components/Gallery/Item'
 import { Container, Row, Col } from 'react-bootstrap';
-import { PublicLayout } from "@/components/Layouts"
+import { PrivateLayout } from "@/components/Layouts"
 
 const Listings = () => {
   const { listings, getPage } = useListing()
@@ -14,7 +14,7 @@ const Listings = () => {
   }
 
   useEffect(() => {
-    fetchPage()
+    fetchPage(0)
   }, [])
 
   return (
@@ -23,7 +23,7 @@ const Listings = () => {
       <Row>
         {listings.map((listing) => {
           return (
-            <Col key={listing.id} xs={6} sm={6} md={4} lg={4}>
+            <Col key={listing.id} xs={12} lg={6}>
               <Item listing={listing} />
             </Col>
             )
@@ -35,7 +35,7 @@ const Listings = () => {
 }
 
 Listings.getLayout = function getLayout(page) {
-  return <PublicLayout>{page}</PublicLayout>
+  return <PrivateLayout>{page}</PrivateLayout>
 }
 
 export default Listings

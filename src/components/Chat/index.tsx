@@ -10,7 +10,7 @@ import ChatInput from './Input'
 
 const Chat: React.FC = () => {
   const { getMessagesByConversationId, currentUser } = useChat();
-  const { userResponses, resetBot } = useBot();
+  const { userResponses, resetBot, botMode } = useBot();
 
   const currentMessages = getMessagesByConversationId('offer');
 
@@ -38,7 +38,7 @@ const Chat: React.FC = () => {
 
       </Card.Body>
       <Card.Footer className="text-muted d-flex justify-content-start align-items-center">
-        <ChatInput />
+        <ChatInput disabled={botMode !== 'listen'} />
       </Card.Footer>
     </Card>
   );

@@ -1,17 +1,17 @@
 import React, { useMemo, useEffect, createContext, useContext, useState, ReactNode, useCallback } from "react";
 import { DEFAULT_BOT_CONFIG  } from '@/config/ChatDefaults'
-import { User, Message, BotMessages } from "@/types/ChatTypes";
+import { User, Message, BotMessage, BotMode } from "@/types/ChatTypes";
 import { useChat } from "./ChatContext";
 
 interface BotContextData {
   userResponses: string[];
+  botMode: BotMode;
   resetBot: () => void;
 }
 
-
 const BotContext = createContext<BotContextData | undefined>(undefined);
 
-const DEFAULT_QUESTIONS: BotMessages[] = DEFAULT_BOT_CONFIG.offer.messages;
+const DEFAULT_QUESTIONS: BotMessage[] = DEFAULT_BOT_CONFIG.offer.messages;
 
 interface BotProviderProps {
   children: ReactNode;
@@ -19,13 +19,17 @@ interface BotProviderProps {
 }
 
 export const BotProvider = ({ children, botId }: BotProviderProps) => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userResponses, setUserResponses] = useState<string[]>([]);
+  const [currentBotMessageIndex, setCurrentBotMessageIndex] = useState(0);
+  const [userResponses, setUserResponses] = useState({});
+  const addUserResponse = (label: string, value: string):void => {
+    setUserResponses((userResponses) => ({...userResponses, [label]: value}))
+  }
+  const [botMode, setBotMode] = useState<BotMode>('talk');
 
   const { getMessagesByConversationId, currentUser, addMessage, resetConversations } = useChat();
   const currentMessages = getMessagesByConversationId(botId);
 
-  const getMessage = (index: number): Message | null => {
+  const getMessage = (index: number): BotMessage | null => {
     // si je ne suis pas au bout de ma liste
     if (index < DEFAULT_QUESTIONS.length) {
 
@@ -37,8 +41,8 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   }
 
   const resetBot = () => {
-    setUserResponses([])
-    setCurrentQuestionIndex(0)
+    setUserResponses({})
+    setCurrentBotMessageIndex(0)
     resetConversations()
     const msg = getMessage(0)
     if (msg) {
@@ -46,39 +50,65 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     }
   }
 
+  const sendBotMessage = () => {
+    const newIndex = currentBotMessageIndex + 1
+    // change for next question
+    setCurrentBotMessageIndex(newIndex);
+    // delay the sending of the next message
+    setTimeout(() => {
+      const msg = getMessage(newIndex)
+      if (msg) {
+        setBotMode(msg.mode);
+        addMessage(botId, msg);
+      }
+    }, 500);
+  }
+
   // send first message
   useEffect(() => {
     const msg = getMessage(0)
+    setCurrentBotMessageIndex(0);
     if (msg) {
+      setBotMode(msg.mode);
       addMessage(botId, msg);
     }
   }, [])
 
 
-  // capture user responses
+  // Actions on new messages added to conversation
   useEffect(() => {
     const lastMessage = currentMessages[currentMessages.length - 1]
-    // if message from current user
-    if (lastMessage && lastMessage.user.id === currentUser.id) {
-      const newIndex = currentQuestionIndex + 1
-      // save its answer
-      setUserResponses((prevResponses) => [...prevResponses, lastMessage.content]);
-      // change for next question
-      setCurrentQuestionIndex(newIndex);
-      // delay the sending of the next message
-      setTimeout(() => {
-        const msg = getMessage(newIndex)
-        if (msg) {
-          addMessage(botId, msg);
-        }
-        else {
-          // THIS IS THE END OF THE CONVERSATION!
-          alert('Saving')
-          resetBot();
-        }
+    if (!lastMessage) { return; }
 
-      }, 1000);
+    const messageIsFromBot = lastMessage.user.id === botId
+
+
+    switch (botMode) {
+      case 'listen':
+        // if message from current user
+        if (lastMessage && lastMessage.user.id === currentUser.id) {
+          const lastBotMessage = getMessage(currentBotMessageIndex)
+          if(lastBotMessage) {
+            addUserResponse(lastBotMessage.label, lastMessage.content);
+            sendBotMessage();
+          }
+        }
+        break;
+      case 'talk':
+        if(messageIsFromBot){
+          sendBotMessage()
+        }
+      case 'process':
+          console.log('IS SUPPOSED TO PROCESS SOMETHING')
+      default:
+        break;
     }
+
+    // if message from bot
+    if (lastMessage && lastMessage.user.id === botId && botMode === 'talk') {
+      console.log('TALKING', currentBotMessageIndex)
+    }
+
   }, [currentMessages])
 
 
@@ -87,7 +117,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     if (msg) {
       addMessage('offer', getNextMessage());
     }
-  }, [currentQuestionIndex]) */
+  }, [currentBotMessageIndex]) */
 
 
 
@@ -96,6 +126,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     <BotContext.Provider
       value={{
         userResponses,
+        botMode,
         resetBot
       }}
     >
