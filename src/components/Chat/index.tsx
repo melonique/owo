@@ -10,7 +10,7 @@ import ChatInput from './Input'
 
 const Chat: React.FC = () => {
   const { getMessagesByConversationId, currentUser } = useChat();
-  const { userResponses, resetBot, botMode } = useBot();
+  const { botMemory, resetBot, botMode } = useBot();
 
   const currentMessages = getMessagesByConversationId('offer');
 
@@ -24,6 +24,7 @@ const Chat: React.FC = () => {
         </Button>
       </Card.Header>
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
+        {JSON.stringify(botMemory)}
         {currentMessages.map((message: Message) => (
           <ChatMessage
             key={message.id}

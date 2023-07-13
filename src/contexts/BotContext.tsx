@@ -1,17 +1,17 @@
-import React, { useMemo, useEffect, createContext, useContext, useState, ReactNode, useCallback } from "react";
-import { DEFAULT_BOT_CONFIG  } from '@/config/ChatDefaults'
-import { User, Message, BotMessage, BotMode } from "@/types/ChatTypes";
+import React, { useEffect, createContext, useContext, useState, ReactNode, useCallback } from "react";
+import { OFFER_BOT_CONFIG } from '@/bots/offer/config'
+import { Message, BotMessage, BotMode } from "@/types/ChatTypes";
 import { useChat } from "./ChatContext";
 
 interface BotContextData {
-  userResponses: string[];
+  botMemory: any;
   botMode: BotMode;
   resetBot: () => void;
 }
 
 const BotContext = createContext<BotContextData | undefined>(undefined);
 
-const DEFAULT_QUESTIONS: BotMessage[] = DEFAULT_BOT_CONFIG.offer.messages;
+const DEFAULT_QUESTIONS: BotMessage[] = OFFER_BOT_CONFIG.messages;
 
 interface BotProviderProps {
   children: ReactNode;
@@ -20,13 +20,15 @@ interface BotProviderProps {
 
 export const BotProvider = ({ children, botId }: BotProviderProps) => {
   const [currentBotMessageIndex, setCurrentBotMessageIndex] = useState(0);
-  const [userResponses, setUserResponses] = useState({});
+  const [botMemory, setBotMemory] = useState({});
   const addUserResponse = (label: string, value: string):void => {
-    setUserResponses((userResponses) => ({...userResponses, [label]: value}))
+    setBotMemory((botMemory) => ({...botMemory, [label]: value}))
   }
   const [botMode, setBotMode] = useState<BotMode>('talk');
 
   const { getMessagesByConversationId, currentUser, addMessage, resetConversations } = useChat();
+
+
   const currentMessages = getMessagesByConversationId(botId);
 
   const getMessage = (index: number): BotMessage | null => {
@@ -41,12 +43,12 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   }
 
   const resetBot = () => {
-    setUserResponses({})
+    setBotMemory({})
     setCurrentBotMessageIndex(0)
     resetConversations()
     const msg = getMessage(0)
     if (msg) {
-      addMessage(botId, msg);
+      addMessage(botId, msg.updateMsg(botMemory));
     }
   }
 
@@ -59,7 +61,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
       const msg = getMessage(newIndex)
       if (msg) {
         setBotMode(msg.mode);
-        addMessage(botId, msg);
+        addMessage(botId, msg.updateMsg(botMemory));
       }
     }, 500);
   }
@@ -69,8 +71,9 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     const msg = getMessage(0)
     setCurrentBotMessageIndex(0);
     if (msg) {
+      resetConversations();
       setBotMode(msg.mode);
-      addMessage(botId, msg);
+      addMessage(botId, msg.updateMsg(botMemory));
     }
   }, [])
 
@@ -80,7 +83,6 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     const lastMessage = currentMessages[currentMessages.length - 1]
     if (!lastMessage) { return; }
 
-    const messageIsFromBot = lastMessage.user.id === botId
     const isBotMessage = (message: Message): message is BotMessage => message.user.id === botId
 
     switch (botMode) {
@@ -95,11 +97,11 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
         }
         break;
       case 'talk':
-        if(isBotMessage(lastMessage)){
+        if (isBotMessage(lastMessage)) {
           sendBotMessage()
         }
       case 'process':
-        if(isBotMessage(lastMessage)) {
+        if (isBotMessage(lastMessage)) {
           const lastLastMessage = currentMessages[currentMessages.length - 2]
           lastMessage.action?.(lastLastMessage.content)
             .then((result) => {
@@ -134,7 +136,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   return (
     <BotContext.Provider
       value={{
-        userResponses,
+        botMemory,
         botMode,
         resetBot
       }}

@@ -45,4 +45,16 @@ export class BotMessage extends Message {
     this.mode = mode || (label ? 'listen' : 'talk');
     this.action = action;
   }
+
+  updateMsg(data:any) {
+    const newStr = this.content.replace(
+      /{(\w*)}/g,
+      function( m, key ){
+        return data.hasOwnProperty( key ) ? data[ key ] : "";
+      }
+    );
+    this.content = newStr;
+    return this;
+  }
+
 }
