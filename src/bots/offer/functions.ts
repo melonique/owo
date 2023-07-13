@@ -9,7 +9,7 @@ export const followupQuestions = async (request: string): Promise<string> => {
 }
 
 export const completeOffer = async (request: string): Promise<string> => {
-    const { data: response } = await supabase.functions.invoke<string>('prompt-ai-followup-questions', {
+    const { data: response } = await supabase.functions.invoke<string>('prompt-ai-complete-offer', {
         body: { content: request }
     })
 
