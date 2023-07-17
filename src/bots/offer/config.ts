@@ -1,4 +1,4 @@
-import { followupQuestions, completeOffer } from './functions'
+import { followupQuestions, completeOffer, saveOffer } from './functions'
 import { BotMessage, User } from '@/types/ChatTypes'
 
 export const OFFER_BOT_USER: User = {
@@ -21,6 +21,10 @@ export const OFFER_BOT_CONFIG = {
     new BotMessage(OFFER_BOT_USER, 'Cette offre et pour un pret, une vente ou un don? ou toutes ces réponses?', 'offer_terms_raw'),
     new BotMessage(OFFER_BOT_USER, 'Ok, je prépare ma proposition...', 'ai_offer_completion', 'process', completeOffer ),
     new BotMessage(OFFER_BOT_USER, 'Ok, donc...'),
-    new BotMessage(OFFER_BOT_USER, '{ai_offer_completion}', 'offer_raw_3'),
+    new BotMessage(OFFER_BOT_USER, '{ai_offer_completion}'),
+    new BotMessage(OFFER_BOT_USER, 'Je sauvegarde?', 'save_offer', 'listen-confirm'),
+    new BotMessage(OFFER_BOT_USER, '...je réfléchit...', 'ai_offer_saved', 'process', saveOffer ),
+    new BotMessage(OFFER_BOT_USER, 'Ok, donc...'),
+    new BotMessage(OFFER_BOT_USER, '{ai_offer_saved}'),
   ]
 }

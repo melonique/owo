@@ -50,3 +50,8 @@ body{
   width: 80%;
   margin-right: 2em;
 }
+
+.bottom-navbar .badge{
+  height: 9px;
+  width: 4px;
+}

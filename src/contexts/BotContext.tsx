@@ -102,8 +102,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
         }
       case 'process':
         if (isBotMessage(lastMessage)) {
-          const lastLastMessage = currentMessages[currentMessages.length - 2]
-          lastMessage.action?.(lastLastMessage.content)
+          lastMessage.action?.(botMemory)
             .then((result) => {
               if (result) {
                 addUserResponse(lastMessage.label, result);

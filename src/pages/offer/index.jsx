@@ -1,5 +1,5 @@
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
-import { Chat } from '@/components'
+import { ChatBot } from '@/components'
 import { BotProvider } from '@/contexts/BotContext'
 import { ChatProvider } from '@/contexts/ChatContext'
 import { PrivateLayout } from "@/components/Layouts"
@@ -11,7 +11,7 @@ const Offer = () => {
         <Container fluid className="text-center">
           <Row className="d-flex justify-content-center">
             <Col md="10" lg="8" xl="6">
-              <Chat />
+              <ChatBot />
             </Col>
           </Row>
         </Container>

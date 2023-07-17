@@ -33,7 +33,7 @@ export class Conversation {
 
 
 // a bot message apply a status and somehting to do for the bot, on send message.
-export type BotMode = 'talk' | 'listen' | 'process' | 'end';
+export type BotMode = 'talk' | 'listen' | 'listen-confirm' | 'process' | 'end';
 export class BotMessage extends Message {
   label: string;
   mode: BotMode;

@@ -28,8 +28,8 @@ const Message: React.FC<MessageProps> = ({
         <p
           className={`small p-2 ${!isCurrentUser ? 'me-3 text-white bg-info' : 'text-primary ms-3'} mb-1 rounded-3`}
           style={{ backgroundColor: !isCurrentUser ? "#007BFF" : "#f5f6f7" }}
+          dangerouslySetInnerHTML={{ __html: content.split("\n").join('<br/>') }}
         >
-          {content}
         </p>
         <p className={`time small rounded-3 text-muted`}>
           {text}
