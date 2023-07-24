@@ -1,5 +1,4 @@
-import { Navbar, Container, Breadcrumb, Row, Col, Card, Tab, ListGroup, Figure } from "react-bootstrap";
-import { Link } from "next/link"
+import { Container, Row, Col, Card, Tab, ListGroup } from "react-bootstrap";
 import Badges from './Badges'
 import UpdatePasswordForm from './UpdatePasswordForm'
 import useAuthentication from "@/authentication/useAuthentication"
@@ -7,7 +6,7 @@ import useAuthentication from "@/authentication/useAuthentication"
 
 const Profile = ({}) => {
   const { user } = useAuthentication() || {};
-  if (!user) { return 'LOADING PROFILE' }
+  if (!user) { return (<span>LOADING PROFILE</span>) }
 
   return(
   <>
@@ -22,7 +21,6 @@ const Profile = ({}) => {
               alt="avatar"
               className="rounded-circle"
               style={{ width: '100px' }}
-              fluid
             />
             <Card.Title className="mt-3 mb-0">{user.username}</Card.Title>
               <p className="text-muted mb-1">👁️‍🗨️ {user.name}</p>
