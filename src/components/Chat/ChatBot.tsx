@@ -17,11 +17,11 @@ const ChatBot: React.FC = () => {
   const BotInput = () => {
     switch (botMode) {
       case 'listen':
-        return <ChatBotTextInput />
+        return <ChatBotTextInput chatId="offer" />
       case 'listen-confirm':
         return <ChatBotContifmInput />
       default:
-        return <ChatBotTextInput disabled />
+        return <ChatBotTextInput disabled chatId="offer" />
     }
   }
 

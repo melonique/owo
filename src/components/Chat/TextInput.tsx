@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useChat } from "@/contexts/ChatContext";
 import { FaSmile, FaPaperclip, FaPaperPlane } from 'react-icons/fa';
 import { Message, User } from "@/types/ChatTypes";
@@ -20,7 +20,6 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled, chatId }) => {
       return;
     }
 
-
     const newMessage: Message = {
       id: "m-" + Math.floor(Math.random() * 10000) , // Replace with a proper ID generation method
       user: currentUser,
@@ -41,10 +40,14 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled, chatId }) => {
     }
   };
 
+  useEffect(() =>  {
+
+  }, [])
   return (
     <div className="chat-input d-flex align-items-center">
       <input
         disabled={disabled}
+        autoFocus
         type="text"
         className="form-control form-control"
         placeholder="Type message"
