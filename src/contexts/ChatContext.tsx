@@ -7,7 +7,7 @@ interface ChatContextData {
   currentUser: User;
   addMessage: (conversationId: string, message: Message) => void;
   getMessagesByConversationId: (conversationId: string) => Message[];
-  getConversationById: (conversationId: string) => Conversation;
+  getConversationById: (conversationId: string) => Conversation | undefined;
   resetConversations: () => void;
 }
 const ChatContext = createContext<ChatContextData>({} as ChatContextData);

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from 'next/link'
-import { User } from "@supabase/supabase-js";
-import { Message } from "react-hook-form";
+import { Message, User } from "@/types/ChatTypes";
+
 
 interface ChatListItemProps {
   id: string;

@@ -9,7 +9,10 @@ import ChatBotMessage from './Message'
 import ChatBotTextInput from './TextInput'
 import ChatBotContifmInput from './ConfirmInput'
 
-const ChatBot: React.FC = ({ showNav }) => {
+type ChatBotProps = {
+  showNav: () => void;
+}
+const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
   const { getMessagesByConversationId, currentUser } = useChat();
   const { resetBot, botMode, botMemory } = useBot();
   const ref = useRef<HTMLDivElement>(null);
