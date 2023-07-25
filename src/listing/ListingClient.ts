@@ -47,16 +47,16 @@ export const fetchListings = async ({ page }: FetchUsecase): Promise<Listing[]> 
 const assembleListing = (listing: any): Listing => {
     return {
         ...listing,
-        user_profile: singleUserProfile(listing.user_profile)
+        userProfile: singleUserProfile(listing.user_profile)
     }
 }
 
 const singleUserProfile = (userProfile: any): UserProfile => {
     return {
-        id: userProfile[0].id,
-        name: userProfile[0].name,
-        email: userProfile[0].email,
-        username: userProfile[0].username,
-        created_at: userProfile[0].created_at
+        id: userProfile.id,
+        name: userProfile.name,
+        email: userProfile.email,
+        username: userProfile.username,
+        createdAt: userProfile.created_at
     }
 }

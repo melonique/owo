@@ -2,7 +2,7 @@ export type UserProfile = {
   id: string;
   name: string;
   email: string;
-  created_at: string;
+  createdAt: string;
   username: string;
 }
 
@@ -13,5 +13,5 @@ export type Listing = {
   description: string;
   tags?: string[];
   type?: string[];
-  user_profile: UserProfile;
+  userProfile: UserProfile;
 }
