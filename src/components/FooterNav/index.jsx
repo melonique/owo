@@ -13,11 +13,11 @@ const BottomNavbar = () => {
         </Link>
       </div>
       <div className="nav-item text-center">
-        <Nav.Link href="/messages/offer">
+        <Link href="/messages/offer">
           <IoIosChatbubbles className="icon" />
           <Badge bg="danger">&nbsp;</Badge>
           <div className="nav-text">Messages</div>
-        </Nav.Link>
+        </Link>
       </div>
       <div className="nav-item text-center">
         <Link href="/offer">
@@ -26,10 +26,10 @@ const BottomNavbar = () => {
         </Link>
       </div>
       <div className="nav-item text-center">
-        <Nav.Link href="#search">
+        <Link href="/messages/search">
           <IoMdSearch className="icon" />
           <div className="nav-text">Search</div>
-        </Nav.Link>
+        </Link>
       </div>
       <div className="nav-item text-center">
         <Link href="/profile">
