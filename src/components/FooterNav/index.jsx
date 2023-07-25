@@ -20,7 +20,7 @@ const BottomNavbar = () => {
         </Link>
       </div>
       <div className="nav-item text-center">
-        <Link href="/offer">
+        <Link href="/messages/offer">
           <IoIosAddCircle className="icon" />
           <div className="nav-text">Offer</div>
         </Link>

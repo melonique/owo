@@ -6,13 +6,14 @@ const borderTypes = {
   'don': 'primary',
   'vente': 'secondary',
   'pret': 'info',
+  'service': 'success',
 }
 
 const GalleryItem = ({ listing : { id, title, description, type, tags, userProfile }}) => (
   <Card className="mb-3" border={type && type.length ? borderTypes[type[0]] : 'primary'}>
     <Card.Body>
       <Row>
-        <Col xs={2}>
+        <Col sm={2}>
           <Card.Img
             src={"https://api.multiavatar.com/" + userProfile.id + '.png'}
             alt="avatar"
