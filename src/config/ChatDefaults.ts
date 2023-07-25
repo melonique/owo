@@ -18,12 +18,20 @@ export const DEFAULT_WELCOME_MESSAGE = (user: User) => ({
   timestamp: Date.now(),
 })
 
-export const DEFAULT_CONVERSATIONS = [{
-  id: "offer",
-  title: 'Poster une offre',
-  user: DEFAULT_USERS[0],
-  messages: [],
-}]
+export const DEFAULT_CONVERSATIONS = [
+  {
+    id: "offer",
+    title: 'Poster une offre',
+    user: DEFAULT_USERS[0],
+    messages: [],
+  },
+  {
+    id: "id",
+    title: 'Parler avec un user',
+    user: DEFAULT_USERS[1],
+    messages: [],
+  },
+]
 
 export const CURRENT_USER = {
   id: "you",

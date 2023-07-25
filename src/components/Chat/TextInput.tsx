@@ -6,11 +6,11 @@ import { Button } from 'react-bootstrap'
 
 interface ChatTextInputProps {
   disabled?: boolean;
+  chatId: string;
 }
 
-const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
+const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled, chatId }) => {
   const { addMessage, currentUser } = useChat();
-  const id = "offer"
   const messageInput = useRef<HTMLInputElement>(null);
 
   const handleSend = () => {
@@ -28,7 +28,7 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
       timestamp: new Date().toISOString(),
     };
 
-    addMessage(id, newMessage);
+    addMessage(chatId, newMessage);
 
     // Reset input field
     messageInput.current!.value = "";
@@ -59,7 +59,7 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
           <FaPaperclip className="icon" />
         </a>
         */}
-      <Button className="ms-3" href="#!">
+      <Button className="ms-3" onClick={handleSend}>
         <FaPaperPlane className="icon" />
       </Button>
     </div>

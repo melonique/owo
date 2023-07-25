@@ -12,7 +12,7 @@ export const OFFER_BOT_CONFIG = {
   user: OFFER_BOT_USER,
   messages: [
     new BotMessage(OFFER_BOT_USER, '👋 Bonjour! Je suis l\'assistant owo! 🦾 Mon objectif est de t\'aider a faire ton annonce à la vitesse de l\'éclair! ⚡️'),
-    new BotMessage(OFFER_BOT_USER, 'Alors, qu\'as-tu à proposer à ta super communauté aujourd\'hui? 😊?', 'offer_raw', 'listen-confirm'),
+    new BotMessage(OFFER_BOT_USER, 'Alors, qu\'as-tu à proposer à ta super communauté aujourd\'hui? 😊?', 'offer_raw'),
     new BotMessage(OFFER_BOT_USER, '... je réfléchit ...', 'ai_offer_followup_question', 'process', followupQuestions ),
     // BUG: ya un bug dans le botcontext qui fait que on a pas le botMemory a jour quand on appel le next message alors
     // je dois ajouter un mesage entre les 2 le temps que le state s'update 🤦‍♀️

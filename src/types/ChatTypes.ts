@@ -18,7 +18,7 @@ export class Message {
   }
 }
 export class Conversation {
-  id?: string;
+  id: string;
   title: string;
   user: User;
   messages: Message[];

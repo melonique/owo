@@ -7,6 +7,7 @@ interface ChatContextData {
   currentUser: User;
   addMessage: (conversationId: string, message: Message) => void;
   getMessagesByConversationId: (conversationId: string) => Message[];
+  getConversationById: (conversationId: string) => Conversation;
   resetConversations: () => void;
 }
 const ChatContext = createContext<ChatContextData>({} as ChatContextData);
@@ -86,6 +87,12 @@ export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
     );
     return selectedConversation?.messages || [];
   };
+  const getConversationById = (conversationId: string) => {
+    const selectedConversation = conversations.find(
+      (conversation) => conversation.id === conversationId
+    );
+    return selectedConversation;
+  };
 
   return (
     <ChatContext.Provider
@@ -95,6 +102,7 @@ export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
         conversations,
         addMessage,
         getMessagesByConversationId: useCallback(getMessagesByConversationId, [conversations]),
+        getConversationById: useCallback(getConversationById, [conversations]),
         resetConversations: () => setConversations(DEFAULT_CONVERSATIONS)
       }}
     >
