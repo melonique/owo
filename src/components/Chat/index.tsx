@@ -19,7 +19,7 @@ const Chat: React.FC<props> = ({ currentChatId }) => {
   return (
     <Row>
       <Col md="4" lg="5" xl="4" >
-        {conversations.filter(c => c.id !== 'offer').map((chat) => (
+        {conversations.map((chat) => (
           <ChatListItem key={chat.id} {...chat} />
         ))}
       </Col>
