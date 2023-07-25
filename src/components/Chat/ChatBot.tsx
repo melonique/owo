@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { BiReset } from 'react-icons/bi';
 import { useChat } from "@/contexts/ChatContext";
@@ -12,8 +12,19 @@ import ChatBotContifmInput from './ConfirmInput'
 const ChatBot: React.FC = () => {
   const { getMessagesByConversationId, currentUser } = useChat();
   const { resetBot, botMode } = useBot();
+  const ref = useRef<HTMLDivElement>(null);
 
   const currentMessages = getMessagesByConversationId('offer');
+
+  useEffect(() => {
+    if (currentMessages.length) {
+      ref.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+    }
+  }, [currentMessages.length]);
+
   const BotInput = () => {
     switch (botMode) {
       case 'listen':
@@ -43,6 +54,7 @@ const ChatBot: React.FC = () => {
             isCurrentUser={message.user.id == currentUser.id}
           />
         ))}
+        <div ref={ref} />
       </Card.Body>
       <Card.Footer>
         <BotInput />

@@ -48,7 +48,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     resetConversations()
     const msg = getMessage(0)
     if (msg) {
-      addMessage(botId, msg.updateMsg(botMemory));
+      addMessage(botId, msg.updateMsg({}));
     }
   }
 
