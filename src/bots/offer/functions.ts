@@ -36,19 +36,17 @@ export const completeOffer = async ({
     return response ? response : 'rip'
 }
 
-
-
-
-// TODO: une function qui save!
-type saveOfferType = {save_offer: string; ai_offer_completion: string; }
+type JsonString = string
+type saveOfferType = {save_offer: string; ai_offer_completion: JsonString; }
 export const saveOffer = async ({ save_offer, ai_offer_completion }: saveOfferType) => {
   if (!save_offer) {
     return "Ok! Tempis! tu peux cliquer sur le bouton reset en haut pour recommencer!"
   } else {
 
-    /* const { data: response } = await supabase.functions.invoke<string>('prompt-ai-followup-questions', {
-        body: { content: ai_offer_completion }
-    }) */
-    return "Saved! Tu peux cliquer sur le bouton reset en haut pour recommencer!"
+    const { data: response } = await supabase.functions.invoke<string>('save-offer', {
+        body: JSON.parse(ai_offer_completion)
+    })
+
+    return response ? "Saved! Tu peux cliquer sur le bouton reset en haut pour recommencer!" : 'rip'
   }
 }
