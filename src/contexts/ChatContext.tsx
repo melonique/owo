@@ -44,7 +44,7 @@ export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
   }, []);
 
-/*
+
   useEffect(() => {
     localStorage.setItem("chatUsers", JSON.stringify(users));
   }, [users]);
@@ -52,7 +52,7 @@ export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("chatConversations", JSON.stringify(conversations));
   }, [conversations]);
-*/
+
 /*
   const createConversation = (title: string, user: User) => {
     const newConversation = {

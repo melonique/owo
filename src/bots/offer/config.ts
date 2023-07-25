@@ -3,7 +3,7 @@ import { BotMessage, User } from '@/types/ChatTypes'
 
 export const OFFER_BOT_USER: User = {
   id: "offer",
-  username: 'Assistant owo',
+  username: '🤖 Assistant owo',
   avatar: 'https://api.multiavatar.com/make an offer.png',
 }
 

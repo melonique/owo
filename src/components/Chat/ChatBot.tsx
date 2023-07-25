@@ -32,7 +32,7 @@ const ChatBot: React.FC = () => {
       case 'listen-confirm':
         return <ChatBotContifmInput />
       default:
-        return <ChatBotTextInput disabled chatId="offer" />
+        return <ChatBotTextInput chatId="offer" />
     }
   }
 
