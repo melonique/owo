@@ -9,9 +9,9 @@ import ChatBotMessage from './Message'
 import ChatBotTextInput from './TextInput'
 import ChatBotContifmInput from './ConfirmInput'
 
-const ChatBot: React.FC = () => {
+const ChatBot: React.FC = ({ showNav }) => {
   const { getMessagesByConversationId, currentUser } = useChat();
-  const { resetBot, botMode } = useBot();
+  const { resetBot, botMode, botMemory } = useBot();
   const ref = useRef<HTMLDivElement>(null);
 
   const currentMessages = getMessagesByConversationId('offer');
@@ -39,7 +39,10 @@ const ChatBot: React.FC = () => {
   return (
     <Card className="chatWindow">
       <Card.Header className="d-flex justify-content-between align-items-center p-3">
-        <h5 className="mb-0">Poster une offre</h5>
+        <Button variant="primary" className="d-md-none" onClick={showNav}>
+          🍔
+        </Button>
+        <h5 className="mb-0">Poster une offre <span className="text-muted" title={JSON.stringify(botMemory, null, 2)}>🛠</span></h5>
         <Button onClick={resetBot}>
           <BiReset className="icon" />
         </Button>

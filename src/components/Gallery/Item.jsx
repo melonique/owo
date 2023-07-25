@@ -10,7 +10,6 @@ const borderTypes = {
 
 const GalleryItem = ({ listing : { id, title, description, type, tags, userProfile }}) => (
   <Card className="mb-3" border={type && type.length ? borderTypes[type[0]] : 'primary'}>
-
     <Card.Body>
       <Row>
         <Col xs={2}>
@@ -25,7 +24,7 @@ const GalleryItem = ({ listing : { id, title, description, type, tags, userProfi
         </Col>
       <Col className="text-left">
           <Card.Title border="primary">
-            {title} titre de ce qui est a offrir
+            {title}
           </Card.Title>
 
           <Card.Text>{description}</Card.Text>

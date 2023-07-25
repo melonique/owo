@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from "react";
-import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import React, { useState, useRef, useEffect } from "react";
+import { Container, Row, Col, Card, Button, Form, Offcanvas } from "react-bootstrap";
 import { BiReset } from 'react-icons/bi';
 import { useChat } from "@/contexts/ChatContext";
 import { Message } from "@/types/ChatTypes";
@@ -13,7 +13,11 @@ type props = {
 }
 const Chat: React.FC<props> = ({ currentChatId }) => {
   const { getConversationById, currentUser, conversations } = useChat();
-  const conversation = getConversationById(currentChatId)
+  const conversation = getConversationById(currentChatId);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   if (!conversation) {
     return <>Loading...</>
@@ -22,14 +26,24 @@ const Chat: React.FC<props> = ({ currentChatId }) => {
 
   return (
     <Row>
-      <Col md="4" lg="5" xl="4" >
-        <Card className="chatWindow">
-          <ChatUserList conversations={conversations} currentChatId={currentChatId}/>
-        </Card>
+
+
+      <Col md="4" lg="5" xl="4">
+        <Offcanvas show={show} onHide={handleClose} responsive="md">
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title></Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Card style={{ width: '100%' }}>
+              <ChatUserList conversations={conversations} currentChatId={currentChatId} />
+            </Card>
+          </Offcanvas.Body>
+        </Offcanvas>
       </Col>
-        <Col md="8" lg="7" xl="8">
-        {isBot ? <ChatWithBot />
-          : <ChatWithUser currentChatId={currentChatId} conversation={conversation} currentUser={currentUser} />}
+
+        <Col sm="12" md="8" lg="7" xl="8">
+        {isBot ? <ChatWithBot showNav={handleShow}/>
+          : <ChatWithUser currentChatId={currentChatId} conversation={conversation} currentUser={currentUser} showNav={handleShow} />}
 
         </Col>
     </Row>

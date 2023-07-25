@@ -2,12 +2,12 @@ import { User } from '@/types/ChatTypes'
 import { OFFER_BOT_USER } from '@/bots/offer/config'
 
 export const DEFAULT_USERS = [OFFER_BOT_USER, {
-  id: "2",
-  username: 'ChatGPT-4',
-  avatar: 'https://api.multiavatar.com/gpt-4.png',
+  id: "vero-user-id",
+  username: 'Véro Lopez',
+  avatar: 'https://api.multiavatar.com/Véro-Lopez.png',
 }, {
-  id: "3",
-  username: 'Innovation OnePager Assistant',
+  id: "another-user-id",
+  username: 'John Doe',
   avatar: 'https://api.multiavatar.com/One pager.png',
 }]
 
@@ -21,19 +21,19 @@ export const DEFAULT_WELCOME_MESSAGE = (user: User) => ({
 export const DEFAULT_CONVERSATIONS = [
   {
     id: "offer",
-    title: 'Poster une offre',
+    title: 'Rédiger une offre',
     user: DEFAULT_USERS[0],
     messages: [],
   },
   {
     id: "id",
-    title: 'Parler avec un user',
+    title: 'Tondeuse à donner',
     user: DEFAULT_USERS[1],
     messages: [],
   },
   {
     id: "another-one",
-    title: 'Parler avec un autre user',
+    title: 'Bas bleus à vendre',
     user: DEFAULT_USERS[2],
     messages: [],
   },

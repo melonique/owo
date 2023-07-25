@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import ChatTextInput from './TextInput';
 import ChatMessage from './Message';
 import { Conversation, Message, User } from '@/types/ChatTypes';
@@ -9,8 +9,9 @@ type ChatWithUserProps = {
   currentChatId: string
    conversation: Conversation
    currentUser: User
+  showNav: () => void
 }
-const ChatWithUser = ({ currentChatId, conversation, currentUser }: ChatWithUserProps) => {
+const ChatWithUser = ({ currentChatId, conversation, currentUser, showNav }: ChatWithUserProps) => {
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -25,7 +26,10 @@ const ChatWithUser = ({ currentChatId, conversation, currentUser }: ChatWithUser
 
   return (
     <Card className="chatWindow">
-      <Card.Header className="d-flex justify-content-between align-items-center p-3">
+      <Card.Header className="d-flex justify-content-start align-items-center p-3">
+        <Button variant="primary" className="d-md-none mr-3" onClick={showNav}>
+          🍔
+        </Button>
         <h5 className="mb-0">{conversation.title}</h5>
       </Card.Header>
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
