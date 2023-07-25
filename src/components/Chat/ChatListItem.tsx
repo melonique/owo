@@ -1,6 +1,5 @@
 import React from "react";
 import Link from 'next/link'
-import { useChat } from "@/contexts/ChatContext";
 import { User } from "@supabase/supabase-js";
 import { Message } from "react-hook-form";
 

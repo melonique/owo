@@ -13,7 +13,7 @@ type props = {
 const Chat: React.FC<props> = ({ currentChatId }) => {
   const { getConversationById, currentUser, conversations } = useChat();
   const conversation = getConversationById(currentChatId)
-  if (!conversations) {
+  if (!conversation) {
     return <>Loading...</>
   }
   return (

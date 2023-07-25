@@ -31,6 +31,12 @@ export const DEFAULT_CONVERSATIONS = [
     user: DEFAULT_USERS[1],
     messages: [],
   },
+  {
+    id: "another-one",
+    title: 'Parler avec un autre user',
+    user: DEFAULT_USERS[2],
+    messages: [],
+  },
 ]
 
 export const CURRENT_USER = {
