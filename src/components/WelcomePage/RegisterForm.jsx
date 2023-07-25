@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 import useAuthentication from '@/contexts/authentication/useAuthentication';
 import { Checkbox, Form, Input } from '@/components';
 import { useRouter } from 'next/router';
@@ -14,21 +14,28 @@ const RegisterForm = ({ }) => {
 
   return (
     <>
-      <Form onSubmit={onSubmit} >
-
+      <Form onSubmit={onSubmit}>
         <Input
           name="name"
-          label="Nom complet"
-          placeholder="Entrez votre nom"
+          label="Prénom"
+          placeholder=""
           rules={{
-            required: "Entrez votre nom",
+            required: "Entrez votre prénom",
+          }}
+        />
+        <Input
+          name="lastname"
+          label="Nom de famille"
+          placeholder=""
+          rules={{
+            required: "Entrez votre nom de famille",
           }}
         />
 
         <Input
           name="username"
-          label="Username"
-          placeholder="Entrez un nom d'utilisateur"
+          label="Nom d'utilisateur"
+          placeholder=""
           rules={{
             required: "Entrez un nom d'utilisateur",
           }}
@@ -70,11 +77,12 @@ const RegisterForm = ({ }) => {
 
         <Checkbox
           name="tos"
-          label="I have read and agree to the terms"
+          label="J'ai lu, comprends et accepte les termes et conditions d'utilisations, ainsi que la politique de confidentialité et de données "
           rules={{
             required: "Acceptez les conditions d'utilisation",
           }}
         />
+        <p className="ml-3"><a href="https://owo.quebec/legal/tos" target="_blank">🔗 Voir les détails </a></p>
 
         <Button variant="primary" type="submit" className="mb-2 w-100">
           Sign Up

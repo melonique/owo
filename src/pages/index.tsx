@@ -3,7 +3,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
-
+import Container from 'react-bootstrap/Container'
 import { Header, WelcomePage, Gallery } from '@/components'
 
 
@@ -16,11 +16,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <p className="text-center mt-2 mb-3">
-        <a className="btn btn-outline-primary" href="https://owo.quebec/" target="_blank">VIEW LANDING PAGE</a>
-      </p>
-      <Header />
-      <WelcomePage />
+      <Container fluid className="bg-primary vh-100">
+        <Header />
+        <WelcomePage />
+      </Container>
     </>
   )
 }

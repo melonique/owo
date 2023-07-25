@@ -29,19 +29,14 @@ const Login = ({ }) => {
         <Input
           name="password"
           type="password"
-          label="Password"
+          label="Mot de passse"
           rules={{
             required: "Entrez votre mot de passe"
           }}
         />
 
-        <Checkbox
-          name="remember"
-          label="Remember me"
-        />
-
         <Button variant="primary" type="submit" className="mb-2 w-100">
-          Sign In
+          Connexion
         </Button>
       </Form>
 

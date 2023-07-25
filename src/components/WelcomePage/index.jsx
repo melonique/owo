@@ -1,8 +1,5 @@
-import useAuthentication from '@/contexts/authentication/useAuthentication';
 import React, { useState } from 'react';
-import { Container, Form, Button, Nav, Card, Tab, Row, Col } from 'react-bootstrap';
-import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';
-import { useForm } from 'react-hook-form';
+import { Container, Nav, Card, Tab, Row, Col } from 'react-bootstrap';
 
 import Login from './Login';
 import RegisterForm from './RegisterForm';
@@ -11,7 +8,7 @@ const WelcomePage = () => {
   const [activeKey, setActiveKey] = useState('login');
 
   return (
-    <Container className="d-flex justify-content-center align-items-center mt-5 bg-feature">
+    <Container className="d-flex justify-content-center align-items-center" >
       <Card style={{ width: '30rem' }} className="border-primary">
         <Card.Body>
           <Tab.Container activeKey={activeKey} onSelect={(k) => setActiveKey(k)}>
@@ -19,10 +16,10 @@ const WelcomePage = () => {
               <Col>
                 <Nav variant="pills" className="justify-content-center mb-3">
                   <Nav.Item>
-                    <Nav.Link eventKey="login">Login</Nav.Link>
+                    <Nav.Link eventKey="login">Connexion</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="register">Register</Nav.Link>
+                    <Nav.Link eventKey="register">Inscription</Nav.Link>
                   </Nav.Item>
                 </Nav>
               </Col>
@@ -32,7 +29,7 @@ const WelcomePage = () => {
                 <Tab.Content>
                   <Tab.Pane eventKey="login">
                     <Login />
-                    <Card.Text className="text-center">Not a member? <Card.Link href="#" onClick={() => setActiveKey('register')}>Register</Card.Link></Card.Text>
+                    <Card.Text className="text-center mt-2">Tu n'es pas membre? <Card.Link href="#" onClick={() => setActiveKey('register')}>Inscrit-toi!</Card.Link></Card.Text>
                   </Tab.Pane>
                   <Tab.Pane eventKey="register">
                     <RegisterForm />
