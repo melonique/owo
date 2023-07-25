@@ -1,4 +1,4 @@
-import useAuthentication from '@/authentication/useAuthentication';
+import useAuthentication from '@/contexts/authentication/useAuthentication';
 import React, { useState } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';

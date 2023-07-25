@@ -1,4 +1,4 @@
-import useAuthentication from '@/authentication/useAuthentication';
+import useAuthentication from '@/contexts/authentication/useAuthentication';
 import React, { useState } from 'react';
 import { Container, Form, Button, Nav, Card, Tab, Row, Col } from 'react-bootstrap';
 import { FaFacebookF, FaTwitter, FaGoogle, FaGithub } from 'react-icons/fa';

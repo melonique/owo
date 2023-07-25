@@ -3,11 +3,11 @@
 import { ReactNode, useEffect, useState } from 'react';
 import type { NextComponentType } from 'next';
 import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app';
-import { AuthenticationProvider } from '@/authentication/AuthenticationContext'
+import { AuthenticationProvider } from '@/contexts/authentication/AuthenticationContext'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css'
-import { AuthenticationState, noAuthentication } from '@/authentication/Authentication';
-import { resumeSession } from '@/authentication/AuthenticationClient';
+import { AuthenticationState, noAuthentication } from '@/contexts/authentication/Authentication';
+import { resumeSession } from '@/contexts/authentication/AuthenticationClient';
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
   Component,

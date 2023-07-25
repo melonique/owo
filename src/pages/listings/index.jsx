@@ -1,4 +1,4 @@
-import useListing from '@/listing/useListing'
+import useListing from '@/contexts/listing/useListing'
 import { useEffect, useState } from 'react';
 import Item from '@/components/Gallery/Item'
 import { Container, Row, Col } from 'react-bootstrap';

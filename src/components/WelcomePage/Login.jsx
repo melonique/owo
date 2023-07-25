@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import useAuthentication from '@/authentication/useAuthentication';
+import useAuthentication from '@/contexts/authentication/useAuthentication';
 import { Checkbox, Form, Input } from '@/components';
 import { useRouter } from 'next/router';
 

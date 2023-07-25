@@ -1,7 +1,7 @@
 import { Container, Row, Col, Card, Tab, ListGroup } from "react-bootstrap";
 import Badges from './Badges'
 import UpdatePasswordForm from './UpdatePasswordForm'
-import useAuthentication from "@/authentication/useAuthentication"
+import useAuthentication from "@/contexts/authentication/useAuthentication"
 
 
 const Profile = ({}) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import useAuthentication from '@/authentication/useAuthentication';
+import useAuthentication from '@/contexts/authentication/useAuthentication';
 import { Checkbox, Form, Input } from '@/components';
 import { useRouter } from 'next/router';
 
@@ -15,7 +15,7 @@ const RegisterForm = ({ }) => {
   return (
     <>
       <Form onSubmit={onSubmit} >
-      
+
         <Input
           name="name"
           label="Nom complet"
@@ -68,9 +68,9 @@ const RegisterForm = ({ }) => {
           }}
         />
 
-        <Checkbox 
+        <Checkbox
           name="tos"
-          label="I have read and agree to the terms" 
+          label="I have read and agree to the terms"
           rules={{
             required: "Acceptez les conditions d'utilisation",
           }}

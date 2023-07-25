@@ -1,5 +1,5 @@
 import { supabase } from '@/config/SupabaseClient'
-import { LoginResponse, LoginRequest, authenticated, errorWhileAuthenticating, RegisterRequest, RegisterResponse, fromAuthenticationResponseToUser, fromAuthErrorToMessage } from '../authentication/Authentication'
+import { LoginResponse, LoginRequest, authenticated, errorWhileAuthenticating, RegisterRequest, RegisterResponse, fromAuthenticationResponseToUser, fromAuthErrorToMessage } from './Authentication'
 import { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
 export const resumeSession = async (): Promise<LoginResponse> => {
