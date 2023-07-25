@@ -53,10 +53,10 @@ const assembleListing = (listing: any): Listing => {
 
 const singleUserProfile = (userProfile: any): UserProfile => {
     return {
-        id: userProfile[0].id,
-        name: userProfile[0].name,
-        email: userProfile[0].email,
-        username: userProfile[0].username,
-        created_at: userProfile[0].created_at
+        id: userProfile.id,
+        name: userProfile.name,
+        email: userProfile.email,
+        username: userProfile.username,
+        created_at: userProfile.created_at
     }
 }
