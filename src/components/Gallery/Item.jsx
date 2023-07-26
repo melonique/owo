@@ -9,20 +9,22 @@ const borderTypes = {
   'service': 'success',
 }
 
-const GalleryItem = ({ listing : { id, title, description, type, tags, userProfile }}) => (
+const GalleryItem = ({ listing: { id, title, description, type, tags, userProfile }, children, noProfile }) => (
   <Card className="mb-3" border={type && type.length ? borderTypes[type[0]] : 'primary'}>
     <Card.Body>
       <Row>
-        <Col sm={2}>
-          <Card.Img
-            src={"https://api.multiavatar.com/" + userProfile.id + '.png'}
-            alt="avatar"
-            className="rounded-circle"
-            style={{ width: '80px' }}
-            fluid
-          />
-          {userProfile.username}
-        </Col>
+        {!noProfile &&
+          <Col sm={2}>
+            <Card.Img
+              src={"https://api.multiavatar.com/" + userProfile.id + '.png'}
+              alt="avatar"
+              className="rounded-circle"
+              style={{ width: '80px' }}
+              fluid
+            />
+            {userProfile.username}
+          </Col>
+        }
       <Col className="text-left">
           <Card.Title border="primary">
             {title}
@@ -36,7 +38,9 @@ const GalleryItem = ({ listing : { id, title, description, type, tags, userProfi
                 return (<Badge key={label} bg={borderTypes[label]} className="text-white">{label}</Badge>)
               })}
             </Col>
-            <Col className="text-right"><Button>Contacter</Button></Col>
+            <Col className="text-right">
+              {children}
+            </Col>
           </Row>
 
 

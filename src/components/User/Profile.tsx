@@ -2,7 +2,7 @@ import { Container, Row, Col, Card, Tab, ListGroup } from "react-bootstrap";
 import Badges from './Badges'
 import UpdatePasswordForm from './UpdatePasswordForm'
 import useAuthentication from "@/contexts/authentication/useAuthentication"
-
+import UserListings from './Listings'
 
 const Profile = ({}) => {
   const { user } = useAuthentication() || {};
@@ -87,7 +87,7 @@ const Profile = ({}) => {
                 Become a backer 🎉
                 </Tab.Pane>
                 <Tab.Pane eventKey="#my-listings">
-                  LISTING GALLERIES
+                  <UserListings />
                 </Tab.Pane>
               <Tab.Pane eventKey="#logout">
                 Logout

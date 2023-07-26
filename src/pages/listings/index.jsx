@@ -1,8 +1,9 @@
 import useListing from '@/contexts/listing/useListing'
 import { useEffect, useState } from 'react';
 import Item from '@/components/Gallery/Item'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
+import Link from 'next/link';
 
 const Listings = () => {
   const { listings, getPage } = useListing()
@@ -24,7 +25,9 @@ const Listings = () => {
         {listings.map((listing) => {
           return (
             <Col key={listing.id} xs={12} lg={6}>
-              <Item listing={listing} />
+              <Item listing={listing}>
+                <Button as={Link} href={`/messages/${listing.userProfile.username.toLowerCase()}`}>Contacter</Button>
+              </Item>
             </Col>
             )
         })}
