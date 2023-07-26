@@ -18,10 +18,6 @@ const Badge = ({ name }) => (
 const Badges = ({}) => (
   <Card className="mb-4">
     <Card.Body>
-      <Card.Title>📝 Stats</Card.Title>
-      <Card.Text>
-        Youve been with us since [USER.creationDate]!
-      </Card.Text>
       <Card.Title>🏆 Badges</Card.Title>
 
       <Row>

@@ -30,7 +30,7 @@ const GalleryItem = ({ listing: { id, title, description, type, tags, userProfil
             {title}
           </Card.Title>
 
-          <Card.Text>{description}</Card.Text>
+          <Card.Text>{description.split('\n').map(str => <p key={str}>{str}</p>)}</Card.Text>
 
           <Row>
             <Col>

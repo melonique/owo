@@ -35,6 +35,7 @@ export const fetchListings = async ({ page }: FetchUsecase): Promise<Listing[]> 
                 username
             )
         `)
+        .eq('deleted', false)
         .range(first, last)
 
     if (!listing) {
@@ -59,4 +60,18 @@ const singleUserProfile = (userProfile: any): UserProfile => {
         username: userProfile.username,
         createdAt: userProfile.created_at
     }
+}
+
+type DeleteUsecase = {
+    id: string;
+}
+export const deleteListing = async ({ id }: DeleteUsecase): Promise<Listing[]> => {
+
+    const response = await supabase
+        .from('offer')
+        .update({deleted: true})
+        .eq('id', id)
+
+    return response
+
 }

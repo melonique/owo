@@ -3,6 +3,7 @@ import Item from '@/components/Gallery/Item'
 import { ButtonWithConfirm  } from '@/components'
 import { useEffect, useState } from 'react';
 import useListing from '@/contexts/listing/useListing'
+import useAuthentication from "@/contexts/authentication/useAuthentication"
 
 
 
@@ -21,7 +22,8 @@ const Badge = ({ name }) => (
 )
 
 const UserListings = ({ }) => {
-  const { listings, getPage } = useListing()
+  const { listings, getPage, deleteListing } = useListing()
+  const { user } = useAuthentication() || {};
   const [page, setPage] = useState(1)
 
   const fetchPage = async () => {
@@ -33,18 +35,13 @@ const UserListings = ({ }) => {
     fetchPage(0)
   }, [])
 
-  const deleteListing = () => {
-    // TODO:
-    alert('DELETE LISTING')
-  }
-
 
   return (
       <Row>
-        {listings.map((listing) => {
+        {listings.filter(l => l.userProfile.id === user.id).map((listing) => {
           return (
               <Item listing={listing} noProfile key={listing.id}>
-                <ButtonWithConfirm onClick={deleteListing}>Supprimer</ButtonWithConfirm>
+              <ButtonWithConfirm onClick={() => { deleteListing(listing.id) }}>Supprimer</ButtonWithConfirm>
               </Item>
           )
         })}
