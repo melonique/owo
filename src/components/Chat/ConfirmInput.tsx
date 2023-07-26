@@ -5,16 +5,15 @@ import { Message, User } from "@/types/ChatTypes";
 import {
   Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap'
 
-interface ChatTextInputProps {
+interface ConfirmInputProps {
   disabled?: boolean;
 }
 
-const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
+const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled }) => {
   const { addMessage, currentUser } = useChat();
   const [radioValue, setRadioValue] = useState('');
   const handleChange = (val:string) => setRadioValue(val);
   const id = "offer"
-  const messageInput = useRef<HTMLInputElement>(null);
 
   const handleSend = () => {
     const message = radioValue;
@@ -55,4 +54,4 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
   );
 };
 
-export default ChatTextInput;
+export default ConfirmInput;

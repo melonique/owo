@@ -8,6 +8,7 @@ import { Message } from "@/types/ChatTypes";
 import ChatBotMessage from './Message'
 import ChatBotTextInput from './TextInput'
 import ChatBotContifmInput from './ConfirmInput'
+import ResetInput from './ResetInput'
 
 type ChatBotProps = {
   showNav: () => void;
@@ -34,6 +35,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
         return <ChatBotTextInput chatId="offer" />
       case 'listen-confirm':
         return <ChatBotContifmInput />
+      case 'end':
+        return <ResetInput />
       default:
         return <ChatBotTextInput chatId="offer" />
     }

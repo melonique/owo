@@ -3,7 +3,7 @@ import { OFFER_BOT_USER } from '@/bots/offer/config'
 
 export const DEFAULT_USERS = [OFFER_BOT_USER, {
   id: "vero-user-id",
-  username: 'Véro Lopez',
+  username: '🕵️‍♀️ Assistant owo',
   avatar: 'https://api.multiavatar.com/Véro-Lopez.png',
 }, {
   id: "another-user-id",
@@ -21,13 +21,13 @@ export const DEFAULT_WELCOME_MESSAGE = (user: User) => ({
 export const DEFAULT_CONVERSATIONS = [
   {
     id: "offer",
-    title: 'Rédiger une offre',
+    title: 'Rédiger une annonce',
     user: DEFAULT_USERS[0],
     messages: [],
   },
   {
-    id: "id",
-    title: 'Tondeuse à donner',
+    id: "search",
+    title: 'Faire une recherche',
     user: DEFAULT_USERS[1],
     messages: [],
   },
