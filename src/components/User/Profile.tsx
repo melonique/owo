@@ -34,10 +34,10 @@ const Profile = ({}) => {
 
           <ListGroup className="mb-4">
             <ListGroup.Item action href="#badges">
-              🏆 Stats & Badges
+              🏆 Mes Badges
             </ListGroup.Item>
             <ListGroup.Item action href="#perso">
-              🔐 ResetPassword
+              🔐 Changer mon mot de passe
             </ListGroup.Item>
             {/*
             <ListGroup.Item action href="#life">
@@ -56,7 +56,7 @@ const Profile = ({}) => {
               Become a backer 🎉
             </ListGroup.Item> */}
             <ListGroup.Item action href="#my-listings">
-              📋 My listings
+              📋 Mes Annonces
             </ListGroup.Item>
             <ListGroup.Item action href="#logout">
               ⛔ Logout

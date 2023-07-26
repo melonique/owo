@@ -18,19 +18,18 @@ const UpdatePasswordForm = () => {
   return (
     <Card>
       <Card.Body>
-        <Card.Title>🔐 Change Password</Card.Title>
+        <Card.Title>🔐 Changer mon mot de passe</Card.Title>
         <Form onSubmit={handleSubmit(onSubmit, onError)} validated={validated}>
           <Form.Group className="mb-2" controlId="formBasicPasswordReg">
-            <Form.Label>New Password</Form.Label>
+            <Form.Label>Nouveau mot de passe</Form.Label>
             <Form.Control type="password" placeholder="Password" {...register('password')} />
           </Form.Group>
           <Form.Group className="mb-2" controlId="formBasicPasswordReg">
-            <Form.Label>Password repeat</Form.Label>
+            <Form.Label>Répéter le mot de passe</Form.Label>
             <Form.Control type="password" placeholder="Password" {...register('password2')} />
           </Form.Group>
-
           <Button variant="primary" type="submit" className="mb-2 w-100">
-            Change password
+            Changer
           </Button>
         </Form>
       </Card.Body>

@@ -9,7 +9,7 @@ const BottomNavbar = () => {
       <div className="nav-item text-center">
         <Link href="/listings" >
           <IoIosApps className="icon" />
-          <div className="nav-text">Listings</div>
+          <div className="nav-text">Annonces</div>
         </Link>
       </div>
       <div className="nav-item text-center">
@@ -22,13 +22,13 @@ const BottomNavbar = () => {
       <div className="nav-item text-center">
         <Link href="/messages/offer">
           <IoIosAddCircle className="icon" />
-          <div className="nav-text">Offer</div>
+          <div className="nav-text">Annoncer</div>
         </Link>
       </div>
       <div className="nav-item text-center">
         <Link href="/messages/search">
           <IoMdSearch className="icon" />
-          <div className="nav-text">Search</div>
+          <div className="nav-text">Recherche</div>
         </Link>
       </div>
       <div className="nav-item text-center">

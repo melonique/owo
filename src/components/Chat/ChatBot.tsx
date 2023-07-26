@@ -13,11 +13,11 @@ type ChatBotProps = {
   showNav: () => void;
 }
 const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
-  const { getMessagesByConversationId, currentUser } = useChat();
+  const { getMessagesByConversationId, currentUser, getConversationById } = useChat();
   const { resetBot, botMode, botMemory } = useBot();
   const ref = useRef<HTMLDivElement>(null);
-
-  const currentMessages = getMessagesByConversationId('offer');
+  const conversation = getConversationById('offer');
+  const currentMessages = conversation?.messages || getMessagesByConversationId('offer');
 
   useEffect(() => {
     if (currentMessages.length) {
@@ -45,7 +45,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
         <Button variant="primary" className="d-md-none" onClick={showNav}>
           🍔
         </Button>
-        <h5 className="mb-0">Poster une offre <span className="text-muted" title={JSON.stringify(botMemory, null, 2)}>🛠</span></h5>
+        <h5 className="mb-0">{conversation?.title} <span className="text-muted" title={JSON.stringify(botMemory, null, 2)}>🛠</span></h5>
         <Button onClick={resetBot}>
           <BiReset className="icon" />
         </Button>
