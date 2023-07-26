@@ -29,7 +29,7 @@ const WelcomePage = () => {
                 <Tab.Content>
                   <Tab.Pane eventKey="login">
                     <Login />
-                    <Card.Text className="text-center mt-2">Tu n'es pas membre? <Card.Link href="#" onClick={() => setActiveKey('register')}>Inscrit-toi!</Card.Link></Card.Text>
+                    <Card.Text className="text-center mt-2">Tu n&apos;es pas membre? <Card.Link href="#" onClick={() => setActiveKey('register')}>Inscrit-toi!</Card.Link></Card.Text>
                   </Tab.Pane>
                   <Tab.Pane eventKey="register">
                     <RegisterForm />
