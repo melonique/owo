@@ -34,7 +34,8 @@ const UserListings = ({ }) => {
   }, [])
 
   const deleteListing = () => {
-
+    // TODO:
+    alert('DELETE LISTING')
   }
 
 
@@ -43,9 +44,7 @@ const UserListings = ({ }) => {
         {listings.map((listing) => {
           return (
               <Item listing={listing} noProfile key={listing.id}>
-                <>
-                  <ButtonWithConfirm onClick={deleteListing}>Supprimer</ButtonWithConfirm>
-                </>
+                <ButtonWithConfirm onClick={deleteListing}>Supprimer</ButtonWithConfirm>
               </Item>
           )
         })}

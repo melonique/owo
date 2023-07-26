@@ -9,9 +9,11 @@ import Popover from 'react-bootstrap/Popover';
 
 
 const ButtonWithConfirm = ({ onClick, children, confirmMessage = "Voulez-vous vraiment supprimer votre annonce ?" }) => {
-
+  const closePopup = () => {
+    document.body.click();
+  }
   const confirm = () => {
-    setPopupOpen(false);
+    closePopup();
     onClick();
   };
 
@@ -22,7 +24,7 @@ const ButtonWithConfirm = ({ onClick, children, confirmMessage = "Voulez-vous vr
         <Popover.Body>
           {confirmMessage}
           <div className="d-flex justify-content-between align-items-start">
-            <Button variant="danger">Non</Button>
+            <Button variant="danger" onClick={closePopup}>Non</Button>
             <Button variant="success" onClick={confirm}>Oui</Button>
           </div>
         </Popover.Body>
