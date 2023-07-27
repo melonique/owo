@@ -13,6 +13,8 @@ type Conversation = {
   messages: UserMessage[]
 }
 
+type ConversationMetadata = Omit<Conversation, 'users' | 'messages'>
+
 type UserMessageId = string
 
 type UserMessage = {
@@ -20,6 +22,22 @@ type UserMessage = {
   sentAt: string
   sender: Maybe<UserId>
   message: string
+}
+
+const getConversations = async (user: UserId): Promise<ConversationMetadata[]> => {
+  const { data: conversations } = await supabase
+    .from('conversation')
+    .select(`
+      id,
+      title,
+      user_conversations!inner (
+        user_profile
+      )
+    `)
+    .eq('user_conversations.user_profile', user)
+    .returns<ConversationMetadata[]>()
+
+  return conversations || []
 }
 
 type InitializeConversationUsecase = Omit<Conversation, 'id' | 'messages'>
@@ -44,29 +62,27 @@ const findConversationByUser = async ({ sender, receiver }: FindConversationRequ
     .from('user_conversations')
     .select('conversation')
     .eq('user_profile', sender)
-    .returns<ConversationId[]>()
+    .returns<{ conversation: ConversationId }[]>()
 
   const { data: receiverConversations } = await supabase
     .from('user_conversations')
     .select('conversation')
     .eq('user_profile', receiver)
-    .returns<ConversationId[]>()
+    .returns<{ conversation: ConversationId }[]>()
 
   const firstCommonConversation = senderConversations?.find(
-    (toFind) => receiverConversations?.some((found) => toFind === found)
+    (toFind) => receiverConversations?.some((found) => toFind.conversation === found.conversation)
   )
 
-  return firstCommonConversation
+  return firstCommonConversation?.conversation
 }
-
-type ConversationMetadata = Omit<Conversation, 'users' | 'messages'>
 
 const fetchConversation = async (id: ConversationId): Promise<Conversation> => {
   const { data: conversation } = await supabase
     .from('conversation')
     .select('id,title')
     .eq('id', id)
-    .returns<ConversationMetadata>()
+    .single<ConversationMetadata>()
 
   if (!conversation) {
     throw new Error('conversation not found')
@@ -87,9 +103,9 @@ const fetchConversationUsers = async (id: ConversationId): Promise<Conversation[
     .from('user_conversations')
     .select('user_profile')
     .eq('conversation', id)
-    .returns<Conversation['users']>()
+    .returns<{ user_profile: Conversation['users'][0] }[]>()
 
-    return users || []
+    return users?.map((user) => (user.user_profile)) || []
 }
 
 const fetchUserMessages = async (id: ConversationId): Promise<Conversation['messages']> => {
@@ -97,12 +113,12 @@ const fetchUserMessages = async (id: ConversationId): Promise<Conversation['mess
     .from('user_messages')
     .select(`
       id,
-      sent_at:sentAt,
+      sentAt:sent_at,
       sender,
       message
     `)
     .eq('conversation', id)
-    .order('sentAt', { ascending: true })
+    .order('sent_at', { ascending: true })
     .returns<Conversation['messages']>()
 
     return messages || []
@@ -111,23 +127,23 @@ const fetchUserMessages = async (id: ConversationId): Promise<Conversation['mess
 type CreateConversationUsecase = Omit<Conversation, 'id' | 'messages'>
 
 const createConversation = async ({ title, users }: CreateConversationUsecase): Promise<Conversation> => {
-  const { data: conversationId } = await supabase
+  const { data: conversationMetadata } = await supabase
     .from('conversation')
     .insert({ title })
-    .select('id')
-    .returns<ConversationId>()
+    .select('id,title')
+    .single<ConversationMetadata>()
 
-  if (!conversationId) {
+  if (!conversationMetadata) {
     throw new Error('cannot create conversation')
   }
 
   await supabase
     .from('user_conversations')
-    .insert(users.map((userId) => ({ conversation: conversationId, user_profile: userId })))
+    .insert(users.map((userId) => ({ conversation: conversationMetadata.id, user_profile: userId })))
 
   return {
-    id: conversationId,
-    title,
+    id: conversationMetadata.id,
+    title: conversationMetadata.title,
     users,
     messages: [],
   }
@@ -163,7 +179,20 @@ const sendMessage = async ({ id, sender, message }: SendMessageUsecase): Promise
 }
 
 export {
+  getConversations,
   initializeConversation,
-  updateConversation,
-  sendMessage,
+  updateConversation, // TODO: test it
+  sendMessage, // TODO: test it
 }
+
+// (async () => {
+//   const Alex = "e4db9a7c-f886-41f2-bc6d-77e12305efa7"
+//   const Vero = "d56006ab-a5df-4726-b39d-0b1b67974796"
+//   const unTitreBidon = "❤🧡💛💚💙💜🤎🖤"
+
+//   console.log(await getConversations(Alex))
+
+//   console.log(await initializeConversation({ title: unTitreBidon, users: [Alex, Vero] }))
+
+//   console.log(await getConversations(Alex))
+// })()
