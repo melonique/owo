@@ -30,14 +30,19 @@ type FindConversationResponse = ConversationId | undefined
 const findConversationByUser = async ({ sender, receiver }: FindConversationRequest): Promise<FindConversationResponse> => {
   const { data: senderConversations } = await supabase
     .from('user_conversations')
-    .select('*')
+    .select('conversation')
     .eq('user_profile', sender)
+    .returns<ConversationId[]>()
 
   const { data: receiverConversations } = await supabase
     .from('user_conversations')
-    .select('*')
+    .select('conversation')
     .eq('user_profile', receiver)
+    .returns<ConversationId[]>()
 
-  // find the first
-  return ''
+  const firstCommonConversation = senderConversations?.find(
+    (conversation) => receiverConversations?.some((rConversation) => conversation === rConversation)
+  )
+
+  return firstCommonConversation
 }
