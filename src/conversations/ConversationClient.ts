@@ -13,6 +13,8 @@ type Conversation = {
   messages: UserMessage[]
 }
 
+type ConversationMetadata = Omit<Conversation, 'users' | 'messages'>
+
 type UserMessageId = string
 
 type UserMessage = {
@@ -20,6 +22,22 @@ type UserMessage = {
   sentAt: string
   sender: Maybe<UserId>
   message: string
+}
+
+const getConversations = async (user: UserId): Promise<ConversationMetadata[]> => {
+  const { data: conversations } = await supabase
+    .from('conversation')
+    .select(`
+      id,
+      title,
+      user_conversations!inner (
+        user_profile
+      )
+    `)
+    .eq('user_conversations.user_profile', user)
+    .returns<ConversationMetadata[]>()
+
+  return conversations || []
 }
 
 type InitializeConversationUsecase = Omit<Conversation, 'id' | 'messages'>
@@ -58,8 +76,6 @@ const findConversationByUser = async ({ sender, receiver }: FindConversationRequ
 
   return firstCommonConversation
 }
-
-type ConversationMetadata = Omit<Conversation, 'users' | 'messages'>
 
 const fetchConversation = async (id: ConversationId): Promise<Conversation> => {
   const { data: conversation } = await supabase
@@ -163,6 +179,7 @@ const sendMessage = async ({ id, sender, message }: SendMessageUsecase): Promise
 }
 
 export {
+  getConversations,
   initializeConversation,
   updateConversation,
   sendMessage,
