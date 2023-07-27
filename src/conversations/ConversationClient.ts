@@ -28,8 +28,8 @@ const initializeConversation = async ({ title, users }: InitializeConversationUs
   const maybeConversation = await findConversationByUser({ sender: users[0], receiver: users[1] })
 
   return maybeConversation
-    ? fetchConversation(maybeConversation)
-    : createConversation({ title, users })
+    ? await fetchConversation(maybeConversation)
+    : await createConversation({ title, users })
 }
 
 type FindConversationRequest = {
@@ -61,9 +61,7 @@ const findConversationByUser = async ({ sender, receiver }: FindConversationRequ
 
 type ConversationMetadata = Omit<Conversation, 'users' | 'messages'>
 
-type FetchConversationResponse = Conversation
-
-const fetchConversation = async (id: ConversationId): Promise<FetchConversationResponse> => {
+const fetchConversation = async (id: ConversationId): Promise<Conversation> => {
   const { data: conversation } = await supabase
     .from('conversation')
     .select('id,title')
