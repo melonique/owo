@@ -23,9 +23,9 @@ export const completeOffer = async ({
 
   const content = `
     user: ${offer_raw} ;
-    YOU: ${ai_offer_followup_question} ;
+    Advisor: ${ai_offer_followup_question} ;
     User: ${offer_raw_2};
-    YOU: Cette offre et pour un pret, une vente ou un don? ou toutes ces réponses? ;
+    Advisor: Cette offre et pour un pret, une vente ou un don? ou toutes ces réponses? ;
     User: ${offer_terms_raw}
   `;
 
