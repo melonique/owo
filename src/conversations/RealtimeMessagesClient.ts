@@ -2,7 +2,6 @@ import { supabase } from "@/config/SupabaseClient"
 import { RealtimeChannel } from '@supabase/supabase-js'
 
 type ChannelIdentification = {
-  senderId: string,
   receiverId: string,
 }
 
