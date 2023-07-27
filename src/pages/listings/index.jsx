@@ -4,8 +4,10 @@ import Item from '@/components/Gallery/Item'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import Link from 'next/link';
+import useAuthentication from '@/contexts/authentication/useAuthentication';
 
 const Listings = () => {
+  const { user } = useAuthentication();
   const { listings, getPage } = useListing()
   const [page, setPage] = useState(1)
 
@@ -22,7 +24,7 @@ const Listings = () => {
     <Container fluid className="text-center">
       <h1>Listings</h1>
       <Row>
-        {listings.map((listing) => {
+        {listings.filter(l => l.userProfile.id !== user.id).map((listing) => {
           return (
             <Col key={listing.id} xs={12} lg={6}>
               <Item listing={listing}>

@@ -5,7 +5,7 @@ import { fetchListings, deleteListing } from "./ListingClient"
 type UseListing = {
     listings: Listing[]
     getPage: (page: number) => Promise<void>
-    deleteListing: (id: string) => Promise<void>
+    deleteListingById: (id: string) => Promise<void>
 }
 
 const useListing = (): UseListing => {
@@ -15,14 +15,13 @@ const useListing = (): UseListing => {
         const newListings = await fetchListings({ page })
         setListings([...listings, ...newListings])
     }
-    const deleteListing = async (id: string): Promise<void> => {
-      debugger
-       // const response = await deleteListing({id})
-        console.log('response')
-        debugger
+    const deleteListingById = async (id: string): Promise<void> => {
+      await deleteListing({ id })
+      const newList = [...listings]
+      setListings(newList.filter(x => x.id !== id))
     }
 
-    return { listings, getPage, deleteListing }
+    return { listings, getPage, deleteListingById }
 }
 
 export default useListing

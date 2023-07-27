@@ -22,7 +22,7 @@ const Badge = ({ name }) => (
 )
 
 const UserListings = ({ }) => {
-  const { listings, getPage, deleteListing } = useListing()
+  const { listings, getPage, deleteListingById } = useListing()
   const { user } = useAuthentication() || {};
   const [page, setPage] = useState(1)
 
@@ -38,11 +38,11 @@ const UserListings = ({ }) => {
 
   return (
       <Row>
-        {listings.filter(l => l.userProfile.id === user.id).map((listing) => {
+        {user && listings.filter(l => l.userProfile.id === user.id).map((listing) => {
           return (
-              <Item listing={listing} noProfile key={listing.id}>
-              <ButtonWithConfirm onClick={() => { deleteListing(listing.id) }}>Supprimer</ButtonWithConfirm>
-              </Item>
+            <Item listing={listing} noProfile key={listing.id}>
+              <ButtonWithConfirm onClick={() => { deleteListingById(listing.id) }}>Supprimer</ButtonWithConfirm>
+            </Item>
           )
         })}
       </Row>

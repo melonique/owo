@@ -65,17 +65,10 @@ const singleUserProfile = (userProfile: any): UserProfile => {
 type DeleteUsecase = {
     id: string;
 }
-export const deleteListing = async ({ id }: DeleteUsecase): Promise<Listing | undefined> => {
+export const deleteListing = async ({ id }: DeleteUsecase): Promise<void> => {
 
     const { data: listing, error } = await supabase
         .from('offer')
         .update({deleted: true})
         .eq('id', id)
-        .select('*')
-
-    if (!listing) {
-        return undefined // do something with this (error field)
-    }
-
-    return assembleListing(listing)
 }
