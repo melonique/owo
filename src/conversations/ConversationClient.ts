@@ -1,4 +1,5 @@
 import { supabase } from '@/config/SupabaseClient'
+import { initializeChannel } from './RealtimeMessagesClient'
 
 type UserId = string
 
@@ -181,18 +182,6 @@ const sendMessage = async ({ id, sender, message }: SendMessageUsecase): Promise
 export {
   getConversations,
   initializeConversation,
-  updateConversation, // TODO: test it
-  sendMessage, // TODO: test it
+  updateConversation,
+  sendMessage,
 }
-
-// (async () => {
-//   const Alex = "e4db9a7c-f886-41f2-bc6d-77e12305efa7"
-//   const Vero = "d56006ab-a5df-4726-b39d-0b1b67974796"
-//   const unTitreBidon = "❤🧡💛💚💙💜🤎🖤"
-
-//   console.log(await getConversations(Alex))
-
-//   console.log(await initializeConversation({ title: unTitreBidon, users: [Alex, Vero] }))
-
-//   console.log(await getConversations(Alex))
-// })()
