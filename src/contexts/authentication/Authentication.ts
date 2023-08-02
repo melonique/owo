@@ -43,6 +43,7 @@ export type RegisterRequest = {
     password: string
     name: string
     username: string
+    firstname: string
 }
 
 export type RegisterResponse = Authenticated | ErrorWhileAuthenticating

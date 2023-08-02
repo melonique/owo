@@ -8,15 +8,15 @@ const RegisterForm = ({ }) => {
   const router = useRouter();
   const { error, register: registerUser } = useAuthentication();
 
-  const onSubmit = async ({ email, password, username, name }) => {
-    await registerUser({ email, password, username, name }, () => router.push('/profile'));
+  const onSubmit = async ({ email, password, username, name, firstname, tos }) => {
+    await registerUser({ email, password, username, name, firstname, tos }, () => router.push('/profile'));
   }
 
   return (
     <>
       <Form onSubmit={onSubmit}>
         <Input
-          name="name"
+          name="firstname"
           label="Prénom"
           placeholder=""
           rules={{
@@ -24,7 +24,7 @@ const RegisterForm = ({ }) => {
           }}
         />
         <Input
-          name="lastname"
+          name="name"
           label="Nom de famille"
           placeholder=""
           rules={{

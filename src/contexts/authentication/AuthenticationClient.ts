@@ -30,6 +30,7 @@ const fromRequestToSignup = (request: RegisterRequest): SignUpWithPasswordCreden
         data: {
             username: request.username,
             name: request.name,
+            firstname: request.firstname,
         }
     }
 })
