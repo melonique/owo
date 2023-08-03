@@ -49,6 +49,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     const msg = getMessage(0)
     if (msg) {
       addMessage(botId, msg.updateMsg({}));
+      setBotMode(msg.mode);
     }
   }
 
