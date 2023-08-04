@@ -15,7 +15,7 @@ export const OFFER_BOT_CONFIG = {
   messages: [
     new BotMessage(OFFER_BOT_USER, "👋 Coucou ! Je suis l'assistant owo ! 🦾 Mon but est de t'aider à créer ton annonce rapidement et sans prise de tête ! ⚡️"),
     new BotMessage(OFFER_BOT_USER, "Notre plateforme te permet de publier ce que tu veux ! Objets à donner, services à offrir, artisanat à vendre... et bien d'autres choses encore ! 😊"),
-    new BotMessage(OFFER_BOT_USER, "🌟 Dis-moi, qu'est-ce que tu voudrais proposer à notre super communauté aujourd'hui ? 😊", 'offer_raw'),
+    new BotMessage(OFFER_BOT_USER, "🌟 Dis-moi, qu'est-ce que tu voudrais proposer à notre super communauté aujourd'hui ? 😊", 'offer_raw', 'listen-picture'),
     new BotMessage(OFFER_BOT_USER, "🌀 Laisse-moi réfléchir...je vais te poser des questions pour améliorer ton annonce.", 'ai_offer_followup_question', 'process', followupQuestions),
     new BotMessage(OFFER_BOT_USER, "✔️ Ça y est, j'ai trouvé ! Alors..."),
     new BotMessage(OFFER_BOT_USER, "{ai_offer_followup_question}", 'offer_raw_2'),
