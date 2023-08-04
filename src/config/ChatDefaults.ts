@@ -1,11 +1,8 @@
 import { User } from '@/types/ChatTypes'
 import { OFFER_BOT_USER } from '@/bots/offer/config'
+import { SEARCH_BOT_USER } from '@/bots/search/config'
 
-export const DEFAULT_USERS = [OFFER_BOT_USER, {
-  id: "vero-user-id",
-  username: '🕵️‍♀️ Assistant owo',
-  avatar: 'https://api.multiavatar.com/Véro-Lopez.png',
-}, {
+export const DEFAULT_USERS = [OFFER_BOT_USER, SEARCH_BOT_USER, {
   id: "another-user-id",
   username: 'John Doe',
   avatar: 'https://api.multiavatar.com/One pager.png',

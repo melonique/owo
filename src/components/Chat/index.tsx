@@ -22,7 +22,7 @@ const Chat: React.FC<props> = ({ currentChatId }) => {
   if (!conversation) {
     return <>Loading...</>
   }
-  const isBot = conversation.id === 'offer'
+  const isBot = conversation.id === 'offer' || conversation.id === 'search';
 
   return (
     <Row>
@@ -42,7 +42,7 @@ const Chat: React.FC<props> = ({ currentChatId }) => {
       </Col>
 
         <Col sm="12" md="8" lg="7" xl="8">
-        {isBot ? <ChatWithBot showNav={handleShow}/>
+        {isBot ? <ChatWithBot showNav={handleShow} botId={conversation.id as 'offer' | 'search'} />
           : <ChatWithUser currentChatId={currentChatId} conversation={conversation} currentUser={currentUser} showNav={handleShow} />}
 
         </Col>

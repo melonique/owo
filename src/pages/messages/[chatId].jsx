@@ -7,9 +7,10 @@ import { PrivateLayout } from "@/components/Layouts"
 
 const Messages = () => {
   const router = useRouter()
+  console.log(router.query.chatId)
   return (
     <ChatProvider>
-      <BotProvider botId="offer">
+      <BotProvider botId={router.query.chatId}>
       <Container fluid className="text-center">
         <Chat currentChatId={router.query.chatId}/>
         </Container>

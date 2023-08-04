@@ -1,5 +1,6 @@
 import React, { useEffect, createContext, useContext, useState, ReactNode, useCallback } from "react";
 import { OFFER_BOT_CONFIG } from '@/bots/offer/config'
+import { SEARCH_BOT_CONFIG } from '@/bots/search/config'
 import { Message, BotMessage, BotMode } from "@/types/ChatTypes";
 import { useChat } from "./ChatContext";
 
@@ -11,11 +12,11 @@ interface BotContextData {
 
 const BotContext = createContext<BotContextData | undefined>(undefined);
 
-const DEFAULT_QUESTIONS: BotMessage[] = OFFER_BOT_CONFIG.messages;
+const DEFAULT_QUESTIONS: { search: BotMessage[], offer: BotMessage[]} = { offer: OFFER_BOT_CONFIG.messages, search: SEARCH_BOT_CONFIG.messages };
 
 interface BotProviderProps {
   children: ReactNode;
-  botId: 'offer'
+  botId: 'offer' | 'search';
 }
 
 export const BotProvider = ({ children, botId }: BotProviderProps) => {
@@ -33,9 +34,12 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
 
   const getMessage = (index: number): BotMessage | null => {
     // si je ne suis pas au bout de ma liste
-    if (index < DEFAULT_QUESTIONS.length) {
+    if (!botId) {
+      return null
+    }
+    if (index < DEFAULT_QUESTIONS[botId].length) {
 
-      const nextQuestion = DEFAULT_QUESTIONS[index]
+      const nextQuestion = DEFAULT_QUESTIONS[botId][index]
       // si ma question est pas null ou undefined pareil
       return nextQuestion || null
     }
@@ -76,7 +80,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
       setBotMode(msg.mode);
       addMessage(botId, msg.updateMsg(botMemory));
     }
-  }, [])
+  }, [botId])
 
 
   // Actions on new messages added to conversation

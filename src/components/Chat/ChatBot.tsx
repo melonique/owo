@@ -12,13 +12,15 @@ import ResetInput from './ResetInput'
 
 type ChatBotProps = {
   showNav: () => void;
+  botId: 'offer' | 'search';
 }
-const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
+const ChatBot: React.FC<ChatBotProps> = ({ showNav, botId }) => {
   const { getMessagesByConversationId, currentUser, getConversationById } = useChat();
   const { resetBot, botMode, botMemory } = useBot();
   const ref = useRef<HTMLDivElement>(null);
-  const conversation = getConversationById('offer');
-  const currentMessages = conversation?.messages || getMessagesByConversationId('offer');
+
+  const conversation = getConversationById(botId);
+  const currentMessages = conversation?.messages || getMessagesByConversationId(botId);
 
   useEffect(() => {
     if (currentMessages.length) {
@@ -32,13 +34,13 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
   const BotInput = () => {
     switch (botMode) {
       case 'listen':
-        return <ChatBotTextInput chatId="offer" />
+        return <ChatBotTextInput chatId={botId} />
       case 'listen-confirm':
         return <ChatBotContifmInput />
       case 'end':
         return <ResetInput />
       default:
-        return <ChatBotTextInput chatId="offer" />
+        return <ChatBotTextInput chatId={botId} />
     }
   }
 
