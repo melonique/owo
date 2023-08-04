@@ -13,7 +13,7 @@ export const SEARCH_BOT_CONFIG = {
   id: 'search',
   user: SEARCH_BOT_USER,
   messages: [
-    new BotMessage(SEARCH_BOT_USER, "Yoyoyo! Je suis l'assistant owo! Utilise mon intelligence artificielle pour trouver ce que tu cherches! "),
+    new BotMessage(SEARCH_BOT_USER, "DEBUG: JE SUIS PAS PRET!!!  Yoyoyo! Je suis l'assistant owo! Utilise mon intelligence artificielle pour trouver ce que tu cherches! ", 'picture', 'listen-picture'),
     new BotMessage(SEARCH_BOT_USER, "Dit moi en quelque mots ce que tu recherches. tu peux me parler de ta situation, ton projet. tu peux être super précis ou plutot vague. Je vais essayer de comprendre et de te poser des questions pour affiner ma recherche."),
     new BotMessage(SEARCH_BOT_USER, "Alors, que cherches-tu?", 'search_raw'),
     new BotMessage(SEARCH_BOT_USER, "🌀 Laisse-moi réfléchir...je vais te poser des questions pour affiner ma recherche.", 'ai_search_followup_question', 'process', searchFollowupQuestions),
