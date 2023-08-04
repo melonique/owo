@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 
@@ -14,18 +13,18 @@ const GalleryItem = ({ listing: { id, title, description, type, tags, userProfil
     <Card.Body>
       <Row>
         {!noProfile &&
-          <Col sm={2}>
+          <Col sm={2} style={{ minWidth: '100px' }}>
             <Card.Img
               src={"https://api.multiavatar.com/" + userProfile.id + '.png'}
               alt="avatar"
               className="rounded-circle"
-              style={{ width: '80px' }}
+              style={{ width: '80px', height: 'auto' }}
               fluid
             />
             {userProfile.username}
           </Col>
         }
-      <Col className="text-left">
+        <Col className="text-left">
           <Card.Title border="primary">
             {title}
           </Card.Title>
@@ -42,8 +41,6 @@ const GalleryItem = ({ listing: { id, title, description, type, tags, userProfil
               {children}
             </Col>
           </Row>
-
-
         </Col>
       </Row>
     </Card.Body>
