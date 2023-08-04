@@ -25,7 +25,7 @@ export const OFFER_BOT_CONFIG = {
     new BotMessage(OFFER_BOT_USER, "{ai_offer_completion}"),
     new BotMessage(OFFER_BOT_USER, "On enregistre ?", 'save_offer', 'listen-confirm'),
     new BotMessage(OFFER_BOT_USER, "⏳ Attends quelques instants, pendant que je sauvegarde (ou pas) ta réponse", 'ai_offer_saved', 'process', saveOffer),
-    new BotMessage(OFFER_BOT_USER, "🔆 Voilà, c'est fait"),
+    new BotMessage(OFFER_BOT_USER, "🔆 Voilà, c'est fait! Tu peux retrouver tes annonces dans ton profil."),
     new BotMessage(OFFER_BOT_USER, "{ai_offer_saved}", '', 'end'),
   ]
 }
