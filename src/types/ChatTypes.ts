@@ -24,10 +24,10 @@ export class Conversation {
   messages: Message[];
 
   constructor(user: User, title: string, id?: string) {
-    this.messages = [];
+    this.messages = []
     this.id = id || 'C-' + Math.floor(Math.random() * 10000)
     this.title = title
-    this.user = user;
+    this.user = user
   }
 }
 
