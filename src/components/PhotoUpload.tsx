@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Form, Button } from 'react-bootstrap'
 
 interface PhotoUploadProps {
@@ -6,13 +6,15 @@ interface PhotoUploadProps {
 }
 
 const PhotoUpload: React.FC<PhotoUploadProps> = ({ onFileSelect }) => {
-  const [previewUrl, setPreviewUrl] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = React.createRef<HTMLInputElement>();
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setPreviewUrl(URL.createObjectURL(file));
-    onFileSelect(file);
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setPreviewUrl(URL.createObjectURL(file));
+      onFileSelect(file);
+    }
   };
 
   const handleCancel = () => {

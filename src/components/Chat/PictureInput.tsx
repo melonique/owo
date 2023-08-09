@@ -12,7 +12,7 @@ interface PicutreInputProps {
 
 const PicutreInput: React.FC<PicutreInputProps> = ({ disabled, chatId }) => {
   const { addMessage, currentUser } = useChat();
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null)
 
   const handleFileSelect = (file: File) => {
     setFile(file);

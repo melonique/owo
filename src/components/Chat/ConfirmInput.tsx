@@ -38,7 +38,7 @@ const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled, chatId }) => {
 
   return (
     <div className="chat-input d-flex align-items-center">
-      <ToggleButtonGroup type="radio" name="confirm" value={radioValue} onChange={handleChange} disabled={disabled}>
+      <ToggleButtonGroup type="radio" name="confirm" value={radioValue} onChange={handleChange}>
         <ToggleButton id="tbg-radio-1" value="Non" variant="danger" disabled={disabled}>
           Non
         </ToggleButton>
