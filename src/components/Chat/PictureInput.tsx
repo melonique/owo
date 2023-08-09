@@ -7,14 +7,14 @@ import { PhotoUpload } from '@/components'
 
 interface PicutreInputProps {
   disabled?: boolean;
-  botId: 'offer' | 'search';
+  chatId: 'offer' | 'search';
 }
 
-const PicutreInput: React.FC<PicutreInputProps> = ({ disabled, botId }) => {
+const PicutreInput: React.FC<PicutreInputProps> = ({ disabled, chatId }) => {
   const { addMessage, currentUser } = useChat();
   const [file, setFile] = useState(null);
 
-  const handleFileSelect = (file) => {
+  const handleFileSelect = (file: File) => {
     setFile(file);
   };
 
@@ -22,15 +22,15 @@ const PicutreInput: React.FC<PicutreInputProps> = ({ disabled, botId }) => {
     if (!file) {
       return;
     }
-
+    debugger
     const newMessage: Message = {
       id: "m-" + Math.floor(Math.random() * 10000), // Replace with a proper ID generation method
       user: currentUser,
-      content: file.name,
+      content: (file as File).name,
       timestamp: new Date().toISOString(),
     };
 
-    addMessage(botId, newMessage);
+    addMessage(chatId, newMessage);
 
     // Reset input field
     setFile(null);

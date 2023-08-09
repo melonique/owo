@@ -34,7 +34,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
 
   const getMessage = (index: number): BotMessage | null => {
     // si je ne suis pas au bout de ma liste
-    if (!botId) {
+    if (!botId || !DEFAULT_QUESTIONS[botId]) {
       return null
     }
     if (index < DEFAULT_QUESTIONS[botId].length) {

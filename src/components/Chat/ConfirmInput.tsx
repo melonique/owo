@@ -7,10 +7,10 @@ import {
 
 interface ConfirmInputProps {
   disabled?: boolean;
-  botId: 'offer' | 'search';
+  chatId: 'offer' | 'search';
 }
 
-const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled, botId }) => {
+const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled, chatId }) => {
   const { addMessage, currentUser } = useChat();
   const [radioValue, setRadioValue] = useState('');
   const handleChange = (val:string) => setRadioValue(val);
@@ -29,7 +29,7 @@ const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled, botId }) => {
       timestamp: new Date().toISOString(),
     };
 
-    addMessage(botId, newMessage);
+    addMessage(chatId, newMessage);
 
     // Reset input field
     setRadioValue('')
