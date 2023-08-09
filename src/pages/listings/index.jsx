@@ -24,35 +24,29 @@ const Listings = () => {
     <Container fluid>
       {/* Top bar with categories */}
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Research Page</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#category1">Category 1</Nav.Link>
-            <Nav.Link href="#category2">Category 2</Nav.Link>
-            <Nav.Link href="#category3">Category 3</Nav.Link>
-            {/* Add more categories as needed */}
-          </Nav>
-          <Form className="form-inline">
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-          <Dropdown onSelect={() => {}}>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Order By
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item eventKey="relevance">Relevance</Dropdown.Item>
-              <Dropdown.Item eventKey="date">Date</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Navbar.Collapse>
+        <Navbar.Brand href="#home">Les annonces</Navbar.Brand>
+        <Form className="form-inline">
+          <FormControl type="text" placeholder="Search" />
+          <Button variant="outline-success">Search</Button>
+        </Form>
       </Navbar>
 
-      <Row>
+      <Row className="pt-3">
         {/* Sidebar with categories and filters */}
         <Col md={3}>
+          <Form>
+
+            <Dropdown onSelect={() => { }}>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Order By
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item eventKey="relevance">Relevance</Dropdown.Item>
+                <Dropdown.Item eventKey="date">Date</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Form>
+
           <h3>Categories</h3>
           <ListGroup className="mb-2">
             <ListGroup.Item>Service</ListGroup.Item>
@@ -69,7 +63,7 @@ const Listings = () => {
         {/* Main area for listings */}
         <Col md={9}>
           <Row>
-
+            <h3>314 offres</h3>
             {listings.filter(l => l.userProfile.id !== user.id).map((listing) => {
               return (
                 <Col key={listing.id} xs={12} lg={6}>

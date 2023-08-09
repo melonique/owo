@@ -6,6 +6,7 @@ import UserListings from './Listings'
 
 const Profile = ({}) => {
   const { user } = useAuthentication() || {};
+  console.log(user)
   if (!user) { return (<span>LOADING PROFILE</span>) }
 
   return(
