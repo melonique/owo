@@ -9,7 +9,8 @@ const Input = ({ name, label, rules, placeholder, register, errors, type = 'text
       <Form.Label>{label}</Form.Label>
       <Form.Control
         type={type}
-        isInvalid={!!errors[name]}
+        className={errors[name] ? 'is-invalid' : ''}
+        isInvalid={errors[name]}
         placeholder={placeholder}
         {...register(name, rules)}
       />
