@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Chat } from '@/components'
 import { useRouter } from 'next/router'
 import { BotProvider } from '@/contexts/BotContext'
@@ -7,7 +7,7 @@ import { PrivateLayout } from "@/components/Layouts"
 
 const Messages = () => {
   const router = useRouter()
-  console.log(router.query.chatId)
+
   return (
     <ChatProvider>
       <BotProvider botId={router.query.chatId}>
