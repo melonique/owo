@@ -12,17 +12,24 @@ type props = {
   currentChatId: string;
 }
 const Chat: React.FC<props> = ({ currentChatId }) => {
-  const { getConversationById, currentUser, conversations } = useChat();
+  const { getConversationById, currentUser, conversations, loadConversationMessages } = useChat();
   const conversation = getConversationById(currentChatId);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const isBot = conversation && (conversation.id === 'offer' || conversation.id === 'search');
+
+  useEffect(() => {
+    if (!currentChatId || isBot) return
+
+    loadConversationMessages(currentChatId)
+  }, [currentChatId])
+
   if (!conversation) {
     return <>Loading...</>
   }
-  const isBot = conversation.id === 'offer' || conversation.id === 'search';
 
   return (
     <Row>

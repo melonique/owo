@@ -40,9 +40,6 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled, chatId }) => {
     }
   };
 
-  useEffect(() =>  {
-
-  }, [])
   return (
     <div className="chat-input d-flex align-items-center">
       <input
@@ -54,14 +51,6 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled, chatId }) => {
         onKeyDown={handleKeyDown}
         ref={messageInput}
       />
-      {/*
-        <a className="ms-1 text-muted" href="#!">
-          <FaSmile className="icon" />
-        </a>
-        <a className="ms-3 text-muted" href="#!">
-          <FaPaperclip className="icon" />
-        </a>
-        */}
       <Button className="ms-3" onClick={handleSend}>
         <FaPaperPlane className="icon" />
       </Button>

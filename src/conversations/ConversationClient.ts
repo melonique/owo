@@ -1,5 +1,4 @@
 import { supabase } from '@/config/SupabaseClient'
-import { initializeChannel } from './RealtimeMessagesClient'
 
 type UserId = string
 
@@ -14,11 +13,11 @@ type Conversation = {
   messages: UserMessage[]
 }
 
-type ConversationMetadata = Omit<Conversation, 'users' | 'messages'>
+export type ConversationMetadata = Omit<Conversation, 'messages'>
 
 type UserMessageId = string
 
-type UserMessage = {
+export type UserMessage = {
   id: UserMessageId
   sentAt: string
   sender: Maybe<UserId>
@@ -27,15 +26,13 @@ type UserMessage = {
 
 const getConversations = async (user: UserId): Promise<ConversationMetadata[]> => {
   const { data: conversations } = await supabase
-    .from('conversation')
+    .from('conversation_metadata')
     .select(`
       id,
       title,
-      user_conversations!inner (
-        user_profile
-      )
+      users
     `)
-    .eq('user_conversations.user_profile', user)
+    .contains('users', [user])
     .returns<ConversationMetadata[]>()
 
   return conversations || []

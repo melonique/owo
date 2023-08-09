@@ -27,7 +27,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   }
   const [botMode, setBotMode] = useState<BotMode>('talk');
 
-  const { getMessagesByConversationId, currentUser, addMessage, resetConversations } = useChat();
+  const { getMessagesByConversationId, currentUser, addMessage, resetBotConversations: resetConversations } = useChat();
 
 
   const currentMessages = getMessagesByConversationId(botId);
@@ -126,17 +126,6 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     }
 
   }, [currentMessages])
-
-
-/*  useEffect(() => {
-    const msg = getNextMessage()
-    if (msg) {
-      addMessage('offer', getNextMessage());
-    }
-  }, [currentBotMessageIndex]) */
-
-
-
 
   return (
     <BotContext.Provider

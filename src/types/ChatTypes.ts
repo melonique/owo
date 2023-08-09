@@ -1,3 +1,4 @@
+import { ConversationMetadata, UserMessage } from "@/conversations/ConversationClient";
 
 export class User {
   id?: string;
@@ -10,13 +11,21 @@ export class Message {
   content: string;
   timestamp: string;
 
-  constructor(user: User, content: string) {
-    this.id = 'm-' + Math.floor(Math.random() * 10000)
+  constructor(user: User, content: string, timestamp?: string, id?: string) {
+    this.id = id ?? 'm-' + Math.floor(Math.random() * 10000)
     this.user = user
     this.content = content
-    this.timestamp = new Date().toISOString()
+    this.timestamp = timestamp ?? new Date().toISOString()
   }
 }
+
+export const toMessages = (userMessages: UserMessage[]) => {
+  return userMessages.map((userMessage) => {
+    const sender = { id: userMessage.sender }
+    return new Message(sender, userMessage.message, userMessage.sentAt, userMessage.id)
+  })
+}
+
 export class Conversation {
   id: string;
   title: string;
@@ -31,6 +40,11 @@ export class Conversation {
   }
 }
 
+export const fromMetadataToConversation = (currentUserId: string) => (data: ConversationMetadata): Conversation => {
+  const [withUserId] = data.users.filter((userId) => userId !== currentUserId)
+
+  return new Conversation({ id: withUserId }, data.title, data.id)
+}
 
 // a bot message apply a status and somehting to do for the bot, on send message.
 export type BotMode = 'talk' | 'listen' | 'listen-confirm' | 'listen-picture' | 'process' | 'end';
