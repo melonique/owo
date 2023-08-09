@@ -2,7 +2,7 @@ import { supabase } from "@/config/SupabaseClient";
 import { Listing, UserProfile } from "./Listing";
 
 export const getRange = (page: number): [number, number] => {
-    const PAGE_SIZE = 12
+    const PAGE_SIZE = 9999999999
     const PAGE_START_NUMBER = 1
 
     const start = (Math.max(page, PAGE_START_NUMBER) - PAGE_START_NUMBER) * PAGE_SIZE
@@ -37,6 +37,7 @@ export const fetchListings = async ({ page }: FetchUsecase): Promise<Listing[]> 
         `)
         .eq('deleted', false)
         .range(first, last)
+        .order('created_at', { ascending: false })
 
     if (!listing) {
         return []

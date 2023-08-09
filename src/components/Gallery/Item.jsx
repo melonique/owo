@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
+import ReactTimeAgo from 'react-time-ago'
 
 const borderTypes = {
   'don': 'primary',
@@ -10,7 +11,7 @@ const borderTypes = {
 
 const getTypeColor = (type) => type && type.length ? borderTypes[type[0]] : 'primary'
 
-const GalleryItem = ({ listing: { id, title, description, type, tags, userProfile }, children, noProfile }) => (
+const GalleryItem = ({ listing: { id, title, description, type, tags, userProfile, created_at }, children, noProfile }) => (
   <Card className="mb-3" border={getTypeColor(type)}>
     <Card.Header>
       <Card.Title border="primary">
@@ -39,7 +40,8 @@ const GalleryItem = ({ listing: { id, title, description, type, tags, userProfil
               />
             </div>
             <Col>
-              {userProfile.username}
+            <span>{userProfile.username}</span><br />
+            <span className="text-muted"><ReactTimeAgo date={created_at} locale="fr" /></span>
             </Col>
           </>
         }

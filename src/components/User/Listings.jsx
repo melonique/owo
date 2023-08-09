@@ -37,7 +37,8 @@ const UserListings = ({ }) => {
 
 
   return (
-      <Row>
+      <Row className="mt-3">
+      {listings.filter(l => l.userProfile.id === user.id).length === 0 && <p className="text-center">Vous n'avez pas encore d'annonces</p>}
         {user && listings.filter(l => l.userProfile.id === user.id).map((listing) => {
           return (
             <Item listing={listing} noProfile key={listing.id}>
