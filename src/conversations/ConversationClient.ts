@@ -154,7 +154,7 @@ const updateConversation = async ({ id, title }: UpdateConversationUsecase): Pro
     .from('conversation')
     .update({ title })
     .eq('id', id)
-    
+
   return await fetchConversation(id)
 }
 

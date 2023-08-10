@@ -91,6 +91,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
 
     switch (botMode) {
       case 'listen':
+      case 'listen-picture':
       case 'listen-confirm':
         // if message from current user
         if (lastMessage && lastMessage.user.id === currentUser.id) {

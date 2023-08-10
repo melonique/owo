@@ -62,6 +62,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
             avatar={message.user.avatar}
             content={message.content}
             timestamp={message.timestamp}
+            type={message.type}
             isCurrentUser={message.user.id == currentUser.id}
           />
         ))}

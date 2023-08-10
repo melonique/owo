@@ -5,17 +5,21 @@ export class User {
   username?: string;
   avatar?: string;
 }
+
+export type messageType = 'text' | 'image' // | 'video' | 'audio' | 'file' | 'location' | 'sticker' | 'contact' | 'link' | 'poll' | 'template' | 'list' | 'carousel' | 'buttons' | 'quickReplies' | 'form' | 'custom'
 export class Message {
   id: string;
   user: User;
   content: string;
   timestamp: string;
+  type: messageType;
 
-  constructor(user: User, content: string, timestamp?: string, id?: string) {
+  constructor(user: User, content: string, timestamp?: string, id?: string, type?: messageType) {
     this.id = id ?? 'm-' + Math.floor(Math.random() * 10000)
     this.user = user
     this.content = content
     this.timestamp = timestamp ?? new Date().toISOString()
+    this.type = type || 'text'
   }
 }
 

@@ -27,7 +27,8 @@
     "react-icons": "^4.8.0",
     "react-time-ago": "^7.2.1",
     "sass": "^1.64.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",

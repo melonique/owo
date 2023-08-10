@@ -27,6 +27,7 @@ export const fetchListings = async ({ page }: FetchUsecase): Promise<Listing[]> 
             description,
             tags,
             type,
+            images,
             user_profile (
                 id,
                 name,

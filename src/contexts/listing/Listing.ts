@@ -14,4 +14,5 @@ export type Listing = {
   tags?: string[];
   type?: string[];
   userProfile: UserProfile;
+  images: string[];
 }

@@ -31,14 +31,14 @@ const PhotoUpload: React.FC<PhotoUploadProps> = ({ onFileSelect }) => {
           Upload File
         </Button>
       )}
-      <Form.Group controlId="formFileSm" className="mb-3" style={{ display: 'none' }}>
+      <Form.Group controlId="formFileSm" style={{ display: 'none' }}>
         <Form.Control type="file" size="sm" onChange={handleFileChange} ref={fileInputRef} />
       </Form.Group>
       {previewUrl && (
         <>
-          <img src={previewUrl} alt="Preview" width="100" />
-          <Button variant="secondary" onClick={handleCancel} className="mt-2">
-            Cancel
+          <img src={previewUrl} alt="Preview" width="100" className="mr-2" />
+          <Button variant="secondary" onClick={handleCancel} className="mr-2">
+            Change image
           </Button>
         </>
       )}
