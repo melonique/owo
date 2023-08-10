@@ -25,7 +25,7 @@ export class Message {
 
 export const toMessages = (userMessages: UserMessage[]) => {
   return userMessages.map((userMessage) => {
-    const sender = { id: userMessage.sender }
+    const sender = { id: userMessage.sender, avatar: `https://api.multiavatar.com/${userMessage.sender}.png` }
     return new Message(sender, userMessage.message, userMessage.sentAt, userMessage.id)
   })
 }
