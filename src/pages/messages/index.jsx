@@ -9,7 +9,7 @@ const Messages = () => {
 
   useEffect(() => {
     // some logic...
-    router.replace(`/messages/id`);
+    router.replace(`/messages/offer`);
   }, [])
 }
 

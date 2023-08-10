@@ -13,7 +13,11 @@ type Conversation = {
   messages: UserMessage[]
 }
 
-export type ConversationMetadata = Omit<Conversation, 'messages'>
+type ConversationUserData = {
+  [user: UserId]: string,
+}
+
+export type ConversationMetadata = Omit<Conversation, 'messages'> & { userData: ConversationUserData[] }
 
 type UserMessageId = string
 
@@ -30,7 +34,8 @@ const getConversations = async (user: UserId): Promise<ConversationMetadata[]> =
     .select(`
       id,
       title,
-      users
+      users,
+      userData:user_data
     `)
     .contains('users', [user])
     .returns<ConversationMetadata[]>()
@@ -182,6 +187,5 @@ const sendMessage = async ({ id, sender, message }: SendMessageUsecase): Promise
 export {
   getConversations,
   initializeConversation,
-  updateConversation,
   sendMessage,
 }

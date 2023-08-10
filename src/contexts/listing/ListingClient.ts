@@ -68,8 +68,7 @@ type DeleteUsecase = {
     id: string;
 }
 export const deleteListing = async ({ id }: DeleteUsecase): Promise<void> => {
-
-    const { data: listing, error } = await supabase
+    await supabase
         .from('offer')
         .update({deleted: true})
         .eq('id', id)
