@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { BiReset } from 'react-icons/bi';
 import { useChat } from "@/contexts/ChatContext";
 import { useBot } from "@/contexts/BotContext";
@@ -13,15 +13,12 @@ import ResetInput from './ResetInput'
 
 type ChatBotProps = {
   showNav: () => void;
-  botId: 'offer' | 'search';
 }
-const ChatBot: React.FC<ChatBotProps> = ({ showNav, botId }) => {
-  const { getMessagesByConversationId, currentUser, getConversationById } = useChat();
+const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
+  const { getMessages, currentUser, selectedConversation: conversation } = useChat();
   const { resetBot, botMode, botMemory } = useBot();
   const ref = useRef<HTMLDivElement>(null);
-
-  const conversation = getConversationById(botId);
-  const currentMessages = conversation?.messages || getMessagesByConversationId(botId);
+  const currentMessages = conversation?.messages || getMessages();
 
   useEffect(() => {
     if (currentMessages.length) {
@@ -35,15 +32,15 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav, botId }) => {
   const BotInput = () => {
     switch (botMode) {
       case 'listen':
-        return <ChatBotTextInput chatId={botId} />
+        return <ChatBotTextInput />
       case 'listen-picture':
-        return <ChatBotPictureInput chatId={botId} />
+        return <ChatBotPictureInput />
       case 'listen-confirm':
-        return <ChatBotContifmInput chatId={botId} />
+        return <ChatBotContifmInput />
       case 'end':
         return <ResetInput />
       default:
-        return <ChatBotTextInput chatId={botId} />
+        return <ChatBotTextInput />
     }
   }
 

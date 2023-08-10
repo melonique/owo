@@ -1,19 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Container, Row, Col, Card, Button, Form, Offcanvas } from "react-bootstrap";
-import { BiReset } from 'react-icons/bi';
+import React, { useState, useEffect } from "react";
+import { Row, Col, Card, Offcanvas } from "react-bootstrap";
 import { useChat } from "@/contexts/ChatContext";
-import { Message } from "@/types/ChatTypes";
 
 import ChatWithUser from './ChatWithUser'
 import ChatUserList from './ChatUserList'
 import ChatWithBot from './ChatBot'
 
-type props = {
-  currentChatId: string;
-}
-const Chat: React.FC<props> = ({ currentChatId }) => {
-  const { getConversationById, currentUser, conversations, loadConversationMessages } = useChat();
-  const conversation = getConversationById(currentChatId);
+const Chat: React.FC = () => {
+  const { selectedConversation: conversation, currentUser, conversations, loadConversationMessages, currentChatId } = useChat();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -24,7 +18,7 @@ const Chat: React.FC<props> = ({ currentChatId }) => {
   useEffect(() => {
     if (!currentChatId || isBot) return
 
-    loadConversationMessages(currentChatId)
+    loadConversationMessages()
   }, [currentChatId])
 
   if (!conversation) {
@@ -49,9 +43,10 @@ const Chat: React.FC<props> = ({ currentChatId }) => {
       </Col>
 
         <Col sm="12" md="8" lg="7" xl="8">
-        {isBot ? <ChatWithBot showNav={handleShow} botId={conversation.id as 'offer' | 'search'} />
-          : <ChatWithUser currentChatId={currentChatId} conversation={conversation} currentUser={currentUser} showNav={handleShow} />}
-
+          {isBot
+            ? <ChatWithBot showNav={handleShow} />
+            : <ChatWithUser conversation={conversation} currentUser={currentUser} showNav={handleShow} />
+          }
         </Col>
     </Row>
 

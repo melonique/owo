@@ -2,7 +2,7 @@ import { supabase } from "@/config/SupabaseClient"
 
 type followupQuestionsType = { offer_raw: string }
 export const followupQuestions = async ({ offer_raw }: followupQuestionsType) => {
-    const { data: response } = await supabase.functions.invoke<string>('prompt-ai-followup-questions', {
+    const { data: response } = await supabase.functions.invoke<string>('ai-offer-followup-questions', {
         body: { content: offer_raw }
     })
 
@@ -29,7 +29,7 @@ export const completeOffer = async ({
     User: ${offer_terms_raw}
   `;
 
-    const { data: response } = await supabase.functions.invoke<string>('prompt-ai-complete-offer', {
+    const { data: response } = await supabase.functions.invoke<string>('ai-offer-complete', {
         body: { content }
     })
 

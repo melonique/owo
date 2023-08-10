@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useState, PropsWithChildren } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState, ReactNode } from "react";
 import { User, Conversation, Message, fromMetadataToConversation, toMessages } from "@/types/ChatTypes";
 import { DEFAULT_USERS, DEFAULT_CONVERSATIONS } from "@/config/ChatDefaults";
 import { getConversations, initializeConversation, sendMessage } from "@/conversations/ConversationClient";
@@ -6,16 +6,22 @@ import useAuthentication from "./authentication/useAuthentication";
 interface ChatContextData {
   users: User[];
   conversations: Conversation[];
+  selectedConversation: Conversation | undefined;
   currentUser: User;
-  addMessage: (conversationId: string, message: Message) => void;
-  getMessagesByConversationId: (conversationId: string) => Message[];
-  loadConversationMessages: (conversationId: string) => Promise<void>;
-  getConversationById: (conversationId: string) => Conversation | undefined;
+  currentChatId: string;
+  addMessage: (message: Message) => void;
+  getMessages: () => Message[];
+  loadConversationMessages: () => Promise<void>;
   resetBotConversations: () => void;
 }
 const ChatContext = createContext<ChatContextData>({} as ChatContextData);
 
-export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
+type ChatProviderProps = {
+  children: ReactNode;
+  chatId: string;
+}
+
+export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
   const { user } = useAuthentication()
   const [users, setUsers] = useState<User[]>(DEFAULT_USERS);
   const [conversations, setConversations] = useState<Conversation[]>(DEFAULT_CONVERSATIONS);
@@ -30,10 +36,10 @@ export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setConversations((previous) => [...previous, ...conversationsLoaded])
   }
 
-  const loadConversationMessages = async (id: Conversation['id']): Promise<void> => {
-    if (!user || id === 'offer' || id === 'search') return
+  const loadConversationMessages = async (): Promise<void> => {
+    if (!user || chatId === 'offer' || chatId === 'search') return
 
-    const selectedConversation = conversations.find((conversation) => conversation.id === id)
+    const selectedConversation = conversations.find((conversation) => conversation.id === chatId)
     if (!selectedConversation) return
     
     const loaded = await initializeConversation({ title: selectedConversation.title, users: [user.id, selectedConversation.user.id!] })
@@ -58,11 +64,11 @@ export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
     loadConversations()
   }, [user])
 
-  const addMessage = (conversationId: string, message: Message) => {
-    if (conversationId !== 'offer' && conversationId !== 'search' && user) {
-      sendMessage({ id: conversationId, sender: user.id, message: message.content })
+  const addMessage = (message: Message) => {
+    if (chatId !== 'offer' && chatId !== 'search' && user) {
+      sendMessage({ id: chatId, sender: user.id, message: message.content })
     }
-    setConversations((prevConversations) => prevConversations.map(notifyMatchOrReturn(conversationId, message)));
+    setConversations((prevConversations) => prevConversations.map(notifyMatchOrReturn(chatId, message)));
   };
 
   return (
@@ -70,10 +76,11 @@ export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
       value={{
         users,
         currentUser: { id: user?.id },
+        currentChatId: chatId,
         conversations,
         addMessage,
-        getMessagesByConversationId: useCallback(getMessagesByConversationId(conversations), [conversations]),
-        getConversationById: useCallback(getConversationById(conversations), [conversations]),
+        getMessages: useCallback(() => getMessages(conversations)(chatId), [conversations]),
+        selectedConversation: getConversation(conversations)(chatId),
         loadConversationMessages,
         resetBotConversations: () => setConversations(
           (prevConversations) => prevConversations
@@ -115,14 +122,14 @@ const updateMessageOrNothing = (conversationId: Conversation['id'], messages: Me
   return conversation;
 }
 
-const getMessagesByConversationId = (conversations: Conversation[]) => (conversationId: string) => {
+const getMessages = (conversations: Conversation[]) => (conversationId: string) => {
   const selectedConversation = conversations.find(
     (conversation) => conversation.id === conversationId
   );
   return selectedConversation?.messages || [];
 };
 
-const getConversationById = (conversations: Conversation[]) => (conversationId: string) => {
+const getConversation = (conversations: Conversation[]) => (conversationId: string) => {
   const selectedConversation = conversations.find(
     (conversation) => conversation.id === conversationId
   );

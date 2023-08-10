@@ -27,10 +27,9 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   }
   const [botMode, setBotMode] = useState<BotMode>('talk');
 
-  const { getMessagesByConversationId, currentUser, addMessage, resetBotConversations: resetConversations } = useChat();
+  const { getMessages, currentUser, addMessage, resetBotConversations: resetConversations } = useChat();
 
-
-  const currentMessages = getMessagesByConversationId(botId);
+  const currentMessages = getMessages();
 
   const getMessage = (index: number): BotMessage | null => {
     // si je ne suis pas au bout de ma liste
@@ -52,7 +51,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     resetConversations()
     const msg = getMessage(0)
     if (msg) {
-      addMessage(botId, msg.updateMsg({}));
+      addMessage(msg.updateMsg({}));
       setBotMode(msg.mode);
     }
   }
@@ -66,7 +65,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
       const msg = getMessage(newIndex)
       if (msg) {
         setBotMode(msg.mode);
-        addMessage(botId, msg.updateMsg(botMemory));
+        addMessage(msg.updateMsg(botMemory));
       }
     }, 500);
   }
@@ -78,7 +77,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
     if (msg) {
       resetConversations();
       setBotMode(msg.mode);
-      addMessage(botId, msg.updateMsg(botMemory));
+      addMessage(msg.updateMsg(botMemory));
     }
   }, [botId])
 

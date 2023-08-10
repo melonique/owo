@@ -1,15 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useChat } from "@/contexts/ChatContext";
-import { FaSmile, FaPaperclip, FaPaperPlane } from 'react-icons/fa';
-import { Message, User } from "@/types/ChatTypes";
+import { FaPaperPlane } from 'react-icons/fa';
+import { Message } from "@/types/ChatTypes";
 import { Button } from 'react-bootstrap'
 
 interface ChatTextInputProps {
   disabled?: boolean;
-  chatId: string;
 }
 
-const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled, chatId }) => {
+const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
   const { addMessage, currentUser } = useChat();
   const messageInput = useRef<HTMLInputElement>(null);
 
@@ -27,7 +26,7 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled, chatId }) => {
       timestamp: new Date().toISOString(),
     };
 
-    addMessage(chatId, newMessage);
+    addMessage(newMessage);
 
     // Reset input field
     messageInput.current!.value = "";

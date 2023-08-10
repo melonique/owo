@@ -9,10 +9,10 @@ const Messages = () => {
   const router = useRouter()
 
   return (
-    <ChatProvider>
+    <ChatProvider chatId={router.query.chatId}>
       <BotProvider botId={router.query.chatId}>
-      <Container fluid className="text-center">
-        <Chat currentChatId={router.query.chatId}/>
+        <Container fluid className="text-center">
+          <Chat />
         </Container>
       </BotProvider>
     </ChatProvider>

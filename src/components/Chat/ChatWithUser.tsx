@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import ChatTextInput from './TextInput';
@@ -6,12 +5,11 @@ import ChatMessage from './Message';
 import { Conversation, Message, User } from '@/types/ChatTypes';
 
 type ChatWithUserProps = {
-  currentChatId: string
-   conversation: Conversation
-   currentUser: User
+  conversation: Conversation
+  currentUser: User
   showNav: () => void
 }
-const ChatWithUser = ({ currentChatId, conversation, currentUser, showNav }: ChatWithUserProps) => {
+const ChatWithUser = ({ conversation, currentUser, showNav }: ChatWithUserProps) => {
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -45,11 +43,9 @@ const ChatWithUser = ({ currentChatId, conversation, currentUser, showNav }: Cha
         <div ref={ref} />
       </Card.Body>
       <Card.Footer>
-        <ChatTextInput chatId={currentChatId} />
+        <ChatTextInput />
       </Card.Footer>
     </Card>
 );}
-
-ChatWithUser.propTypes = {};
 
 export default ChatWithUser;

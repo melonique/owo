@@ -1,16 +1,14 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useChat } from "@/contexts/ChatContext";
-import { FaSmile, FaPaperclip, FaPaperPlane } from 'react-icons/fa';
-import { Message, User } from "@/types/ChatTypes";
-import {
-  Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap'
+import { FaPaperPlane } from 'react-icons/fa';
+import { Message } from "@/types/ChatTypes";
+import { Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap'
 
 interface ConfirmInputProps {
   disabled?: boolean;
-  chatId: 'offer' | 'search';
 }
 
-const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled, chatId }) => {
+const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled }) => {
   const { addMessage, currentUser } = useChat();
   const [radioValue, setRadioValue] = useState('');
   const handleChange = (val:string) => setRadioValue(val);
@@ -29,7 +27,7 @@ const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled, chatId }) => {
       timestamp: new Date().toISOString(),
     };
 
-    addMessage(chatId, newMessage);
+    addMessage(newMessage);
 
     // Reset input field
     setRadioValue('')

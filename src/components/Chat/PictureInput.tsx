@@ -1,16 +1,15 @@
 import React, { useState  } from "react";
 import { useChat } from "@/contexts/ChatContext";
 import { FaPaperPlane } from 'react-icons/fa';
-import { Message, User } from "@/types/ChatTypes";
+import { Message } from "@/types/ChatTypes";
 import { Button } from 'react-bootstrap'
 import { PhotoUpload } from '@/components'
 
 interface PicutreInputProps {
   disabled?: boolean;
-  chatId: 'offer' | 'search';
 }
 
-const PicutreInput: React.FC<PicutreInputProps> = ({ disabled, chatId }) => {
+const PicutreInput: React.FC<PicutreInputProps> = ({ disabled }) => {
   const { addMessage, currentUser } = useChat();
   const [file, setFile] = useState<File | null>(null)
 
@@ -30,7 +29,7 @@ const PicutreInput: React.FC<PicutreInputProps> = ({ disabled, chatId }) => {
       timestamp: new Date().toISOString(),
     };
 
-    addMessage(chatId, newMessage);
+    addMessage(newMessage);
 
     // Reset input field
     setFile(null);

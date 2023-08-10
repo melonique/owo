@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import Link from 'next/link'
 import { ListGroup, Badge } from 'react-bootstrap';
@@ -45,7 +44,5 @@ const ChatUserList = ({ conversations, currentChatId }: ChatUserListProps) => {
     </ListGroup>
 );
   }
-
-ChatUserList.propTypes = {};
 
 export default ChatUserList;
