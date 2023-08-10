@@ -7,19 +7,11 @@ import ChatUserList from './ChatUserList'
 import ChatWithBot from './ChatBot'
 
 const Chat: React.FC = () => {
-  const { selectedConversation: conversation, currentUser, conversations, loadConversationMessages, currentChatId } = useChat();
+  const { selectedConversation: conversation, currentUser, conversations, currentChatId, isSelectedConversationBot } = useChat();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const isBot = conversation && (conversation.id === 'offer' || conversation.id === 'search');
-
-  useEffect(() => {
-    if (!currentChatId || isBot) return
-
-    loadConversationMessages()
-  }, [currentChatId])
 
   if (!conversation) {
     return <>Loading...</>
@@ -27,7 +19,6 @@ const Chat: React.FC = () => {
 
   return (
     <Row>
-
 
       <Col md="4" lg="5" xl="4">
         <Offcanvas show={show} onHide={handleClose} responsive="md">
@@ -43,7 +34,7 @@ const Chat: React.FC = () => {
       </Col>
 
         <Col sm="12" md="8" lg="7" xl="8">
-          {isBot
+          {isSelectedConversationBot
             ? <ChatWithBot showNav={handleShow} />
             : <ChatWithUser conversation={conversation} currentUser={currentUser} showNav={handleShow} />
           }

@@ -1,15 +1,17 @@
 import useListing from '@/contexts/listing/useListing'
 import { useEffect, useState } from 'react';
 import Item from '@/components/Gallery/Item'
-import { Container, Row, Col, Button, Navbar, Nav, ListGroup, Card, Form, FormControl, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, Button, Navbar, ListGroup, Form, FormControl, Dropdown } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
-import Link from 'next/link';
+import { useRouter } from 'next/router'
 import useAuthentication from '@/contexts/authentication/useAuthentication';
+import { initializeConversation } from "@/conversations/ConversationClient";
 
 const Listings = () => {
   const { user } = useAuthentication();
   const { listings, getPage } = useListing()
   const [page, setPage] = useState(1)
+  const router = useRouter()
 
   const fetchPage = async () => {
     await getPage(page)
@@ -19,6 +21,11 @@ const Listings = () => {
   useEffect(() => {
     fetchPage(0)
   }, [])
+
+  const createConversation = async ({ title, user1, user2 }) => {
+    const loaded = await initializeConversation({ title: title, users: [user1, user2] })
+    router.push(`/messages/${loaded.id}`)
+  }
 
   return (
     <Container fluid>
@@ -68,7 +75,9 @@ const Listings = () => {
               return (
                 <Col key={listing.id} xs={12} lg={6}>
                   <Item listing={listing}>
-                    <Button as={Link} href={`/messages/${listing.userProfile.username.toLowerCase()}`}>Contacter</Button>
+                    <Button onClick={() => createConversation({ title: listing.id, user1: user.id, user2: listing.userProfile.id })}>
+                      Contacter
+                    </Button>
                   </Item>
                 </Col>
               )

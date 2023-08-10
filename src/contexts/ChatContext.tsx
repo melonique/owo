@@ -9,9 +9,9 @@ interface ChatContextData {
   selectedConversation: Conversation | undefined;
   currentUser: User;
   currentChatId: string;
+  isSelectedConversationBot: boolean;
   addMessage: (message: Message) => void;
   getMessages: () => Message[];
-  loadConversationMessages: () => Promise<void>;
   resetBotConversations: () => void;
 }
 const ChatContext = createContext<ChatContextData>({} as ChatContextData);
@@ -23,8 +23,9 @@ type ChatProviderProps = {
 
 export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
   const { user } = useAuthentication()
-  const [users, setUsers] = useState<User[]>(DEFAULT_USERS);
+  const [users, _] = useState<User[]>(DEFAULT_USERS);
   const [conversations, setConversations] = useState<Conversation[]>(DEFAULT_CONVERSATIONS);
+  const isSelectedConversationBot = chatId === 'offer' || chatId === 'search'
 
   const loadConversations = async (): Promise<void> => {
     if (!user) return
@@ -37,7 +38,7 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
   }
 
   const loadConversationMessages = async (): Promise<void> => {
-    if (!user || chatId === 'offer' || chatId === 'search') return
+    if (!user || isSelectedConversationBot) return
 
     const selectedConversation = conversations.find((conversation) => conversation.id === chatId)
     if (!selectedConversation) return
@@ -48,24 +49,15 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
   }
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (localStorage.getItem("chatUsers")) {
-        setUsers(JSON.parse(localStorage.getItem("chatUsers") as string))
-      }
-    }
-
-    const storedUsers = localStorage.getItem("chatUsers");
-    if (storedUsers) {
-      setUsers(JSON.parse(storedUsers));
-    }
-  }, []);
-
-  useEffect(() => {
     loadConversations()
   }, [user])
 
+  useEffect(() => {
+    loadConversationMessages()
+  }, [chatId])
+
   const addMessage = (message: Message) => {
-    if (chatId !== 'offer' && chatId !== 'search' && user) {
+    if (!isSelectedConversationBot && user) {
       sendMessage({ id: chatId, sender: user.id, message: message.content })
     }
     setConversations((prevConversations) => prevConversations.map(notifyMatchOrReturn(chatId, message)));
@@ -81,7 +73,7 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
         addMessage,
         getMessages: useCallback(() => getMessages(conversations)(chatId), [conversations]),
         selectedConversation: getConversation(conversations)(chatId),
-        loadConversationMessages,
+        isSelectedConversationBot,
         resetBotConversations: () => setConversations(
           (prevConversations) => prevConversations
             .map(updateMessageOrNothing('offer', []))
