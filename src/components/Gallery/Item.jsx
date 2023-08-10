@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 import ReactTimeAgo from 'react-time-ago'
 
@@ -22,9 +22,20 @@ const GalleryItem = ({ listing: { id, title, description, type, tags, userProfil
       </Card.Title>
     </Card.Header>
     <Card.Body>
-      <Card.Text>
-        {description.split('\n').map(str => <p key={str}>{str}</p>)}
-      </Card.Text>
+    <Row>
+        {images && images.length > 0 &&
+        <Col sm={4} xs={12}>
+          <Card.Img
+            src={images[0]}
+          />
+        </Col>
+        }
+        <Col>
+          <Card.Text>
+            {description.split('\n').map(str => <Fragment key={str}>{str}<br /></Fragment>)}
+          </Card.Text>
+      </Col>
+    </Row>
     </Card.Body>
     <Card.Footer>
       <Row className="align-items-center">
