@@ -25,6 +25,7 @@ const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled }) => {
       user: currentUser,
       content: message,
       timestamp: new Date().toISOString(),
+      type: 'text',
     };
 
     addMessage(newMessage);

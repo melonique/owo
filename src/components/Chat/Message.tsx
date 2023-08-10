@@ -1,3 +1,4 @@
+import { MessageType } from "@/types/ChatTypes";
 import React, { Fragment } from "react";
 import ReactTimeAgo from 'react-time-ago'
 
@@ -5,6 +6,7 @@ interface MessageProps {
   avatar?: string;
   content: string;
   timestamp: string;
+  type?: MessageType;
   isCurrentUser?: boolean;
 }
 

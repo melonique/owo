@@ -24,6 +24,7 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
       user: currentUser,
       content: message,
       timestamp: new Date().toISOString(),
+      type: 'text',
     };
 
     addMessage(newMessage);

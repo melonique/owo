@@ -44,7 +44,7 @@ const initializeConversation = async ({ title, users }: InitializeConversationUs
   const maybeConversation = await findConversationByUser({ sender: users[0], receiver: users[1] })
 
   return maybeConversation
-    ? await fetchConversation(maybeConversation)
+    ? await updateConversation({ id: maybeConversation, title })
     : await createConversation({ title, users })
 }
 
@@ -147,7 +147,10 @@ const createConversation = async ({ title, users }: CreateConversationUsecase): 
   }
 }
 
-type UpdateConversationUsecase = ConversationMetadata
+type UpdateConversationUsecase = {
+  id: Conversation['id'],
+  title: Conversation['title'],
+}
 
 const updateConversation = async ({ id, title }: UpdateConversationUsecase): Promise<Conversation> => {
   await supabase
