@@ -47,7 +47,7 @@ export class Conversation {
 export const fromMetadataToConversation = (currentUserId: string) => (data: ConversationMetadata): Conversation => {
   const [withUserId] = data.users.filter((userId) => userId !== currentUserId)
 
-  return new Conversation({ id: withUserId }, data.title, data.id)
+  return new Conversation({ id: withUserId, avatar: `https://api.multiavatar.com/${withUserId}.png` }, data.title, data.id)
 }
 
 // a bot message apply a status and somehting to do for the bot, on send message.

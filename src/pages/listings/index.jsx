@@ -75,7 +75,7 @@ const Listings = () => {
               return (
                 <Col key={listing.id} xs={12} lg={6}>
                   <Item listing={listing}>
-                    <Button onClick={() => createConversation({ title: listing.id, user1: user.id, user2: listing.userProfile.id })}>
+                    <Button onClick={() => createConversation({ title: listing.title, user1: user.id, user2: listing.userProfile.id })}>
                       Contacter
                     </Button>
                   </Item>
