@@ -24,7 +24,7 @@ const PicutreInput: React.FC<PicutreInputProps> = ({ disabled }) => {
     if (!file) {
       return;
     }
-    debugger
+
     // upload file to server
     const uuid = uuidv4();
     const filePath = `${currentUser.id}/${uuid}.${file.name.split('.')[1]}`

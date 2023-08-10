@@ -20,6 +20,8 @@ export const OFFER_BOT_CONFIG = {
     new BotMessage(OFFER_BOT_USER, "✔️ Ça y est, j'ai trouvé ! Alors..."),
     new BotMessage(OFFER_BOT_USER, "{ai_offer_followup_question}", 'offer_raw_2'),
     new BotMessage(OFFER_BOT_USER, "S'agit-il d'un prêt, d'une vente ou d'un don ? Ou peut-être les trois ?", 'offer_terms_raw'),
+    new BotMessage(OFFER_BOT_USER, "📷 Aimerais-tu ajouter une photo a ton annonce?", 'image', 'listen-picture'),
+    new BotMessage(OFFER_BOT_USER, "Bien reçus!"),
     new BotMessage(OFFER_BOT_USER, "💭 Je prépare ton annonce...", 'ai_offer_completion', 'process', completeOffer),
     new BotMessage(OFFER_BOT_USER, "😄 J'ai une proposition pour toi ! Écoute : "),
     new BotMessage(OFFER_BOT_USER, "{ai_offer_completion}"),

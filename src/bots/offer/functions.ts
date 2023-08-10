@@ -37,14 +37,16 @@ export const completeOffer = async ({
 }
 
 type JsonString = string
-type saveOfferType = {save_offer: string; ai_offer_completion: JsonString; }
-export const saveOffer = async ({ save_offer, ai_offer_completion }: saveOfferType) => {
+type saveOfferType = {save_offer: string; ai_offer_completion: JsonString; image: string }
+export const saveOffer = async ({ save_offer, ai_offer_completion, image }: saveOfferType) => {
   if (!save_offer) {
     return "Pas de souci ! 😊 Si tu veux recommencer, n'hésite pas à cliquer sur le bouton reset en haut de l'écran !"
   } else {
+    const body = JSON.parse(ai_offer_completion);
+    if(image !== 'NULL'){ body.images = [image] }
 
     const { data: response } = await supabase.functions.invoke<string>('save-offer', {
-        body: JSON.parse(ai_offer_completion)
+        body
     })
 
     return response ? "C'est enregistré ! 👍 Si tu souhaites recommencer, il te suffit de cliquer sur le bouton reset en haut de l'écran !" : 'rip'
