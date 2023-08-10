@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 import ChatTextInput from './TextInput';
 import ChatMessage from './Message';
 import { Conversation, Message, User } from '@/types/ChatTypes';
+import { useLiveChat } from '@/contexts/useLiveChat';
 
 type ChatWithUserProps = {
   conversation: Conversation
@@ -10,6 +11,7 @@ type ChatWithUserProps = {
   showNav: () => void
 }
 const ChatWithUser = ({ conversation, currentUser, showNav }: ChatWithUserProps) => {
+  useLiveChat({ conversation, currentUser })
 
   const ref = useRef<HTMLDivElement>(null);
 

@@ -11,6 +11,7 @@ interface ChatContextData {
   currentChatId: string;
   isSelectedConversationBot: boolean;
   addMessage: (message: Message) => void;
+  syncMessage: (message: Message) => void;
   getMessages: () => Message[];
   resetBotConversations: () => void;
 }
@@ -60,8 +61,12 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
     if (!isSelectedConversationBot && user) {
       sendMessage({ id: chatId, sender: user.id, message: message.content })
     }
-    setConversations((prevConversations) => prevConversations.map(notifyMatchOrReturn(chatId, message)));
+    addLocalMessage(message)
   };
+
+  const addLocalMessage = (message: Message) => {
+    setConversations((prevConversations) => prevConversations.map(notifyMatchOrReturn(chatId, message)));
+  }
 
   return (
     <ChatContext.Provider
@@ -71,6 +76,7 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
         currentChatId: chatId,
         conversations,
         addMessage,
+        syncMessage: addLocalMessage,
         getMessages: useCallback(() => getMessages(conversations)(chatId), [conversations]),
         selectedConversation: getConversation(conversations)(chatId),
         isSelectedConversationBot,

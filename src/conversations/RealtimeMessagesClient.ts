@@ -1,23 +1,28 @@
 import { supabase } from "@/config/SupabaseClient"
+import { MessageType } from "@/types/ChatTypes"
 import { RealtimeChannel } from '@supabase/supabase-js'
 
 type ChannelIdentification = {
   channelId: string,
   senderId: string,
+  notifyNewMessage: (message: SenderMessage) => void,
 }
 
-type SenderMessage = {
-  createdAt: string,
+export type SenderMessage = {
+  id: string,
+  conversation: string,
+  sent_at: string,
   message: string,
-  senderId: string,
+  sender: string,
+  type: MessageType
 }
 
 const SOURCE_SCHEMA = "public"
 const SOURCE_TABLE = "user_messages"
 
-const initializeChannel = ({ channelId, senderId }: ChannelIdentification): RealtimeChannel => {
+const initializeChannel = ({ channelId, senderId, notifyNewMessage }: ChannelIdentification): RealtimeChannel => {
   return supabase.channel(channelId)
-    .on(
+    .on<SenderMessage>(
       "postgres_changes",
       { 
         event: 'INSERT',
@@ -25,7 +30,11 @@ const initializeChannel = ({ channelId, senderId }: ChannelIdentification): Real
         table: SOURCE_TABLE,
         filter: `conversation=eq.${channelId}`,
       },
-      (payload: unknown) => console.log('return from payload', payload))
+      (payload) => {
+        if (payload.new.sender !== senderId) {
+          notifyNewMessage(payload.new)
+        }
+      })
     .subscribe()
 }
 
