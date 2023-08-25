@@ -17,11 +17,11 @@ export const DEFAULT_CONVERSATIONS = [
     title: 'Rédiger une annonce',
     user: DEFAULT_USERS[0],
     messages: [],
-  },
+  }, /*
   {
     id: "search",
     title: 'Faire une recherche',
     user: DEFAULT_USERS[1],
     messages: [],
-  },
+  }, */
 ]

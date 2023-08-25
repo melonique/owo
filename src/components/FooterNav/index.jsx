@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge, Navbar, Nav } from 'react-bootstrap'
-import { IoIosApps, IoMdSearch, IoIosChatbubbles, IoIosPerson, IoIosAddCircle } from 'react-icons/io';
+import { IoIosApps, IoIosNotifications, IoIosChatbubbles, IoIosPerson, IoIosAddCircle } from 'react-icons/io';
 import Link from 'next/link'
 
 const BottomNavbar = () => {
@@ -26,15 +26,15 @@ const BottomNavbar = () => {
         </Link>
       </div>
       <div className="nav-item text-center">
-        <Link href="/messages/search">
-          <IoMdSearch className="icon" />
-          <div className="nav-text">Recherche</div>
-        </Link>
-      </div>
-      <div className="nav-item text-center">
         <Link href="/profile">
           <IoIosPerson className="icon" />
           <div className="nav-text">Profil</div>
+        </Link>
+      </div>
+      <div className="nav-item text-center">
+        <Link href="/notifications" >
+          <IoIosNotifications className="icon text-danger" />
+          <div className="nav-text">Notifications</div>
         </Link>
       </div>
     </Navbar>
