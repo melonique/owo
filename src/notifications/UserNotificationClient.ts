@@ -62,8 +62,6 @@ const getAllNotifications = async (user: UserId): Promise<UserConversationNotifi
     .order('created_at', { ascending: false })
     .returns<UserConversationNotification[]>()
 
-  console.log(userNotifications)
-
   return userNotifications || []
 }
 
