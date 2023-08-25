@@ -1,4 +1,5 @@
 import { supabase } from '@/config/SupabaseClient'
+import { sendUserNotification } from '@/notifications/UserNotificationClient'
 
 export type UserId = string
 
@@ -15,12 +16,6 @@ type Conversation = {
 
 type ConversationUserData = {
   [user: UserId]: string,
-}
-
-export type SendUserConversationNotificationUsecase = {
-  conversationId: ConversationId,
-  userId: UserId,
-  message: string,
 }
 
 export type ConversationMetadata = Omit<Conversation, 'messages'> & { userData: ConversationUserData[] }
@@ -188,6 +183,14 @@ const sendMessage = async ({ id, sender, message }: SendMessageUsecase): Promise
   await supabase
     .from('user_messages')
     .insert(newMessage)
+
+  const newNotification = {
+    conversationId: id,
+    userId: sender,
+    message,
+  }
+
+  await sendUserNotification(newNotification)
 }
 
 export {

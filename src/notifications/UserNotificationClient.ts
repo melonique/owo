@@ -1,7 +1,15 @@
 import { supabase } from "@/config/SupabaseClient"
 import { RealtimeChannel } from '@supabase/supabase-js'
 import { UserConversationNotification } from "./UserNotification"
-import { SendUserConversationNotificationUsecase, UserId } from "@/conversations/ConversationClient"
+
+type ConversationId = string
+type UserId = string
+
+export type SendUserConversationNotificationUsecase = {
+  conversationId: ConversationId,
+  userId: UserId,
+  message: string,
+}
 
 type UserNotificationIdentification = {
   targetUserId: UserId,
