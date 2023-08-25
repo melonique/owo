@@ -1,6 +1,7 @@
 // pages/_app.tsx
 
 import { AuthenticationProvider } from '@/contexts/authentication/AuthenticationContext'
+import { UiContextProvider } from '@/contexts/UiContext'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.scss'
 import TimeAgo from 'javascript-time-ago'
@@ -23,10 +24,12 @@ const MyApp = ({
     <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     </Head>
-    <AuthenticationProvider>
-      {getLayout(<Component {...pageProps} />)}
-    </AuthenticationProvider>
-    </>
+    <UiContextProvider>
+      <AuthenticationProvider>
+        {getLayout(<Component {...pageProps} />)}
+      </AuthenticationProvider>
+    </UiContextProvider>
+  </>
   )
 }
 

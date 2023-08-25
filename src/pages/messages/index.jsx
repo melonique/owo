@@ -3,13 +3,14 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useUi } from '@/contexts/UiContext'
 
 const Messages = () => {
   const router = useRouter()
+  const { uiState: { latestConversationOpenedId } } = useUi();
 
   useEffect(() => {
-    // some logic...
-    router.replace(`/messages/offer`);
+    router.replace(`/messages/${latestConversationOpenedId}`);
   }, [])
 }
 

@@ -12,9 +12,9 @@ const borderTypes = {
 const getTypeColor = (type) => type && type.length ? borderTypes[type[0]] : 'primary'
 
 const GalleryItem = ({ listing: { id, title, description, type, tags, userProfile, created_at, images }, children, noProfile }) => (
-  <Card className="mb-3" border={getTypeColor(type)}>
+  <Card className="mb-3">
     <Card.Header>
-      <Card.Title border="primary">
+      <Card.Title>
         {title}
         &nbsp;{type?.map(label => {
           return (<Badge key={label} bg={borderTypes[label]} className="text-white">{label}</Badge>)

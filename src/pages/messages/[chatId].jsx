@@ -4,9 +4,16 @@ import { useRouter } from 'next/router'
 import { BotProvider } from '@/contexts/BotContext'
 import { ChatProvider } from '@/contexts/ChatContext'
 import { PrivateLayout } from "@/components/Layouts"
+import { useUi } from '@/contexts/UiContext'
+import { useEffect } from 'react';
 
 const Messages = () => {
   const router = useRouter()
+  const { changeUi } = useUi();
+
+  useEffect(() => {
+    changeUi('latestConversationOpenedId', router.query.chatId);
+  }, [router.query.chatId])
 
   return (
     <ChatProvider chatId={router.query.chatId}>

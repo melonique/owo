@@ -13,7 +13,7 @@ const BottomNavbar = () => {
         </Link>
       </div>
       <div className="nav-item text-center">
-        <Link href="/messages/offer">
+        <Link href="/messages">
           <IoIosChatbubbles className="icon" />
           <Badge bg="danger">&nbsp;</Badge>
           <div className="nav-text">Messages</div>
