@@ -1,7 +1,7 @@
 {
   "name": "owo",
   "short_name": "owo",
-  "description": "marché social",
+  "description": "marché local",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -20,3 +20,5 @@
     }
   ]
 }
+
+
