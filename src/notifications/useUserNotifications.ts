@@ -16,7 +16,7 @@ export const useUserNotification = (): UserNotificationUsecase => {
     syncNotification: (notification) => {
       alert('allo chérie, check ta console')
       console.log(notification)
-      setUserNotifications([notification, ...userNotifications])
+      setUserNotifications((previous) => [notification, ...previous])
     },
   }
 }
