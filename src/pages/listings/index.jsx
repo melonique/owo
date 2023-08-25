@@ -22,9 +22,9 @@ const Listings = () => {
     router.push(`/messages/${loaded.id}`)
   }
 
-  const searchAction = () => {
+  const searchAction = (event) => {
     search(currentSearch);
-    return false;
+    event.preventDefault()
   }
 
   return (
@@ -32,9 +32,10 @@ const Listings = () => {
       {/* Top bar with categories */}
       <Navbar bg="light" expand="lg">
         <Navbar.Brand href="#home">Les annonces</Navbar.Brand>
-        <Form className="form-inline" onSubmit={searchAction}>
-          <FormControl type="text" placeholder="Search" onChange={(event) => setCurrentSearch(event.target.value)} value={currentSearch} />
-          <Button variant="outline-success" onClick={searchAction}>{loading ? <Spinner /> : 'Search'}</Button>
+        <Form className="form-inline" method="post" onSubmit={searchAction}>
+          <FormControl type="text" placeholder="Recherche" onChange={(event) => setCurrentSearch(event.target.value)} value={currentSearch} />
+          <Button variant="outline-success" onClick={searchAction}>{loading ? <Spinner size="sm" /> : 'Recherche'}</Button>
+          <Button variant="outline-success" onClick={getAll}>Réinitialiser la recherche!</Button>
         </Form>
       </Navbar>
 
@@ -70,7 +71,7 @@ const Listings = () => {
         {/* Main area for listings */}
         <Col md={9}>
           <Row>
-            <h3>314 offres</h3>
+            <h3>Vos offres</h3>
             {listings.filter(l => l.userProfile.id !== user.id).map((listing) => {
               return (
                 <Col key={listing.id} xs={12} lg={6}>
@@ -82,8 +83,6 @@ const Listings = () => {
                 </Col>
               )
             })}
-
-            <button onClick={getAll}>Reset!</button>
           </Row>
         </Col>
       </Row>
