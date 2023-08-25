@@ -1,6 +1,6 @@
 import { supabase } from '@/config/SupabaseClient'
 
-type UserId = string
+export type UserId = string
 
 type ConversationId = string
 

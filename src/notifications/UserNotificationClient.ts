@@ -1,10 +1,10 @@
 import { supabase } from "@/config/SupabaseClient"
 import { RealtimeChannel } from '@supabase/supabase-js'
 import { UserConversationNotification } from "./UserNotification"
-import { SendUserConversationNotificationUsecase } from "@/conversations/ConversationClient"
+import { SendUserConversationNotificationUsecase, UserId } from "@/conversations/ConversationClient"
 
 type UserNotificationIdentification = {
-  targetUserId: string,
+  targetUserId: UserId,
   notify: (notification: UserConversationNotification) => void,
 }
 
@@ -22,7 +22,6 @@ const initializeUserNotificationBroadcaster = ({ targetUserId, notify }: UserNot
         filter: `target=eq.${targetUserId}`,
       },
       (payload) => {
-        console.log(payload)
         notify(payload.new)
       })
     .subscribe()
@@ -47,8 +46,30 @@ const sendUserNotification = async ({ conversationId, userId, message }: SendUse
     .insert(newNotification)
 }
 
+const getAllNotifications = async (user: UserId): Promise<UserConversationNotification[]> => {
+  const { data: userNotifications } = await supabase
+    .from('user_notifications')
+    .select(`
+      id,
+      target,
+      excerpt,
+      type,
+      createdAt:created_at,
+      context,
+      status
+    `)
+    .eq('target', user)
+    .order('created_at', { ascending: false })
+    .returns<UserConversationNotification[]>()
+
+  console.log(userNotifications)
+
+  return userNotifications || []
+}
+
 export {
   initializeUserNotificationBroadcaster,
   removeUserNotificationBroadcaster,
   sendUserNotification,
+  getAllNotifications,
 }
