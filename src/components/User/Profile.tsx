@@ -6,7 +6,6 @@ import UserListings from './Listings'
 
 const Profile = ({}) => {
   const { user } = useAuthentication() || {};
-  console.log(user)
   if (!user) { return (<span>LOADING PROFILE</span>) }
 
   return(
@@ -60,7 +59,7 @@ const Profile = ({}) => {
               📋 Mes Annonces
             </ListGroup.Item>
             <ListGroup.Item action href="#logout">
-              ⛔ Logout
+              ⛔ Se déconnecter
             </ListGroup.Item>
           </ListGroup>
         </Col>

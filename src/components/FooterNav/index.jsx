@@ -34,7 +34,7 @@ const BottomNavbar = () => {
       <div className="nav-item text-center">
         <Link href="/profile">
           <IoIosPerson className="icon" />
-          <div className="nav-text">Profile</div>
+          <div className="nav-text">Profil</div>
         </Link>
       </div>
     </Navbar>

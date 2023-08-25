@@ -1,11 +1,9 @@
-import { Navbar, Container, Button, Row, Col, Card, Tab, ListGroup, Figure } from "react-bootstrap";
+import { Row, Figure } from "react-bootstrap";
 import Item from '@/components/Gallery/Item'
 import { ButtonWithConfirm  } from '@/components'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useListing from '@/contexts/listing/useListing'
 import useAuthentication from "@/contexts/authentication/useAuthentication"
-
-
 
 const Badge = ({ name }) => (
   <Figure className="p-4">
@@ -22,19 +20,12 @@ const Badge = ({ name }) => (
 )
 
 const UserListings = ({ }) => {
-  const { listings, getPage, deleteListingById } = useListing()
+  const { listings, getAll, deleteListingById } = useListing()
   const { user } = useAuthentication() || {};
-  const [page, setPage] = useState(1)
-
-  const fetchPage = async () => {
-    await getPage(page)
-    setPage(page + 1)
-  }
 
   useEffect(() => {
-    fetchPage(0)
+    getAll()
   }, [])
-
 
   return (
       <Row className="mt-3">
