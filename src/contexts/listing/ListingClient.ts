@@ -1,23 +1,23 @@
 import { supabase } from "@/config/SupabaseClient";
 import { Listing, UserProfile } from "./Listing";
 
-export const getRange = (page: number): [number, number] => {
-    const PAGE_SIZE = 9999999999
-    const PAGE_START_NUMBER = 1
-
-    const start = (Math.max(page, PAGE_START_NUMBER) - PAGE_START_NUMBER) * PAGE_SIZE
-    const end = start + PAGE_SIZE - 1
-
-    return [start, end]
+type SearchUsescase = {
+    searchQuery: string;
 }
 
-type FetchUsecase = {
-    page: number;
+export const searchListings = async ({ searchQuery }: SearchUsescase): Promise<Listing[]> => {
+    const { data: listing } = await supabase.functions.invoke('search-offers', {
+        body: { query: searchQuery }
+    })
+
+    if (!listing) {
+        return []
+    }
+
+    return listing.map(assembleListing)
 }
 
-export const fetchListings = async ({ page }: FetchUsecase): Promise<Listing[]> => {
-    const [ first, last ] = getRange(page)
-
+export const fetchListings = async (): Promise<Listing[]> => {
     const { data: listing } = await supabase
         .from('offer')
         .select(`
@@ -37,7 +37,6 @@ export const fetchListings = async ({ page }: FetchUsecase): Promise<Listing[]> 
             )
         `)
         .eq('deleted', false)
-        .range(first, last)
         .order('created_at', { ascending: false })
 
     if (!listing) {
@@ -67,6 +66,7 @@ const singleUserProfile = (userProfile: any): UserProfile => {
 type DeleteUsecase = {
     id: string;
 }
+
 export const deleteListing = async ({ id }: DeleteUsecase): Promise<void> => {
     await supabase
         .from('offer')

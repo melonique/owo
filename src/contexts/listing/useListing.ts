@@ -1,27 +1,42 @@
 import { useState } from "react"
 import { Listing } from "./Listing"
-import { fetchListings, deleteListing } from "./ListingClient"
+import { fetchListings, searchListings, deleteListing } from "./ListingClient"
 
 type UseListing = {
     listings: Listing[]
-    getPage: (page: number) => Promise<void>
+    loading: boolean
+    getAll: () => Promise<void>
+    search: (query: string) => Promise<void>
     deleteListingById: (id: string) => Promise<void>
 }
 
 const useListing = (): UseListing => {
     const [listings, setListings] = useState<Listing[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
 
-    const getPage = async (page: number): Promise<void> => {
-        const newListings = await fetchListings({ page })
-        setListings([...listings, ...newListings])
+    const getAll = async (): Promise<void> => {
+        setLoading(true)
+        const newListings = await fetchListings()
+        setListings(newListings)
+        setLoading(false)
     }
+
     const deleteListingById = async (id: string): Promise<void> => {
-      await deleteListing({ id })
-      const newList = [...listings]
-      setListings(newList.filter(x => x.id !== id))
+        setLoading(true)
+        await deleteListing({ id })
+        const newList = [...listings]
+        setListings(newList.filter(x => x.id !== id))
+        setLoading(false)
     }
 
-    return { listings, getPage, deleteListingById }
+    const search = async (query: string): Promise<void> => {
+        setLoading(true)
+        const newListings = await searchListings({ searchQuery: query })
+        setListings(newListings)
+        setLoading(false)
+    }
+
+    return { listings, loading, getAll, search, deleteListingById }
 }
 
 export default useListing

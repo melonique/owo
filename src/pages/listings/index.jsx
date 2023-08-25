@@ -1,7 +1,7 @@
 import useListing from '@/contexts/listing/useListing'
 import { useEffect, useState } from 'react';
 import Item from '@/components/Gallery/Item'
-import { Container, Row, Col, Button, Navbar, ListGroup, Form, FormControl, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, Button, Navbar, ListGroup, Form, FormControl, Spinner } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import { useRouter } from 'next/router'
 import useAuthentication from '@/contexts/authentication/useAuthentication';
@@ -9,17 +9,12 @@ import { initializeConversation } from "@/conversations/ConversationClient";
 
 const Listings = () => {
   const { user } = useAuthentication();
-  const { listings, getPage } = useListing()
-  const [page, setPage] = useState(1)
+  const { loading, listings, getAll, search } = useListing()
+  const [currentSearch, setCurrentSearch] = useState('')
   const router = useRouter()
 
-  const fetchPage = async () => {
-    await getPage(page)
-    setPage(page + 1)
-  }
-
   useEffect(() => {
-    fetchPage(0)
+    getAll()
   }, [])
 
   const createConversation = async ({ title, user1, user2 }) => {
@@ -27,21 +22,26 @@ const Listings = () => {
     router.push(`/messages/${loaded.id}`)
   }
 
+  const searchAction = () => {
+    search(currentSearch);
+    return false;
+  }
+
   return (
     <Container fluid>
       {/* Top bar with categories */}
       <Navbar bg="light" expand="lg">
         <Navbar.Brand href="#home">Les annonces</Navbar.Brand>
-        <Form className="form-inline">
-          <FormControl type="text" placeholder="Search" />
-          <Button variant="outline-success">Search</Button>
+        <Form className="form-inline" onSubmit={searchAction}>
+          <FormControl type="text" placeholder="Search" onChange={(event) => setCurrentSearch(event.target.value)} value={currentSearch} />
+          <Button variant="outline-success" onClick={searchAction}>{loading ? <Spinner /> : 'Search'}</Button>
         </Form>
       </Navbar>
 
       <Row className="pt-3">
         {/* Sidebar with categories and filters */}
         <Col md={3}>
-          <Form>
+          {/* <Form>
 
             <Dropdown onSelect={() => { }}>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -52,7 +52,7 @@ const Listings = () => {
                 <Dropdown.Item eventKey="date">Date</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          </Form>
+          </Form> */}
 
           <h3>Categories</h3>
           <ListGroup className="mb-2">
@@ -83,7 +83,7 @@ const Listings = () => {
               )
             })}
 
-            <button onClick={fetchPage}>Next!</button>
+            <button onClick={getAll}>Reset!</button>
           </Row>
         </Col>
       </Row>
