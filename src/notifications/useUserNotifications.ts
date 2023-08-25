@@ -4,6 +4,7 @@ import { UserConversationNotification } from "./UserNotification"
 type UserNotificationUsecase = {
   notifications: UserConversationNotification[],
   hasNewNotification: boolean,
+  syncNotification: (newNotification: UserConversationNotification) => void,
 }
 
 export const useUserNotification = (): UserNotificationUsecase => {
@@ -11,6 +12,7 @@ export const useUserNotification = (): UserNotificationUsecase => {
 
   return {
     notifications: userNotifications,
-    hasNewNotification: userNotifications.some((notification) => notification.status === 'new')
+    hasNewNotification: userNotifications.some((notification) => notification.status === 'new'),
+    syncNotification: (notification) => { setUserNotifications([notification, ...userNotifications]) },
   }
 }
