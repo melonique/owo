@@ -3,6 +3,7 @@ import { User, Conversation, Message, fromMetadataToConversation, toMessages } f
 import { DEFAULT_USERS, DEFAULT_CONVERSATIONS } from "@/config/ChatDefaults";
 import { getConversations, initializeConversation, sendMessage } from "@/conversations/ConversationClient";
 import useAuthentication from "./authentication/useAuthentication";
+import { sendUserNotification } from "@/notifications/UserNotificationClient";
 interface ChatContextData {
   users: User[];
   conversations: Conversation[];
@@ -60,6 +61,11 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
   const addMessage = (message: Message) => {
     if (!isSelectedConversationBot && user) {
       sendMessage({ id: chatId, sender: user.id, message: message.content })
+
+      const selectedConversation = conversations.find((conversation) => conversation.id === chatId)
+      if (!selectedConversation) return
+    
+      sendUserNotification({ conversationId: chatId, userId: selectedConversation.user.id!, message: message.content })
     }
     addLocalMessage(message)
   };

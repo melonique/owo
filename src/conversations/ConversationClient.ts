@@ -183,14 +183,6 @@ const sendMessage = async ({ id, sender, message }: SendMessageUsecase): Promise
   await supabase
     .from('user_messages')
     .insert(newMessage)
-
-  const newNotification = {
-    conversationId: id,
-    userId: sender,
-    message,
-  }
-
-  await sendUserNotification(newNotification)
 }
 
 export {
