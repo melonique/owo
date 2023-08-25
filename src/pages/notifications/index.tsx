@@ -1,11 +1,14 @@
 import { ReactNode } from "react"
 import { PrivateLayout } from "@/components/Layouts"
 import { Notifications } from '@/components'
+import { useUserNotification } from "@/notifications/useUserNotifications"
 
 const NotificationWall = () => {
+  const { notifications } = useUserNotification()
+
   return (
     <div>
-      <Notifications />
+      <Notifications notifications={notifications} />
     </div>
   )
 }
