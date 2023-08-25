@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Row, Col } from 'react-bootstrap';
 import ChatTextInput from './TextInput';
 import ChatMessage from './Message';
 import { Conversation, Message, User } from '@/types/ChatTypes';
@@ -25,13 +25,27 @@ const ChatWithUser = ({ conversation, currentUser, showNav }: ChatWithUserProps)
   }, [conversation.messages.length]);
 
   return (
-    <Card className="chatWindow">
+    <Card className="conversationWindow">
       <Card.Header className="d-flex justify-content-start align-items-center p-3">
         <Button variant="primary" className="d-md-none mr-3" onClick={showNav}>
           🍔
         </Button>
         <h5 className="mb-0">{conversation.title}</h5>
       </Card.Header>
+
+      <div className="d-flex flex-row p-2 d-md-none">
+        <div>
+          <img
+            src={conversation.user.avatar}
+            alt="avatar"
+            className="d-flex align-self-center me-3"
+            width="40"
+          />
+        </div>
+        <p style={{ lineHeight: '40px', margin: 0 }}>{conversation.user.username}</p>
+      </div>
+      <hr className="m-0 p-0" />
+
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
         {conversation.messages.map((message: Message) => (
           <ChatMessage

@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import ReactTimeAgo from 'react-time-ago'
 import { IoIosChatbubbles } from 'react-icons/io';
 import Link from 'next/link'
-import './styles.module.scss'
 
 const SingleNotification = ({ id, excerpt, createdAt, status, type, context }) => {
   useEffect(() => {
@@ -14,7 +13,7 @@ const SingleNotification = ({ id, excerpt, createdAt, status, type, context }) =
   }, [])
 
   return (
-    <Link href={type === 'message' && `/messages/${context.conversationId}`} className="notification">
+    <Link href={type === 'message' && `/messages/${context.conversationId}`}>
       <Toast>
         <Toast.Header closeButton={false}>
           <IoIosChatbubbles className="icon" />
