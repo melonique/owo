@@ -4,6 +4,7 @@ import ChatTextInput from './TextInput';
 import ChatMessage from './Message';
 import { Conversation, Message, User } from '@/types/ChatTypes';
 import { useLiveChat } from '@/contexts/useLiveChat';
+import { IoIosMenu } from 'react-icons/io';
 
 type ChatWithUserProps = {
   conversation: Conversation
@@ -27,8 +28,8 @@ const ChatWithUser = ({ conversation, currentUser, showNav }: ChatWithUserProps)
   return (
     <Card className="conversationWindow">
       <Card.Header className="d-flex justify-content-start align-items-center p-3">
-        <Button variant="primary" className="d-md-none mr-3" onClick={showNav}>
-          🍔
+        <Button variant="light" className="d-md-none mr-3" onClick={showNav}>
+          <IoIosMenu className="icon" />
         </Button>
         <h5 className="mb-0">{conversation.title}</h5>
       </Card.Header>

@@ -4,6 +4,7 @@ import { BiReset } from 'react-icons/bi';
 import { useChat } from "@/contexts/ChatContext";
 import { useBot } from "@/contexts/BotContext";
 import { Message } from "@/types/ChatTypes";
+import { IoIosMenu } from 'react-icons/io';
 
 import ChatBotMessage from './Message'
 import ChatBotTextInput from './TextInput'
@@ -47,11 +48,11 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
   return (
     <Card className="chatWindow">
       <Card.Header className="d-flex justify-content-between align-items-center p-3">
-        <Button variant="primary" className="d-md-none" onClick={showNav}>
-          🍔
+        <Button variant="light" className="d-md-none" onClick={showNav}>
+          <IoIosMenu className="icon" />
         </Button>
         <h5 className="mb-0">{conversation?.title} <span className="text-muted" title={JSON.stringify(botMemory, null, 2)}>🛠</span></h5>
-        <Button onClick={resetBot}>
+        <Button variant="light" onClick={resetBot}>
           <BiReset className="icon" />
         </Button>
       </Card.Header>
