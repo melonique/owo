@@ -17,6 +17,12 @@ type ConversationUserData = {
   [user: UserId]: string,
 }
 
+export type SendUserConversationNotificationUsecase = {
+  conversationId: ConversationId,
+  userId: UserId,
+  message: string,
+}
+
 export type ConversationMetadata = Omit<Conversation, 'messages'> & { userData: ConversationUserData[] }
 
 type UserMessageId = string
