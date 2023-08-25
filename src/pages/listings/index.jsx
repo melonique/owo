@@ -34,7 +34,7 @@ const Listings = () => {
         <Navbar.Brand href="#home">Les annonces</Navbar.Brand>
         <Form className="form-inline" method="post" onSubmit={searchAction}>
           <FormControl type="text" placeholder="Recherche" onChange={(event) => setCurrentSearch(event.target.value)} value={currentSearch} />
-          <Button variant="outline-success" onClick={searchAction}>{loading ? <Spinner size="sm" /> : 'Recherche'}</Button>
+          <Button variant="outline-success" onClick={searchAction}>{loading ? <Spinner as="span" size="sm" /> : 'Recherche'}</Button>
           <Button variant="outline-success" onClick={getAll}>Réinitialiser la recherche!</Button>
         </Form>
       </Navbar>
