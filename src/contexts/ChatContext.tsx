@@ -4,6 +4,32 @@ import { DEFAULT_USERS, DEFAULT_CONVERSATIONS } from "@/config/ChatDefaults";
 import { getConversations, initializeConversation, sendMessage } from "@/conversations/ConversationClient";
 import useAuthentication from "./authentication/useAuthentication";
 import { sendUserNotification } from "@/notifications/UserNotificationClient";
+
+declare global {
+  interface Array<T> {
+    mergeNoDuplicate(otherArray: T[], key: keyof T): T[];
+  }
+}
+
+Array.prototype.mergeNoDuplicate = function (otherArray: any[], key: string) {
+  const mergedArray = [...this];
+
+  otherArray.forEach(itemB => {
+    const existingItemIndex = mergedArray.findIndex(item => item[key] === itemB[key]);
+
+    if (existingItemIndex !== -1) {
+      // Mettre à jour le doublon avec les valeurs de otherArray
+      mergedArray[existingItemIndex] = { ...itemB };
+    } else {
+      // Ajouter un nouvel élément à mergedArray
+      mergedArray.push({ ...itemB });
+    }
+  });
+
+  return mergedArray;
+};
+
+
 interface ChatContextData {
   users: User[];
   conversations: Conversation[];
@@ -36,7 +62,7 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
     const metadata = await getConversations(currentUserId)
     const conversationsLoaded = metadata.map(fromMetadataToConversation(currentUserId))
 
-    setConversations((previous) => [...previous, ...conversationsLoaded])
+    setConversations((previous) => previous.mergeNoDuplicate(conversationsLoaded, 'id'))
   }
 
   const loadConversationMessages = async (): Promise<void> => {
@@ -44,7 +70,7 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
 
     const selectedConversation = conversations.find((conversation) => conversation.id === chatId)
     if (!selectedConversation) return
-    
+
     const loaded = await initializeConversation({ title: selectedConversation.title, users: [user.id, selectedConversation.user.id!] })
 
     setConversations((prevConversations) => prevConversations.map(updateMessageOrNothing(loaded.id, toMessages(loaded.messages))))
@@ -64,7 +90,7 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
 
       const selectedConversation = conversations.find((conversation) => conversation.id === chatId)
       if (!selectedConversation) return
-    
+
       sendUserNotification({ conversationId: chatId, userId: selectedConversation.user.id!, message: message.content })
     }
     addLocalMessage(message)

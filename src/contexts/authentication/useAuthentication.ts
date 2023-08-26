@@ -42,7 +42,6 @@ const useAuthentication = (): UseAuthentication => {
 
     const updatePassword = async (request: UpdatePasswordRequest): Promise<void> => {
       const response = await supabaseUpdatePassword(request)
-
       console.log(response)
     }
 

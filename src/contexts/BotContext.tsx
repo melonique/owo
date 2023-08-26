@@ -119,12 +119,6 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
       default:
         break;
     }
-
-    // if message from bot
-    if (lastMessage && lastMessage.user.id === botId && botMode === 'talk') {
-      console.log('TALKING', currentBotMessageIndex)
-    }
-
   }, [currentMessages])
 
   return (
