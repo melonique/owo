@@ -18,7 +18,6 @@ export const UiContextProvider = ({ children }) => {
     if (typeof window !== "undefined") {
       localStorage.setItem("uiState", JSON.stringify(updatedState));
     }
-    console.log({ key, value });
   };
 
   return (
