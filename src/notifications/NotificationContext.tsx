@@ -8,12 +8,7 @@ type ContextValue = {
   setUserNotifications: Dispatch<SetStateAction<UserConversationNotification[]>>
 }
 
-const defaultContextValue: ContextValue = {
-  userNotifications: [],
-  setUserNotifications: () => undefined
-}
-
-const NotificationContext = createContext<ContextValue>(defaultContextValue);
+const NotificationContext = createContext<ContextValue | undefined>(undefined);
 
 export const NotificationProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { user } = useAuthentication()

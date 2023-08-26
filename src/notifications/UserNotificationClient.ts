@@ -16,12 +16,23 @@ type UserNotificationIdentification = {
   notify: (notification: UserConversationNotification) => void,
 }
 
+type SQLUserConversationNotification = Omit<UserConversationNotification, 'createdAt'> & {
+  created_at: string
+}
+
+const fromSQLToDomain = (sql: SQLUserConversationNotification): UserConversationNotification => {
+  return {
+    ...sql,
+    createdAt: sql.created_at,
+  }
+}
+
 const SOURCE_SCHEMA = "public"
 const SOURCE_TABLE = "user_notifications"
 
 const initializeUserNotificationBroadcaster = ({ targetUserId, notify }: UserNotificationIdentification): RealtimeChannel => {
   return supabase.channel(targetUserId)
-    .on<UserConversationNotification>(
+    .on<SQLUserConversationNotification>(
       "postgres_changes",
       { 
         event: 'INSERT',
@@ -30,7 +41,7 @@ const initializeUserNotificationBroadcaster = ({ targetUserId, notify }: UserNot
         filter: `target=eq.${targetUserId}`,
       },
       (payload) => {
-        notify(payload.new)
+        notify(fromSQLToDomain(payload.new))
       })
     .subscribe()
 }

@@ -14,8 +14,6 @@ export const useUserNotification = (): UserNotificationUsecase => {
     notifications: userNotifications,
     hasNewNotification: userNotifications.some((notification) => notification.status === 'new'),
     syncNotification: (notification) => {
-      console.log(notification)
-      console.log('next', [notification, ...userNotifications])
       setUserNotifications([notification, ...userNotifications])
     },
   }
