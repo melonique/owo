@@ -1,16 +1,16 @@
 import { Navbar, Container, Breadcrumb, Row, Col, Card, Tab, ListGroup, Figure } from "react-bootstrap";
 
 
-const Badge = ({ name }) => (
+const Badge = ({ name, label }) => (
   <Figure className="p-4">
     <Figure.Image
       width={171}
       height={180}
       alt={name}
-      src={`https://source.boringavatars.com/beam/${name}?colors=6D9E37,F9C80E,B3C100,E55934,56CCF2`}
+      src={`/badges/${name}.png`}
     />
     <Figure.Caption className="text-center">
-      {name}
+      {label}
     </Figure.Caption>
   </Figure>
 )
@@ -22,7 +22,7 @@ const Badges = ({}) => (
 
       <Row>
         <Col xs={4}>
-          <Badge name="Béta Habitus" />
+          <Badge name="habitus" label="Béta Habitus🌿"/>
         </Col>
 {/*
 

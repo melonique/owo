@@ -76,10 +76,12 @@ const Listings = () => {
             {listings.map((listing) => {
               return (
                 <Col key={listing.id} xs={12} lg={6}>
-                  <Item listing={listing}>
+                  <Item listing={listing}>{
+                    user.id !== listing.userProfile.id &&
                     <Button onClick={() => createConversation({ title: listing.title, user1: user.id, user2: listing.userProfile.id })}>
                       <IoIosChatbubbles className="icon" />
                     </Button>
+                  }
                   </Item>
                 </Col>
               )
