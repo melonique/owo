@@ -6,6 +6,7 @@ const DEFAULT_UI_STATE = {
   latestConversationOpenedId: 'offer',
   onboardingRegistration: false,  // went trough the registration onboarding process
   onboardingListings: false,
+  onboardingMessages: false,
 }
 
 export const UiContextProvider = ({ children }) => {

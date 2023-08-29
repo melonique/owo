@@ -4,16 +4,19 @@ import { useUi } from '@/contexts/UiContext'
 
 import LightboxRegistration from './LightboxRegistration';
 import LightboxListings from './LightboxListings';
+import LightboxMessages from './LightboxMessages';
 
 
 
 const Onboarding = ({}) => {
   const { uiState } = useUi();
   const {route} = useRouter();
+  const routeBase = route.split('/')[1];
 
   return (<>{route}
-    {!uiState.onboardingRegistration && route == '/profile' && <LightboxRegistration />}
-    {!uiState.onboardingListings && route == '/listings' && <LightboxListings />}
+    {!uiState.onboardingRegistration && routeBase == 'profile' && <LightboxRegistration />}
+    {!uiState.onboardingListings && routeBase == 'listings' && <LightboxListings />}
+    {!uiState.onboardingMessages && routeBase == 'messages' && <LightboxMessages />}
   </>
   );
 }
