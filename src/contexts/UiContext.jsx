@@ -3,7 +3,9 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const UiContext = createContext(undefined);
 
 const DEFAULT_UI_STATE = {
-  latestConversationOpenedId: 'offer'
+  latestConversationOpenedId: 'offer',
+  onboardingRegistration: false,  // went trough the registration onboarding process
+  onboardingListings: false,
 }
 
 export const UiContextProvider = ({ children }) => {

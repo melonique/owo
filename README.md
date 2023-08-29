@@ -52,4 +52,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-
+## docs
+###  onboarding
+is a process where the user is guided through the app and its features.
+it uses the Bootstrap Modal and the useUi() hook to display the modal depending on the route.
