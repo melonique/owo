@@ -13,7 +13,7 @@ const Onboarding = ({}) => {
   const {route} = useRouter();
   const routeBase = route.split('/')[1];
 
-  return (<>{route}
+  return (<>
     {!uiState.onboardingRegistration && routeBase == 'profile' && <LightboxRegistration />}
     {!uiState.onboardingListings && routeBase == 'listings' && <LightboxListings />}
     {!uiState.onboardingMessages && routeBase == 'messages' && <LightboxMessages />}
