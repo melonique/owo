@@ -72,7 +72,7 @@ const Listings = () => {
         <Col md={9}>
           <Row>
             <h3>Vos offres</h3>
-            {listings.filter(l => l.userProfile.id !== user.id).map((listing) => {
+            {listings.map((listing) => {
               return (
                 <Col key={listing.id} xs={12} lg={6}>
                   <Item listing={listing}>
