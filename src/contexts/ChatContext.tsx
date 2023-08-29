@@ -68,7 +68,9 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
   const loadConversationMessages = async (): Promise<void> => {
     if (!user || isSelectedConversationBot) return
 
-    const selectedConversation = conversations.find((conversation) => conversation.id === chatId)
+    const metadata = await getConversations(user.id)
+    const conversationsLoaded = metadata.map(fromMetadataToConversation(user.id))
+    const selectedConversation = conversationsLoaded.find((conversation) => conversation.id === chatId)
     if (!selectedConversation) return
 
     const loaded = await initializeConversation({ title: selectedConversation.title, users: [user.id, selectedConversation.user.id!] })
