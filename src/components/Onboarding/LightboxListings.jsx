@@ -5,16 +5,17 @@ const Registration = ({ }) => {
   return (
     <Lightbox
       name="onboardingListings"
-      title="🌟 Bienvenue dans les annonces owo ! 🌟"
+      title="Le marché"
     >
-
-      <p>Plonge dans un univers d'opportunités juste à ta porte. Ici, notre intelligence artificielle t'accompagne pour te proposer des annonces adaptées à tes besoins. Navigue à travers nos catégories de base pour découvrir tout ce que la communauté a à offrir.</p>
-
-      <h5>🔍 Petits rappels pour optimiser ta recherche :</h5>
+      <p>Te voilà dans le catalogue d'annonces de tes voisins.</p>
+      <h5>Ce qui distingue les annonces owo</h5>
       <ul>
-        <li><b>Intelligence Artificielle</b> : Notre système apprend de tes préférences pour te suggérer des annonces qui te correspondent le mieux.</li>
-        <li><b>Catégories de base</b> : Commence par explorer ces catégories pour avoir une idée générale de ce qui est disponible.</li>
+        <li><b>Ultra-local</b> : Puisque c'est la Bêta Habitus 🌿, tu ne verras que des annonces de résidents de Habitus. À l'avenir, seules les annonces dans un rayon de 2 km à pied seront présentées.</li>
+        <li><b>Rédigés à l'aide de AI</b> : Les annonces sont documentées à l'aide de l'assistant owo 🤖</li>
+        <li><b>Recherche intelligente</b> : La recherche utilise l'intelligence artificielle pour présenter les résultats les plus pertinents, peu importe les mots que tu utilises. Cela te permet aussi d'être très détaillé dans ta recherche.</li>
       </ul>
+
+      <p>Si tu as des suggestions ou veux nous donner des commentaires sur ton expérience avec les annonces, <a href="#">écris-nous ici</a> !</p>
 
       <p>Et n'oublie pas, si une annonce t'interpelle, clique simplement sur le bouton avec la bulle 🗨️ pour entrer en contact avec son auteur. L'échange, le partage et la découverte n'ont jamais été aussi simples !</p>
 
