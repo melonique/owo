@@ -98,6 +98,6 @@ const RegisterForm = ({ }) => {
     </>
   )
 }
-RegisterForm.propTypes = {};
+
 
 export default RegisterForm;

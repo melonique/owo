@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import Image from 'next/image';
 import owologo from "../../../public/owo.svg";
@@ -15,7 +14,5 @@ const Header = ({}) => (
     </a>
   </div>
 );
-
-Header.propTypes = {};
 
 export default Header;

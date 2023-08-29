@@ -6,6 +6,7 @@ import { PrivateLayout } from "@/components/Layouts"
 import { useRouter } from 'next/router'
 import useAuthentication from '@/contexts/authentication/useAuthentication';
 import { initializeConversation } from "@/conversations/ConversationClient";
+import { IoIosChatbubbles } from 'react-icons/io';
 
 const Listings = () => {
   const { user } = useAuthentication();
@@ -77,7 +78,7 @@ const Listings = () => {
                 <Col key={listing.id} xs={12} lg={6}>
                   <Item listing={listing}>
                     <Button onClick={() => createConversation({ title: listing.title, user1: user.id, user2: listing.userProfile.id })}>
-                      Contacter
+                      <IoIosChatbubbles className="icon" />
                     </Button>
                   </Item>
                 </Col>

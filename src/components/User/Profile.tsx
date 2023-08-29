@@ -28,7 +28,7 @@ const Profile = ({}) => {
                <p className="text-muted mb-1">👑 Gamified Unlocked Title chosen</p>
                 <p className="text-muted"> Rating: <br />⭐️⭐️⭐️⭐️⭐️</p>
                */}
-              <p className="text-muted">📍 Habitus</p>
+                  <p className="text-muted">📍 Habitus🌿</p>
           </Card.Body>
         </Card>
 

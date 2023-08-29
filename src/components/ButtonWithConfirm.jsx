@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useState  } from 'react';
 
 import Button from 'react-bootstrap/Button';
@@ -35,6 +34,5 @@ const ButtonWithConfirm = ({ onClick, children, confirmMessage = "Voulez-vous vr
   );
 }
 
-ButtonWithConfirm.propTypes = {};
 
 export default ButtonWithConfirm;

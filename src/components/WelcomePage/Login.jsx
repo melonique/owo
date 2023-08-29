@@ -48,6 +48,6 @@ const Login = ({ }) => {
     </>
   )
 }
-Login.propTypes = {};
+
 
 export default Login;

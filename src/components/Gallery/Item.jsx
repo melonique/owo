@@ -41,17 +41,17 @@ const GalleryItem = ({ listing: { id, title, description, type, tags, userProfil
       <Row className="align-items-center">
         {!noProfile &&
           <>
-            <div style={{ width: '80px', display: 'flex', alignItems: 'center' }} className="mr-2">
+            <div style={{ width: '50px', display: 'flex', alignItems: 'center' }} className="mr-2">
               <Card.Img
                 src={"https://api.multiavatar.com/" + userProfile.id + '.png'}
                 alt="avatar"
                 className="rounded-circle"
-                style={{ width: '80px', height: 'auto' }}
+                style={{ width: '50px', height: 'auto' }}
                 fluid
               />
             </div>
             <Col>
-            <span>{userProfile.username}</span><br />
+            <span>{userProfile.username}</span> <span className="text-muted">📍 Habitus🌿</span> <br />
             <span className="text-muted"><ReactTimeAgo date={created_at} locale="fr" /></span>
             </Col>
           </>

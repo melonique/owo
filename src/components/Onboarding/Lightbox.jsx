@@ -11,13 +11,14 @@ function Lightbox({ title, children, name }) {
     setShow(false);
     changeUi(name, true);
   };
+  const setShowFalse = () => setShow(false);
 
   useEffect(() => {
     setShow(true);
   }, [])
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={setShowFalse}>
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
@@ -25,11 +26,11 @@ function Lightbox({ title, children, name }) {
         {children}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
         <Button variant="primary" onClick={handleClose}>
-          Save Changes
+          Ne plus voir ce message
+        </Button>
+        <Button variant="secondary" onClick={handleClose}>
+          Fermer
         </Button>
       </Modal.Footer>
     </Modal>

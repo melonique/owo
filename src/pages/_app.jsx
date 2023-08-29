@@ -23,6 +23,7 @@ const MyApp = ({
   <>
     <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+        <link href="https://fonts.cdnfonts.com/css/montserrat" rel="stylesheet" />
     </Head>
     <UiContextProvider>
       <AuthenticationProvider>

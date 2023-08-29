@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import Lightbox from './Lightbox';
 
@@ -6,16 +5,21 @@ const Registration = ({ }) => {
   return (
     <Lightbox
       name="onboardingListings"
-      title="onboardingListings!"
+      title="🌟 Bienvenue dans les annonces owo ! 🌟"
     >
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, quisquam voluptates magnam nostrum ut consequuntur nihil accusamus atque molestias veritatis mollitia inventore libero quasi, totam harum. Dolor mollitia a quia!</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur quam quibusdam temporibus est, necessitatibus id, quasi eaque nulla ipsa dolorum, distinctio perspiciatis itaque animi. Est, dolores! Cupiditate repellat laboriosam impedit.</p>
-      IMAGE wwhatever
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic sed labore quas perspiciatis laudantium, facere enim facilis dignissimos autem! Praesentium fugit harum suscipit assumenda accusamus, quas ad commodi provident itaque!</p>
+
+      <p>Plonge dans un univers d'opportunités juste à ta porte. Ici, notre intelligence artificielle t'accompagne pour te proposer des annonces adaptées à tes besoins. Navigue à travers nos catégories de base pour découvrir tout ce que la communauté a à offrir.</p>
+
+      <h5>🔍 Petits rappels pour optimiser ta recherche :</h5>
+      <ul>
+        <li><b>Intelligence Artificielle</b> : Notre système apprend de tes préférences pour te suggérer des annonces qui te correspondent le mieux.</li>
+        <li><b>Catégories de base</b> : Commence par explorer ces catégories pour avoir une idée générale de ce qui est disponible.</li>
+      </ul>
+
+      <p>Et n'oublie pas, si une annonce t'interpelle, clique simplement sur le bouton avec la bulle 🗨️ pour entrer en contact avec son auteur. L'échange, le partage et la découverte n'ont jamais été aussi simples !</p>
+
     </Lightbox>
   );
 }
-
-Registration.propTypes = {};
 
 export default Registration;

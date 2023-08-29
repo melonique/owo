@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import Toast from 'react-bootstrap/Toast';
 import React, { useEffect } from 'react';
 import ReactTimeAgo from 'react-time-ago'
@@ -30,6 +29,5 @@ const SingleNotification = ({ id, excerpt, createdAt, status, type, context }) =
   );
 }
 
-SingleNotification.propTypes = {};
 
 export default SingleNotification;
