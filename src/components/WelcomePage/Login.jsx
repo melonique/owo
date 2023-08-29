@@ -9,7 +9,7 @@ const Login = ({ }) => {
   const { error, login } = useAuthentication();
 
   const onSubmit = async ({ email, password }) => {
-    await login({ email, password }, () => router.push('/profile'));
+    await login({ email, password }, () => router.push('/listings'));
   }
 
   return (

@@ -26,7 +26,7 @@ const fromRequestToSignup = (request: RegisterRequest): SignUpWithPasswordCreden
     email: request.email,
     password: request.password,
     options: {
-        emailRedirectTo: "https://owo-quebec.vercel.app/profile",
+        emailRedirectTo: "https://owo-quebec.vercel.app/listings",
         data: {
             username: request.username,
             name: request.name,
