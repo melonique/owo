@@ -6,16 +6,17 @@ import { Conversation } from '@/types/ChatTypes';
 type ChatUserListProps = {
   conversations: Conversation[],
   currentChatId: string
+  onSelect: () => void
 }
 
-const ChatUserList = ({ conversations, currentChatId }: ChatUserListProps) => {
+const ChatUserList = ({ conversations, currentChatId, onSelect }: ChatUserListProps) => {
 
   return (
     <ListGroup as="ol" variant="flush">
       {conversations.map((chat: Conversation) => (
         <ListGroup.Item
           key={chat.id}
-
+          onClick={onSelect}
           active={chat.id === currentChatId}
           action href={`/messages/${chat.id}`}
           as={Link}

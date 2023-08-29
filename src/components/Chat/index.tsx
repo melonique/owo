@@ -27,7 +27,7 @@ const Chat: React.FC = () => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Card style={{ width: '100%' }}>
-              <ChatUserList conversations={conversations} currentChatId={currentChatId} />
+              <ChatUserList conversations={conversations} currentChatId={currentChatId} onSelect={handleClose}/>
             </Card>
           </Offcanvas.Body>
         </Offcanvas>
