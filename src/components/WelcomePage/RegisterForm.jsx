@@ -36,6 +36,7 @@ const RegisterForm = ({ }) => {
           name="username"
           label="Nom d'utilisateur"
           placeholder=""
+          exemple="Nom sous lequel vous apparaissez publiquement"
           rules={{
             required: "Entrez un nom d'utilisateur",
           }}

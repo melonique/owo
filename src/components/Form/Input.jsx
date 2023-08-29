@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 
 
-const Input = ({ name, label, rules, placeholder, register, errors, type = 'text' }) => {
+const Input = ({ name, label, rules, placeholder, register, errors, type = 'text', exemple }) => {
 
   return (
     <Form.Group className="mb-3" controlname={name}>
@@ -17,6 +17,11 @@ const Input = ({ name, label, rules, placeholder, register, errors, type = 'text
       {errors[name] && (
         <Form.Text className="text-danger">
           {errors[name].message}
+        </Form.Text>
+      )}
+      { !!exemple && (
+        <Form.Text className="text-muted">
+          {exemple}
         </Form.Text>
       )}
     </Form.Group>

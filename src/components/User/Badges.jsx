@@ -22,7 +22,7 @@ const Badges = ({}) => (
 
       <Row>
         <Col xs={4}>
-          <Badge name="Habitus" />
+          <Badge name="Béta Habitus" />
         </Col>
 {/*
 
