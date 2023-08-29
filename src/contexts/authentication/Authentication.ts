@@ -8,6 +8,7 @@ export type User = {
     id: string
     email: string
     name: string
+    firstname: string
     username: string
 }
 
@@ -52,6 +53,7 @@ export const fromAuthenticationResponseToUser = (userData: any): User => ({
     id: userData['id'],
     email: userData['email'],
     name: userData['user_metadata']['name'],
+    firstname: userData['user_metadata']['firstname'],
     username: userData['user_metadata']['username'],
 })
 

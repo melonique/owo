@@ -9,7 +9,7 @@ const RegisterForm = ({ }) => {
   const { error, register: registerUser } = useAuthentication();
 
   const onSubmit = async ({ email, password, username, name, firstname, tos }) => {
-    await registerUser({ email, password, username, name, firstname, tos }, () => router.push('/profile'));
+    await registerUser({ email, password, username, name, firstname, tos }, () => router.push('/annonces'));
   }
 
   return (

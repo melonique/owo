@@ -23,7 +23,7 @@ const Profile = ({}) => {
               style={{ width: '100px' }}
             />
             <Card.Title className="mt-3 mb-0">{user.username}</Card.Title>
-              <p className="text-muted mb-1">👁️‍🗨️ {user.name}</p>
+                  <p className="text-muted mb-1">👁️‍🗨️ {user.firstname} {user.name}</p>
               {/*
                <p className="text-muted mb-1">👑 Gamified Unlocked Title chosen</p>
                 <p className="text-muted"> Rating: <br />⭐️⭐️⭐️⭐️⭐️</p>
