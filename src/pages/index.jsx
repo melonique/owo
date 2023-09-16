@@ -1,8 +1,6 @@
 // pages/index.tsx
 
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '@/styles/Home.module.css'
 import Container from 'react-bootstrap/Container'
 import { Header, WelcomePage, Gallery } from '@/components'
 import { PublicLayout } from "@/components/Layouts"
