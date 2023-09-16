@@ -6,16 +6,18 @@
 
 body{
   min-height: 100%;
-/*  background-color: #1acc8d; */
+}
+
+.private-layout{
   padding-bottom: 60px;
+
   &.keyboard-open{
-    nav{
+    padding-bottom: 0;
+    + nav{
       display: none;
     }
   }
 }
-
-
 .bottom-navbar {
   position: fixed;
   bottom: 0;
@@ -36,7 +38,7 @@ body{
 }
 
 .chatWindow{
-  height: calc(100vh - 60px)
+  height: 100%;
 }
 
 

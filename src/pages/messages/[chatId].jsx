@@ -20,7 +20,7 @@ const Messages = () => {
   return (
     <ChatProvider chatId={router.query.chatId}>
       <BotProvider botId={router.query.chatId}>
-        <Container fluid className="text-center">
+        <Container fluid>
           <Chat />
         </Container>
       </BotProvider>

@@ -28,11 +28,9 @@ export const UiContextProvider = ({ children }) => {
 
   const watchKeyboard = {
     onFocus: () => {
-      console.log('focus')
       if (isMobile) { setVirtualKeyboardOpen(true) }
     },
     onBlur: () => {
-      console.log('blur')
       if (isMobile) { setVirtualKeyboardOpen(false) }
     }
   }

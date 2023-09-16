@@ -60,7 +60,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
           <BiReset className="icon" />
         </Button>
       </Card.Header>
-      <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
+      <Card.Body style={{ position: "relative", overflowY: "auto" }}>
         <ChatMessages component={ChatBotMessage} messages={currentMessages} currentUser={currentUser}/>
         <div ref={ref} />
       </Card.Body>

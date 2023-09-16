@@ -2,11 +2,8 @@ import React from 'react';
 import { Badge, Navbar, Nav } from 'react-bootstrap'
 import { IoIosApps, IoIosNotifications, IoIosChatbubbles, IoIosPerson, IoIosAddCircle } from 'react-icons/io';
 import Link from 'next/link'
-import { useUi } from '@/contexts/UiContext'
 
 const FooterNav = () => {
-  const { keyboard } = useUi();
-  if (keyboard.isOpen) return null;
 
   return (
     <Navbar className="justify-content-around bottom-navbar" bg="primary" >
