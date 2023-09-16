@@ -4,6 +4,9 @@ import { IoIosApps, IoIosNotifications, IoIosChatbubbles, IoIosPerson, IoIosAddC
 import Link from 'next/link'
 
 const BottomNavbar = () => {
+  const { uiState } = useUi();
+  if(uiState.virtualKeyboardOpen) return null;
+
   return (
     <Navbar className="justify-content-around bottom-navbar" bg="primary" >
       <div className="nav-item text-center">

@@ -7,6 +7,7 @@ const DEFAULT_UI_STATE = {
   onboardingRegistration: false,  // went trough the registration onboarding process
   onboardingListings: false,
   onboardingMessages: false,
+  virtualKeyboardOpen: false,
 }
 
 export const UiContextProvider = ({ children }) => {
@@ -22,6 +23,24 @@ export const UiContextProvider = ({ children }) => {
       localStorage.setItem("uiState", JSON.stringify(updatedState));
     }
   };
+
+
+  const keyboardOpen = () => {
+    changeUi('virtualKeyboardOpen', true)
+  }
+  const keyboardClose = () => {
+    changeUi('virtualKeyboardOpen', false)
+  }
+
+  useEffect(() => {
+    document.addEventListener("showkeyboard", function () { keyboardOpen(); }, false);
+    document.addEventListener("hidekeyboard", function () { keyboardClose(); }, false);
+
+    return () => {
+      document.removeEventListener("showkeyboard", keyboardOpen);
+      document.removeEventListener("hidekeyboard", keyboardClose);
+    }
+  });
 
   return (
     <UiContext.Provider
