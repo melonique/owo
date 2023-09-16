@@ -1,8 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import useDetectKeyboardOpen from "use-detect-keyboard-open";
 
 export default function Document() {
-  const isKeyboardOpen = useDetectKeyboardOpen();
   return (
     <Html lang="en">
       <Head >
@@ -19,7 +17,7 @@ export default function Document() {
         <link rel="icon" href="/favicon.png" />
 
       </Head>
-      <body className={`${isKeyboardOpen ? "keyboard-open" : "keyboard-close"}`}>
+      <body>
         <Main />
         <NextScript />
       </body>
