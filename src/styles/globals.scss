@@ -11,6 +11,15 @@ body{
 .private-layout{
   padding-bottom: 60px;
 
+  // makes the chat full height
+  height: 100vh;
+  main,
+  main .container-fluid,
+  main .container-fluid .row,
+  main .container-fluid .row .col-chat
+  { height: 100%; }
+
+  // style on virtual keyboard open
   &.keyboard-open{
     padding-bottom: 0;
     + nav{

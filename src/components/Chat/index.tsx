@@ -33,7 +33,7 @@ const Chat: React.FC = () => {
         </Offcanvas>
       </Col>
 
-        <Col sm="12" md="8" lg="7" xl="8">
+      <Col sm="12" md="8" lg="7" xl="8" className="col-chat">
           {isSelectedConversationBot
             ? <ChatWithBot showNav={handleShow} />
             : <ChatWithUser conversation={conversation} currentUser={currentUser} showNav={handleShow} />
