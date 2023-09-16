@@ -54,6 +54,9 @@ body{
 .chatWindow{
   height: 100%;
 }
+.offcanvas-header .btn-close{
+  margin-top: env(safe-area-inset-top);
+}
 
 
 .chat-message.justify-content-start + .chat-message.justify-content-start img,
