@@ -12,7 +12,7 @@ const Messages = () => {
   const { changeUi } = useUi();
 
   useEffect(() => {
-    if (router.query.chatId !== 'offer'){
+    if (router.query.chatId !== 'offer') {
       changeUi('latestConversationOpenedId', router.query.chatId);
     }
   }, [router.query.chatId])

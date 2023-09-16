@@ -11,6 +11,7 @@ import ChatBotTextInput from './TextInput'
 import ChatBotContifmInput from './ConfirmInput'
 import ChatBotPictureInput from './PictureInput'
 import ResetInput from './ResetInput'
+import ChatMessages from './ChatMessages'
 
 type ChatBotProps = {
   showNav: () => void;
@@ -57,16 +58,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
         </Button>
       </Card.Header>
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
-        {currentMessages.map((message: Message) => (
-          <ChatBotMessage
-            key={message.id}
-            avatar={message.user.avatar}
-            content={message.content}
-            timestamp={message.timestamp}
-            type={message.type}
-            isCurrentUser={message.user.id == currentUser.id}
-          />
-        ))}
+        <ChatMessages component={ChatBotMessage} messages={currentMessages} currentUser={currentUser}/>
         <div ref={ref} />
       </Card.Body>
       <Card.Footer>

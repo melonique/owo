@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useChat } from "@/contexts/ChatContext";
+import { useUi } from '@/contexts/UiContext'
 import { FaPaperPlane } from 'react-icons/fa';
 import { Message } from "@/types/ChatTypes";
 import { Button } from 'react-bootstrap'
@@ -10,6 +11,7 @@ interface ChatTextInputProps {
 
 const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
   const { addMessage, currentUser } = useChat();
+  const { keyboard } = useUi();
   const messageInput = useRef<HTMLInputElement>(null);
 
   const handleSend = () => {
@@ -44,12 +46,12 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
     <div className="chat-input d-flex align-items-center">
       <input
         disabled={disabled}
-        autoFocus
         type="text"
         className="form-control form-control"
         placeholder="Type message"
         onKeyDown={handleKeyDown}
         ref={messageInput}
+        {...keyboard.watchKeyboard}
       />
       <Button className="ms-3" onClick={handleSend}>
         <FaPaperPlane className="icon" />

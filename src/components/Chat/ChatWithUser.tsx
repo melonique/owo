@@ -2,9 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import ChatTextInput from './TextInput';
 import ChatMessage from './Message';
+import ChatMessages from './ChatMessages';
 import { Conversation, Message, User } from '@/types/ChatTypes';
 import { useLiveChat } from '@/contexts/useLiveChat';
 import { IoIosMenu } from 'react-icons/io';
+
 
 type ChatWithUserProps = {
   conversation: Conversation
@@ -48,15 +50,7 @@ const ChatWithUser = ({ conversation, currentUser, showNav }: ChatWithUserProps)
       <hr className="m-0 p-0" />
 
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
-        {conversation.messages.map((message: Message) => (
-          <ChatMessage
-            key={message.id}
-            avatar={message.user.avatar}
-            content={message.content}
-            timestamp={message.timestamp}
-            isCurrentUser={message.user.id == currentUser.id}
-          />
-        ))}
+        <ChatMessages component={ChatMessage} messages={conversation.messages} currentUser={currentUser} />
         <div ref={ref} />
       </Card.Body>
       <Card.Footer>

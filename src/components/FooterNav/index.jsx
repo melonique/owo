@@ -4,9 +4,9 @@ import { IoIosApps, IoIosNotifications, IoIosChatbubbles, IoIosPerson, IoIosAddC
 import Link from 'next/link'
 import { useUi } from '@/contexts/UiContext'
 
-const BottomNavbar = () => {
-  const { uiState } = useUi();
-  if(uiState.virtualKeyboardOpen) return null;
+const FooterNav = () => {
+  const { keyboard } = useUi();
+  if (keyboard.isOpen) return null;
 
   return (
     <Navbar className="justify-content-around bottom-navbar" bg="primary" >
@@ -45,4 +45,4 @@ const BottomNavbar = () => {
   );
 };
 
-export default BottomNavbar;
+export default FooterNav;
