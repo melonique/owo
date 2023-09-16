@@ -15,7 +15,7 @@ import ChatMessages from './ChatMessages'
 
 
 
-const BotInput = ({ botMode }) => {
+const BotInput: React.FC<{botMode : string}> = ({ botMode }) => {
   switch (botMode) {
     case 'listen':
       return <ChatBotTextInput />
