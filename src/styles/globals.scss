@@ -22,6 +22,7 @@ body{
   // style on virtual keyboard open
   &.keyboard-open{
     padding-bottom: 0;
+    height: 100%;
     + nav{
       display: none;
     }
