@@ -7,7 +7,7 @@
 body{
   min-height: 100%;
 }
-.public-layout, .privateLayout{
+.public-layout, .private-layout{
   // notch handeling on iphone https: //css-tricks.com/the-notch-and-css/
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
