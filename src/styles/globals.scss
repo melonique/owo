@@ -8,6 +8,11 @@ body{
   min-height: 100%;
 /*  background-color: #1acc8d; */
   padding-bottom: 60px;
+  &.keyboard-open{
+    nav{
+      display: none;
+    }
+  }
 }
 
 

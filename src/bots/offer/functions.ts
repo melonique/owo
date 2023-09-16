@@ -8,11 +8,20 @@ export const followupQuestions = async ({ offer_raw }: followupQuestionsType) =>
 
     return response ? response : 'rip'
 }
+
+type OfferItem = {
+  title: string;
+  description: string;
+  type: string;
+  tags: string[];
+  images: string[];
+}
 type completeOfferType = {
   offer_raw: string;
   ai_offer_followup_question: string;
   offer_raw_2: string;
   offer_terms_raw: string;
+  image: string;
 }
 export const completeOffer = async ({
   offer_raw,
@@ -32,6 +41,12 @@ export const completeOffer = async ({
     const { data: response } = await supabase.functions.invoke<string>('ai-offer-complete', {
         body: { content }
     })
+
+    if (response) {
+      const textes = JSON.parse(response)
+
+    }
+
 
     return response ? response : 'rip'
 }
