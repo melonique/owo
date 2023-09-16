@@ -5,9 +5,9 @@ import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import Container from 'react-bootstrap/Container'
 import { Header, WelcomePage, Gallery } from '@/components'
+import { PublicLayout } from "@/components/Layouts"
 
-
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Head>
@@ -21,3 +21,11 @@ export default function Home() {
     </>
   )
 }
+
+
+
+Home.getLayout = function getLayout(page) {
+  return <PublicLayout>{page}</PublicLayout>
+}
+
+export default Home
