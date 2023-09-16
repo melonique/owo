@@ -27,9 +27,11 @@ export const UiContextProvider = ({ children }) => {
 
   const keyboardOpen = () => {
     changeUi('virtualKeyboardOpen', true)
+    alert('on')
   }
   const keyboardClose = () => {
     changeUi('virtualKeyboardOpen', false)
+    alert('off')
   }
 
   useEffect(() => {
