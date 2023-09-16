@@ -13,6 +13,23 @@ import ChatBotPictureInput from './PictureInput'
 import ResetInput from './ResetInput'
 import ChatMessages from './ChatMessages'
 
+
+
+const BotInput = ({ botMode }) => {
+  switch (botMode) {
+    case 'listen':
+      return <ChatBotTextInput />
+    case 'listen-picture':
+      return <ChatBotPictureInput />
+    case 'listen-confirm':
+      return <ChatBotContifmInput />
+    case 'end':
+      return <ResetInput />
+    default:
+      return <ChatBotTextInput />
+  }
+}
+
 type ChatBotProps = {
   showNav: () => void;
 }
@@ -31,20 +48,6 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
     }
   }, [currentMessages.length]);
 
-  const BotInput = () => {
-    switch (botMode) {
-      case 'listen':
-        return <ChatBotTextInput />
-      case 'listen-picture':
-        return <ChatBotPictureInput />
-      case 'listen-confirm':
-        return <ChatBotContifmInput />
-      case 'end':
-        return <ResetInput />
-      default:
-        return <ChatBotTextInput />
-    }
-  }
 
   return (
     <Card className="chatWindow">
@@ -62,7 +65,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
         <div ref={ref} />
       </Card.Body>
       <Card.Footer>
-        <BotInput />
+        <BotInput botMode={botMode} />
       </Card.Footer>
     </Card>
   );
