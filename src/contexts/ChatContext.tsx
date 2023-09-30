@@ -138,7 +138,7 @@ const notifyMatchOrReturn = (conversationId: Conversation['id'], message: Messag
   if (conversation.id === conversationId) {
     return {
       ...conversation,
-      messages: [...conversation.messages, message],
+      messages: [message, ...conversation.messages],
     };
   }
   return conversation;

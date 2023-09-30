@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import { Card, Button, Row, Col } from 'react-bootstrap';
+import React from 'react';
+import { Card, Button } from 'react-bootstrap';
 import ChatTextInput from './TextInput';
 import ChatMessage from './Message';
 import ChatMessages from './ChatMessages';
-import { Conversation, Message, User } from '@/types/ChatTypes';
+import { Conversation, User } from '@/types/ChatTypes';
 import { useLiveChat } from '@/contexts/useLiveChat';
 import { IoIosMenu } from 'react-icons/io';
 
@@ -15,17 +15,6 @@ type ChatWithUserProps = {
 }
 const ChatWithUser = ({ conversation, currentUser, showNav }: ChatWithUserProps) => {
   useLiveChat({ conversation, currentUser })
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (conversation.messages.length) {
-      ref.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
-    }
-  }, [conversation.messages.length]);
 
   return (
     <Card className="conversationWindow">
@@ -51,7 +40,6 @@ const ChatWithUser = ({ conversation, currentUser, showNav }: ChatWithUserProps)
 
       <Card.Body style={{ position: "relative", height: "400px", overflowY: "auto" }}>
         <ChatMessages component={ChatMessage} messages={conversation.messages} currentUser={currentUser} />
-        <div ref={ref} />
       </Card.Body>
       <Card.Footer>
         <ChatTextInput />
