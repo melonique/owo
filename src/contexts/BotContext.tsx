@@ -76,7 +76,6 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
       case 'listen':
       case 'listen-picture':
       case 'listen-confirm':
-        // if message from current user
         if (lastMessage.isAuthor(currentUser)) {
           const lastBotMessage = getMessage(currentBotMessageIndex)
           if(lastBotMessage) {
