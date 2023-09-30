@@ -16,7 +16,7 @@ const DEFAULT_QUESTIONS: { search: BotMessage[], offer: BotMessage[] } = { offer
 
 interface BotProviderProps {
   children: ReactNode;
-  botId: 'offer' | 'search';
+  botId: 'offer' | 'search' | undefined;
 }
 
 export const BotProvider = ({ children, botId }: BotProviderProps) => {
@@ -29,6 +29,10 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   const currentMessages = getMessages();
 
   const getMessage = (index: number): BotMessage | null => {
+    if (!botId || !DEFAULT_QUESTIONS[botId]) {
+      return null;
+    }
+
     return DEFAULT_QUESTIONS[botId][index] ?? null;
   }
 
