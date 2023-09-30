@@ -49,21 +49,14 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
 
   const sendBotMessage = () => {
     const newIndex = currentBotMessageIndex + 1;
-    // change for next question
     setCurrentBotMessageIndex(newIndex);
-    // delay the sending of the next message
+
     setTimeout(() => {
       sendMessageAt(newIndex);
     }, 500);
   }
 
-  // send first message
-  useEffect(() => {
-    setCurrentBotMessageIndex(0);
-    resetConversations();
-    sendMessageAt(0);
-  }, [botId])
-
+  useEffect(resetBot, [botId])
 
   // Actions on new messages added to conversation
   useEffect(() => {
@@ -76,7 +69,7 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
       case 'listen':
       case 'listen-picture':
       case 'listen-confirm':
-        if (lastMessage.isAuthor(currentUser)) {
+        if (lastMessage.authorIs(currentUser)) {
           const lastBotMessage = getMessage(currentBotMessageIndex)
           if(lastBotMessage) {
             setBotMemory((botMemory) => ({ ...botMemory, [lastBotMessage.label]: lastMessage.content }))

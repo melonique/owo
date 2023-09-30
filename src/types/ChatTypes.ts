@@ -22,7 +22,7 @@ export class Message {
     this.type = type || 'text'
   }
 
-  isAuthor = (user: User): boolean => this.user.id === user.id;
+  authorIs = (user: User): boolean => this.user.id === user.id;
 }
 
 export const toMessages = (userMessages: UserMessage[]) => {
