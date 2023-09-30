@@ -21,6 +21,8 @@ export class Message {
     this.timestamp = timestamp ?? new Date().toISOString()
     this.type = type || 'text'
   }
+
+  isAuthor = (user: User): boolean => this.user.id === user.id;
 }
 
 export const toMessages = (userMessages: UserMessage[]) => {
@@ -65,7 +67,7 @@ export class BotMessage extends Message {
     this.action = action;
   }
 
-  updateMsg(data:any) {
+  updateMsg(data: Record<string, string>): BotMessage {
     const newStr = this.content.replace(
       /{(\w*)}/g,
       function( m, key ){

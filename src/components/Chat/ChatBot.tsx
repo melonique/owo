@@ -3,7 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import { BiReset } from 'react-icons/bi';
 import { useChat } from "@/contexts/ChatContext";
 import { useBot } from "@/contexts/BotContext";
-import { Message } from "@/types/ChatTypes";
+import { BotMode } from "@/types/ChatTypes";
 import { IoIosMenu } from 'react-icons/io';
 
 import ChatBotMessage from './Message'
@@ -15,7 +15,7 @@ import ChatMessages from './ChatMessages'
 
 
 
-const BotInput: React.FC<{botMode : string}> = ({ botMode }) => {
+const BotInput: React.FC<{botMode : BotMode}> = ({ botMode }) => {
   switch (botMode) {
     case 'listen':
       return <ChatBotTextInput />
