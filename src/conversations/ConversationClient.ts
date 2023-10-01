@@ -38,6 +38,7 @@ const getConversations = async (user: UserId): Promise<ConversationMetadata[]> =
       userData:user_data
     `)
     .contains('users', [user])
+    .order('last_updated', { ascending: false })
     .returns<ConversationMetadata[]>()
 
   return conversations || []
