@@ -121,7 +121,7 @@ const fetchUserMessages = async (id: ConversationId): Promise<Conversation['mess
       message
     `)
     .eq('conversation', id)
-    .order('sent_at', { ascending: false })
+    .order('sent_at', { ascending: true })
     .returns<Conversation['messages']>()
 
     return messages || []
