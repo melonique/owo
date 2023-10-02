@@ -60,3 +60,5 @@ export const fromAuthenticationResponseToUser = (userData: any): User => ({
 export const fromAuthErrorToMessage = (errorData: any): ResponseError => ({
     message: errorData['message'],
 })
+
+export const labelFrom = (user: User): string => (`${user.firstname} ${user.name} (${user.username})`)

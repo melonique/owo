@@ -8,6 +8,7 @@ type UserId = string
 export type SendUserConversationNotificationUsecase = {
   conversationId: ConversationId,
   userId: UserId,
+  from: string,
   message: string,
 }
 
@@ -50,13 +51,14 @@ const removeUserNotificationBroadcaster = async (toRemove: RealtimeChannel): Pro
   await supabase.removeChannel(toRemove)
 }
 
-const sendUserNotification = async ({ conversationId, userId, message }: SendUserConversationNotificationUsecase): Promise<void> => {
+const sendUserNotification = async ({ conversationId, userId, message, from }: SendUserConversationNotificationUsecase): Promise<void> => {
   const newNotification = {
     type: 'message',
     target: userId,
     excerpt: message,
     context: {
       conversationId,
+      from,
     },
   }
 

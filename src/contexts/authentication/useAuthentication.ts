@@ -1,4 +1,4 @@
-import { LoginRequest, RegisterRequest, ResponseError, User } from "./Authentication"
+import { LoginRequest, RegisterRequest, ResponseError, User, labelFrom } from "./Authentication"
 import { login as supabaseLogin, register as supabaseRegister, resumeSession as supabaseResume } from "./AuthenticationClient"
 import { updatePassword as supabaseUpdatePassword } from "./UserInformationClient"
 import { UpdatePasswordRequest } from "./UserInformation"
@@ -10,6 +10,7 @@ type UseAuthentication = {
   register: (request: RegisterRequest, onSuccess?: () => void) => Promise<void>,
   updatePassword: (request: UpdatePasswordRequest) => Promise<void>,
   user: User | undefined,
+  userLabel: string | undefined,
   error: ResponseError | undefined,
 }
 
@@ -51,6 +52,7 @@ const useAuthentication = (): UseAuthentication => {
       register,
       updatePassword,
       user: state.tag === 'Authenticated' ? state.user : undefined,
+      userLabel: state.tag === 'Authenticated' ? labelFrom(state.user) : undefined,
       error: state.tag === 'ErrorWhileAuthenticating' ? state.error : undefined,
     }
 }

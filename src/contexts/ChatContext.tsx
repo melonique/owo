@@ -50,7 +50,7 @@ type ChatProviderProps = {
 }
 
 export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
-  const { user } = useAuthentication()
+  const { user, userLabel } = useAuthentication()
   const [users, _] = useState<User[]>(DEFAULT_USERS);
   const [conversations, setConversations] = useState<Conversation[]>(DEFAULT_CONVERSATIONS);
   const isSelectedConversationBot = chatId === 'offer' || chatId === 'search'
@@ -87,13 +87,13 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
   }, [chatId])
 
   const addMessage = (message: Message) => {
-    if (!isSelectedConversationBot && user) {
+    if (!isSelectedConversationBot && user && userLabel) {
       sendMessage({ id: chatId, sender: user.id, message: message.content })
 
       const selectedConversation = conversations.find((conversation) => conversation.id === chatId)
       if (!selectedConversation) return
 
-      sendUserNotification({ conversationId: chatId, userId: selectedConversation.user.id!, message: message.content })
+      sendUserNotification({ conversationId: chatId, userId: selectedConversation.user.id!, message: message.content, from: userLabel })
     }
     addLocalMessage(message)
   };
