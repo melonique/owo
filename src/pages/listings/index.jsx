@@ -42,8 +42,8 @@ const Listings = () => {
 
       <Row className="pt-3">
         {/* Sidebar with categories and filters */}
-        <Col md={3}>
-          {/* <Form>
+        {/*<Col md={3}>
+          <Form>
 
             <Dropdown onSelect={() => { }}>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -55,27 +55,25 @@ const Listings = () => {
               </Dropdown.Menu>
             </Dropdown>
           </Form> */}
-
+          {/* TODO: navigation par catefories ou tags
           <h3>Categories</h3>
           <ListGroup className="mb-2">
             <ListGroup.Item>Service</ListGroup.Item>
             <ListGroup.Item>Don</ListGroup.Item>
             <ListGroup.Item>Vente</ListGroup.Item>
             <ListGroup.Item>Pret</ListGroup.Item>
-            {/* Add more categories as needed */}
           </ListGroup>
           <h3>Tags</h3>
 
-          {/* Add filter options here */}
-        </Col>
+        </Col>*/}
 
         {/* Main area for listings */}
-        <Col md={9}>
+        <Col>
           <Row>
             <h3>Vos offres</h3>
             {listings.map((listing) => {
               return (
-                <Col key={listing.id} xs={12} lg={6}>
+                <Col key={listing.id} xs={12} lg={4}>
                   <Item listing={listing}>{
                     user.id !== listing.userProfile.id &&
                     <Button onClick={() => createConversation({ title: listing.title, user1: user.id, user2: listing.userProfile.id })}>
