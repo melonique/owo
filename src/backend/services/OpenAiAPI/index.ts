@@ -1,5 +1,5 @@
 import OpenAi from "openai";
-import PRICES, { ModelName } from "./prices.js";
+import PRICES, { ModelName } from "./prices";
 
 type CostSummary = {
   promptCost: number,
@@ -38,7 +38,7 @@ class OpenAiAPI {
     const totalCost = promptCost + completionCost;
 
     this.logger.log(`$$ -- called  --    ${modelName}      $ ${totalCost}    -- $$`);
-    
+
     return {
       promptCost,
       completionCost,
