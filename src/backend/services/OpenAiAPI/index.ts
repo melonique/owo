@@ -1,16 +1,6 @@
 import OpenAi from "openai";
-import PRICES, { ModelName } from "./prices";
-
-type CostSummary = {
-  promptCost: number,
-  completionCost: number,
-  totalCost: number,
-}
-
-type CostTokens = {
-  prompt: number,
-  completion: number,
-}
+import { ModelName } from "./prices";
+import { CostTokens, CostSummary, calculateCost } from "./cost-calculator";
 
 type Logger = {
   log: (message: string) => void;
@@ -32,18 +22,11 @@ class OpenAiAPI {
   }
 
   calculateCost(modelName: ModelName, tokens: CostTokens): CostSummary {
-    const languageModel = PRICES.LanguageModels[modelName];
-    const promptCost = languageModel.Input * tokens.prompt / 1000;
-    const completionCost = languageModel.Output * tokens.completion / 1000;
-    const totalCost = promptCost + completionCost;
+    const costSummary = calculateCost(modelName, tokens);
+    
+    this.logger.log(`$$ -- called  --    ${modelName}      $ ${costSummary.totalCost}    -- $$`);
 
-    this.logger.log(`$$ -- called  --    ${modelName}      $ ${totalCost}    -- $$`);
-
-    return {
-      promptCost,
-      completionCost,
-      totalCost,
-    };
+    return costSummary;
   }
 
   async visionDescription(base64Image: string) {
