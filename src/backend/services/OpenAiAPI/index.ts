@@ -12,11 +12,23 @@ type CostTokens = {
   completion: number,
 }
 
+type Logger = {
+  log: (message: string) => void;
+}
+
+const consoleLogger: Logger = {
+  log: (message: string) => {
+    console.log(message);
+  }
+};
+
 class OpenAiAPI {
   private client;
+  private logger: Logger;
 
   constructor() {
     this.client = new OpenAi();
+    this.logger = consoleLogger;
   }
 
   calculateCost(modelName: ModelName, tokens: CostTokens): CostSummary {
@@ -24,7 +36,9 @@ class OpenAiAPI {
     const promptCost = languageModel.Input * tokens.prompt / 1000;
     const completionCost = languageModel.Output * tokens.completion / 1000;
     const totalCost = promptCost + completionCost;
-    console.log('$$ -- called  --    ', modelName,'      $ ',  totalCost, '    -- $$');
+
+    this.logger.log(`$$ -- called  --    ${modelName}      $ ${totalCost}    -- $$`);
+    
     return {
       promptCost,
       completionCost,
