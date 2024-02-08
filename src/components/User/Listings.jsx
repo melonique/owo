@@ -1,5 +1,5 @@
 import { Row, Figure } from "react-bootstrap";
-import Item from '@/components/Listing/Item'
+import Listing from '@/components/Listing'
 import { ButtonWithConfirm  } from '@/components'
 import { useEffect } from 'react';
 import useListing from '@/contexts/listing/useListing'
@@ -32,9 +32,9 @@ const UserListings = ({ }) => {
       {listings.filter(l => l.userProfile.id === user.id).length === 0 && <p className="text-center"> Vous n&apos;avez pas encore d&apos;annonces</p>}
         {user && listings.filter(l => l.userProfile.id === user.id).map((listing) => {
           return (
-            <Item listing={listing} noProfile key={listing.id}>
+            <Listing listing={listing} noProfile key={listing.id}>
               <ButtonWithConfirm onClick={() => { deleteListingById(listing.id) }}>Supprimer</ButtonWithConfirm>
-            </Item>
+            </Listing>
           )
         })}
       </Row>

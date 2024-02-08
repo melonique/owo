@@ -1,6 +1,6 @@
 import useListing from '@/contexts/listing/useListing'
 import { useEffect, useState } from 'react';
-import Item from '@/components/Listing/Item'
+import Listing from '@/components/Listing'
 import { Container, Row, Col, Button, Navbar, ListGroup, Form, FormControl, Spinner } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import { useRouter } from 'next/router'
@@ -74,13 +74,13 @@ const Listings = () => {
             {listings.map((listing) => {
               return (
                 <Col key={listing.id} xs={12} lg={4}>
-                  <Item listing={listing}>{
+                  <Listing listing={listing}>{
                     user.id !== listing.userProfile.id &&
                     <Button onClick={() => createConversation({ title: listing.title, user1: user.id, user2: listing.userProfile.id })}>
                       <IoIosChatbubbles className="icon" />
                     </Button>
                   }
-                  </Item>
+                  </Listing>
                 </Col>
               )
             })}
