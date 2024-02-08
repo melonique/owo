@@ -38,7 +38,7 @@ const CreateListing = () => {
     <Container fluid>
       <Row className="justify-content-center">
         <Col md={12} lg={6} xl={6} style={{ maxWidth: '600px' }}>
-          <h1>Create a Listing</h1>
+
           <div className={!!listing ? 'd-none' : 'd-block'}>
             <Form onSubmit={pictureToListing}>
               <PictureInput

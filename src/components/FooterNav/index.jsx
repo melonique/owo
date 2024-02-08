@@ -21,7 +21,7 @@ const FooterNav = () => {
         </Link>
       </div>
       <div className="nav-item text-center">
-        <Link href="/messages/offer">
+        <Link href="/listings/create">
           <IoIosAddCircle className="icon" />
           <div className="nav-text">Annoncer</div>
         </Link>
