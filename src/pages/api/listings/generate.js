@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     if (req.method !== "POST") {
       throw "Only POST requests are allowed";
     }
-
+    // TODO: Make the 2 calls a single one when the models alows it. (now there is no vision with json_mode)
     const { picture } = req.body;
 
     const imageDescription = "this is a pair of shoes :D";
@@ -15,13 +15,6 @@ export default async function handler(req, res) {
       title: "Adidas High-Top Sneakers",
       description:
         "Predominantly black high-top Adidas sneakers with white signature three stripes. Features Velcro strap closure and padded collar for comfort. Lightly used condition with signs of wear. Size not visible in image. Blue reflective accent on heel counter. Adidas logo on Velcro strap and heel. Intact outsole with little wear. No box or additional accessories included.",
-      proposition_terms: {
-        don: false,
-        pret: false,
-        vente: true,
-        service: false,
-        location: false,
-      },
       tags: [
         "Adidas",
         "sneakers",
