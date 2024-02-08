@@ -1,14 +1,16 @@
-import OpenAi from "openai";
 import openAiApi from "@/backend/services/OpenAiAPI";
-import base64Image from './base64img.js';
 
 
 export default async function handler(req, res) {
-
+  // TODO: Add authentication with token
   try {
+    if (req.method !== "POST") {
+      throw "Only POST requests are allowed";
+    }
 
-   // const imageDescription = await openAiApi.visionDescription(base64Image);
+    const { picture } = req.body;
 
+    const imageDescription = "this is a pair of shoes :D";
     const listing = {
       title: "Adidas High-Top Sneakers",
       description:
@@ -31,9 +33,11 @@ export default async function handler(req, res) {
         "athletic",
       ],
     };
-    // const listing = await openAiApi.listingCompletions(imageDescription);
+   // const imageDescription = await openAiApi.visionDescription(picture);
 
-    res.status(200).json({ listing });
+   // const listing = await openAiApi.listingCompletions(imageDescription);
+
+    res.status(200).json({ imageDescription, ...listing });
   } catch (error) {
     res.status(500).json(error);
   }

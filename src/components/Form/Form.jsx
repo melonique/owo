@@ -11,7 +11,7 @@ export default function Form({ defaultValues, children, onSubmit }) {
     formState: { errors, isDirty, isSubmitted }
   } = useForm({
     reValidateMode: "onChange",
-    // defaultValues: initialValues
+    defaultValues
   });
 
 
