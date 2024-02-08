@@ -6,6 +6,7 @@ import { Form  as BForm } from "react-bootstrap"
 export default function Form({ defaultValues, children, onSubmit }) {
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors, isDirty, isSubmitted }
   } = useForm({
@@ -23,6 +24,7 @@ export default function Form({ defaultValues, children, onSubmit }) {
             ...{
               ...child.props,
               register,
+              setValue,
               error: errors[child.props.name],
               key: child.props.name,
             },
