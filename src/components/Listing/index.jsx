@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 import ReactTimeAgo from 'react-time-ago'
-import ItemLayout from './Layout'
+import ListingLayout from './Layout'
 
 const borderTypes = {
   'don': 'primary',
@@ -13,7 +13,7 @@ const borderTypes = {
 const getTypeColor = (type) => type && type.length ? borderTypes[type[0]] : 'primary'
 
 const Listing = ({ listing: { id, title, description, type, tags, userProfile, created_at, images }, children, noProfile }) => (
-  <ItemLayout
+  <ListingLayout
     title={title}
     image={images && images.length > 0 && images[0]}
     description={description}

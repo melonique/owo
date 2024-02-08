@@ -1,8 +1,6 @@
-import React, { Fragment } from 'react';
-import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
-import ReactTimeAgo from 'react-time-ago'
+import { Row, Col, Card } from 'react-bootstrap';
 
-const ItemLayout = ({ title, image, description, footer }) => (
+const ListingLayout = ({ title, image, description, footer }) => (
   <Card className="mb-3">
     <Card.Header>
       <Card.Title>
@@ -11,7 +9,7 @@ const ItemLayout = ({ title, image, description, footer }) => (
     </Card.Header>
     <Card.Body>
       <Row>
-        {image &&
+        {!!image &&
           <Col sm={4} xs={12}>
             <Card.Img
               src={image}
@@ -31,4 +29,4 @@ const ItemLayout = ({ title, image, description, footer }) => (
   </Card>
 );
 
-export default ItemLayout;
+export default ListingLayout;
