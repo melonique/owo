@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { PictureInput, Form, Input } from '@/components/Form'
+import { PictureInput, Form, Input, Textarea } from '@/components/Form'
 import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
+import ListingLayout from '@/components/Listing/Layout'
 
 const CreateListing = () => {
   const { token } = 'TOKEN' // TODO: make it work ; useAuthentication();
@@ -50,52 +51,51 @@ const CreateListing = () => {
 
           {
             !!listing && <>
-                <Card>
-                  <Card.Img
-                    src={listing.picture}
+            <ListingLayout
+              title={""}
+              image={listing.picture}
+              description={
+
+                <Form onSubmit={saveListing} defaultValues={listing}>
+                  <Input
+                    name="imageDescription"
+                    label="Description"
                   />
-                <Card.Body>
-                  <Form onSubmit={saveListing} defaultValues={listing}>
-                    <Input
-                      name="imageDescription"
-                      label="Description"
-                    />
-                    <Input
-                      name="title"
-                      label="title"
-                      rules={{
-                        required: "Entrez un titre",
-                      }}
-                    />
-                    <Input
-                      name="description"
-                      label="title"
-                      rules={{
-                        required: "Entrez une description",
-                      }}
+                  <Input
+                    name="title"
+                    label="title"
+                    rules={{
+                      required: "Entrez un titre",
+                    }}
+                  />
+                  <Textarea
+                    name="description"
+                    label="description"
+                    rules={{
+                      required: "Entrez une description",
+                    }}
 
-                    />
-                    <Input
-                      name="tags"
-                      label="tags"
-                      rules={{
-                        required: "Entrez des tags",
-                      }}
-                    />
-                  </Form>
-                </Card.Body>
-
-                  <Card.Footer>
-                    <Nav variant="pills" defaultActiveKey="#first">
-                      <Nav.Item>
-                        <Button variant="link" className="px-0" onClick={cancel}>X Cancel</Button>
-                      </Nav.Item>
-                      <Nav.Item className="ml-auto">
-                        <Button variant="success" type="submit">Publish</Button>
-                      </Nav.Item>
-                    </Nav>
-                  </Card.Footer>
-              </Card>
+                  />
+                  <Input
+                    name="tags"
+                    label="tags"
+                    rules={{
+                      required: "Entrez des tags",
+                    }}
+                  />
+                </Form>
+              }
+              footer={(
+                <Nav variant="pills" defaultActiveKey="#first">
+                  <Nav.Item>
+                    <Button variant="link" className="px-0" onClick={cancel}>X Cancel</Button>
+                  </Nav.Item>
+                  <Nav.Item className="ml-auto">
+                    <Button variant="success" type="submit">Publish</Button>
+                  </Nav.Item>
+                </Nav>
+              )}
+            />
             </>
           }
         </Col>
