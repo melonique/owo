@@ -11,7 +11,7 @@ const RegisterForm = ({ }) => {
   const onSubmit = async ({ email, password, username, name, firstname, tos }) => {
     await registerUser({ email, password, username, name, firstname, tos }, () => router.push('/listings'));
   }
-
+  const postalCodePattern = /^(?!.*[DFIOQU])[A-VXYa-vxy]\d[A-Za-z]\s?\d[A-Za-z]\d$/;
   return (
     <>
       <Form onSubmit={onSubmit}>
@@ -29,6 +29,15 @@ const RegisterForm = ({ }) => {
           placeholder=""
           rules={{
             required: "Entrez votre nom de famille",
+          }}
+        />
+        <Input
+          name="postalcode"
+          label="Code postal"
+          placeholder=""
+          rules={{
+            required: "Entrez votre code postal",
+            pattern: { value: postalCodePattern, message: "Entrez un code postal canadien valide"}
           }}
         />
 
