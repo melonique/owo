@@ -1,20 +1,20 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-const Checkbox = ({ name, label, rules, placeholder, register, errors }) => {
+const Checkbox = ({ name, label, rules, placeholder, register, error }) => {
 
   return (
     <Form.Group className="mb-2" controlname={name}>
       <Form.Check
         id={name}
         label={label}
-        isInvalid={!!errors[name]}
+        isInvalid={!!error}
         placeholder={placeholder}
         {...register(name, rules)}
       />
-      {errors[name] && (
+      {error && (
         <Form.Text className="text-danger">
-          {errors[name].message}
+          {error.message}
         </Form.Text>
       )}
     </Form.Group>
