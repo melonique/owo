@@ -2,21 +2,21 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 
 
-const Input = ({ name, label, rules, placeholder, register, errors, type = 'text', exemple }) => {
+const Input = ({ name, label, rules, placeholder, register, error, type = 'text', exemple }) => {
 
   return (
     <Form.Group className="mb-3" controlname={name}>
       <Form.Label>{label}</Form.Label>
       <Form.Control
         type={type}
-        className={errors[name] ? 'is-invalid' : ''}
-        isInvalid={errors[name]}
+        className={error ? 'is-invalid' : ''}
+        isInvalid={error}
         placeholder={placeholder}
         {...register(name, rules)}
       />
-      {errors[name] && (
+      {error && (
         <Form.Text className="text-danger">
-          {errors[name].message}
+          {error.message}
         </Form.Text>
       )}
       { !!exemple && (

@@ -23,7 +23,7 @@ export default function Form({ defaultValues, children, onSubmit }) {
             ...{
               ...child.props,
               register,
-              errors,
+              error: errors[child.props.name],
               key: child.props.name,
             },
           })
