@@ -23,7 +23,7 @@ class OpenAiAPI {
 
   calculateCost(modelName: ModelName, tokens: CostTokens): CostSummary {
     const costSummary = calculateCost(modelName, tokens);
-    
+
     this.logger.log(`$$ -- called  --    ${modelName}      $ ${costSummary.totalCost}    -- $$`);
 
     return costSummary;
@@ -36,12 +36,17 @@ class OpenAiAPI {
         messages: [
           {
             role: "system",
-            content: `The objective is to sell this item on a second hand marketplace. Describe the principal object of the picture. Describe it, its color, brand, and condition. List the size if is obvious and any other relevant information that you can see in the picture. stay specific and truthfull. dont make assumptions or propositions. dont emmit oppinion.`,
+            content: `
+            L'objectif est de vendre cet objet sur un marché de l'occasion.
+            Décrivez l'objet principal de la photo. Décrivez-le, sa couleur, sa marque et son état.
+            Indiquez la taille si elle est évidente et toute autre information pertinente que vous pouvez voir sur la photo.
+            Restez précis et sincère. Ne faites pas de suppositions ou de propositions.
+            N'émettez pas d'opinion.`,
           },
           {
             role: "user",
             content: [
-              { type: "text", text: "Describe the item on this image" },
+              { type: "text", text: "Décrivez l'objet sur cette image en français canadien." },
               {
                 type: "image_url",
                 image_url: {
@@ -88,19 +93,12 @@ class OpenAiAPI {
             \`\`\`
             {"title": [le titre],
             "description": [la description],
-            "proposition_terms": {
-              "don": boolean[si c'est un don],
-              "pret": boolean[si c'est un pret],
-              "vente": boolean[si c'est une vente],
-              "service": boolean[si c'est un service],
-              "location": boolean[si c'est un cas de location (rental)],
-            },
             "tags": string[][liste des tags]
           `,
           },
           {
             role: "user",
-            content: `Create a listing based on this desciprtion: ${imageDescription}`,
+            content: `Fait une annonce basée sur la descirption de cette image: ${imageDescription}`,
           },
         ],
         max_tokens: 400,
