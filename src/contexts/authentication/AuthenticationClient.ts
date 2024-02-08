@@ -31,6 +31,7 @@ const fromRequestToSignup = (request: RegisterRequest): SignUpWithPasswordCreden
             username: request.username,
             name: request.name,
             firstname: request.firstname,
+            postalcode: request.postalcode,
         }
     }
 })

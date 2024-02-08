@@ -8,10 +8,12 @@ const RegisterForm = ({ }) => {
   const router = useRouter();
   const { error, register: registerUser } = useAuthentication();
 
-  const onSubmit = async ({ email, password, username, name, firstname, tos }) => {
-    await registerUser({ email, password, username, name, firstname, tos }, () => router.push('/listings'));
+  const onSubmit = async ({ email, password, username, name, firstname, tos, postalcode }) => {
+    await registerUser({ email, password, username, name, firstname, tos, postalcode }, () => router.push('/listings'));
   }
+
   const postalCodePattern = /^(?!.*[DFIOQU])[A-VXYa-vxy]\d[A-Za-z]\s?\d[A-Za-z]\d$/;
+
   return (
     <>
       <Form onSubmit={onSubmit}>

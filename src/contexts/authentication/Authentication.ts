@@ -45,6 +45,7 @@ export type RegisterRequest = {
     name: string
     username: string
     firstname: string
+    postalcode: string
 }
 
 export type RegisterResponse = Authenticated | ErrorWhileAuthenticating
