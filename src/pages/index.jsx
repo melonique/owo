@@ -2,7 +2,7 @@
 
 import Head from 'next/head'
 import Container from 'react-bootstrap/Container'
-import { Header, WelcomePage, Gallery } from '@/components'
+import { Header, WelcomePage, Listings } from '@/components'
 import { PublicLayout } from "@/components/Layouts"
 
 const Home = () => {

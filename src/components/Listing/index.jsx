@@ -4,7 +4,7 @@ import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 import Item from './Item'
 
 
-const Gallery = ({}) => (
+const Listings = ({}) => (
     <Container fluid className="text-center">
       <h4>
         <strong>Bestsellers</strong>
@@ -37,4 +37,4 @@ const Gallery = ({}) => (
 );
 
 
-export default Gallery;
+export default Listings;

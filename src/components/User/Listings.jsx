@@ -1,5 +1,5 @@
 import { Row, Figure } from "react-bootstrap";
-import Item from '@/components/Gallery/Item'
+import Item from '@/components/Listing/Item'
 import { ButtonWithConfirm  } from '@/components'
 import { useEffect } from 'react';
 import useListing from '@/contexts/listing/useListing'

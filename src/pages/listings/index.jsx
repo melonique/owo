@@ -1,6 +1,6 @@
 import useListing from '@/contexts/listing/useListing'
 import { useEffect, useState } from 'react';
-import Item from '@/components/Gallery/Item'
+import Item from '@/components/Listing/Item'
 import { Container, Row, Col, Button, Navbar, ListGroup, Form, FormControl, Spinner } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import { useRouter } from 'next/router'

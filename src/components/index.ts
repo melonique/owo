@@ -1,6 +1,6 @@
 export { default as Header } from './Header'
 export { default as WelcomePage } from './WelcomePage'
-export { default as Gallery } from './Gallery'
+export { default as Listings } from './Listing'
 export * from './Form'
 export { default as FooterNav } from './FooterNav'
 export { default as Profile } from './User/Profile'
