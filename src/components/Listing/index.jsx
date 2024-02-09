@@ -27,12 +27,11 @@ const Listing = ({ listing: { id, title, description, type, tags, userProfile, c
                 alt="avatar"
                 className="rounded-circle"
                 style={{ width: '50px', height: 'auto' }}
-                fluid
               />
             </div>
             <Col>
               <span>{userProfile.username}</span> <span className="text-muted">📍 Habitus🌿</span> <br />
-              <span className="text-muted"><ReactTimeAgo date={created_at} locale="fr" /></span>
+              <span className="text-muted"><ReactTimeAgo date={new Date(created_at).getDate()} locale="fr" /></span>
             </Col>
           </>
         }

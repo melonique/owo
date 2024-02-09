@@ -42,7 +42,7 @@ const Message: React.FC<MessageProps> = ({
 
 
         <p className={`time small rounded-3 text-muted`}>
-          <ReactTimeAgo date={new Date(timestamp)} locale="fr" />
+          <ReactTimeAgo date={new Date(timestamp).getDate()} locale="fr" />
         </p>
       </div>
       {isCurrentUser && avatar && (

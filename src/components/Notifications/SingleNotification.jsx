@@ -20,7 +20,7 @@ const SingleNotification = ({ id, excerpt, createdAt, status, type, context }) =
             {type === 'message' && "Nouveau message"}
           </strong>
           <small>
-            <ReactTimeAgo date={new Date(createdAt)} locale="fr" />
+            <ReactTimeAgo date={new Date(createdAt).getDate()} locale="fr" />
           </small>
         </Toast.Header>
         <Toast.Body>{excerpt}</Toast.Body>
