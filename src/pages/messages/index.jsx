@@ -10,7 +10,9 @@ const Messages = () => {
   const { uiState: { latestConversationOpenedId } } = useUi();
 
   useEffect(() => {
-    router.replace(`/messages/${latestConversationOpenedId}`);
+    console.log('latestConversationOpenedId', latestConversationOpenedId)
+    const pushTo = latestConversationOpenedId  != 'undefined' ? latestConversationOpenedId : 'offer'
+    router.replace(`/messages/${pushTo}`);
   }, [])
 }
 
