@@ -7,7 +7,7 @@ export default function Document() {
 
         <link href="https://fonts.cdnfonts.com/css/montserrat" rel="stylesheet" />
 
-        <link rel="manifest" href="manifest.json"></link>
+        <link rel="manifest" href="/manifest.json"></link>
         <meta name="theme-color" content="#1014a3" />
 
         <meta name="apple-mobile-web-app-capable" content="yes" />

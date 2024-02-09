@@ -1,19 +1,23 @@
 import { useState } from 'react'
+import cn from 'classnames'
+import { FaWandMagicSparkles } from "react-icons/fa6";
 import { PictureInput, Form, Input, Textarea } from '@/components/Form'
 import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import ListingLayout from '@/components/Listing/Layout'
 
+
 const CreateListing = () => {
   const { token } = 'TOKEN' // TODO: make it work ; useAuthentication();
   const [listing, setListing] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const cancel = () => {
     setListing(null);
   }
 
   const pictureToListing = (data) => {
-    console.log('data 1', data)
+    setIsLoading(true);
     fetch('/api/listings/generate', {
       method: 'POST',
       headers: {
@@ -24,10 +28,9 @@ const CreateListing = () => {
     })
       .then(response => response.json())
       .then(resp => {
-        console.log('data 2', data)
         const generatedlisting = { ...resp, tags: resp.tags.join(', '), picture: data.picture }
-        console.log('generatedlisting', generatedlisting)
         setListing(generatedlisting);
+        setIsLoading(false);
     })
   }
 
@@ -40,13 +43,19 @@ const CreateListing = () => {
       <Row className="justify-content-center">
         <Col md={12} lg={6} xl={6} style={{ maxWidth: '600px' }}>
 
-          <div className={!!listing ? 'd-none' : 'd-block'}>
+          <div className={cn(!!listing ? 'd-none' : 'd-block', 'position-relative')}>
             <Form onSubmit={pictureToListing}>
               <PictureInput
                 name="picture"
                 label="Choose or Take a Picture"
               />
             </Form>
+            {isLoading &&
+              <div className="full-width-height bg-light text-center d-flex align-items-center justify-content-center">
+                <FaWandMagicSparkles size="2em" className="px-2"/>
+                L'assistant owo est au travail et rédige votre annonce!
+              </div>
+            }
           </div>
 
           {

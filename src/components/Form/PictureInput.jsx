@@ -29,7 +29,9 @@ const PictureInput = ({ name, label, rules, placeholder, register, error, setVal
   }
 
   const resetImage = () => {
+    // TODO: BUG: FIX IT
     setBase64String(null)
+    setInput(null)
   }
 
   return (
