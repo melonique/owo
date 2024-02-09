@@ -59,7 +59,7 @@ class OpenAiAPI {
         max_tokens: 300,
       });
 
-      this.calculateCost("gpt-4-vision-preview", visionCompletion.usage);
+      this.calculateCost("gpt-4-vision-preview", { prompt: visionCompletion.usage?.prompt_tokens || 0, completion: visionCompletion.usage?.completion_tokens || 0 });
 
       const imageDescription = visionCompletion.choices[0].message.content;
 
@@ -104,9 +104,9 @@ class OpenAiAPI {
         max_tokens: 400,
       });
 
-      this.calculateCost("gpt-3.5-turbo-0125", listingCompletion.usage);
+      this.calculateCost("gpt-3.5-turbo-0125", { prompt: listingCompletion.usage?.prompt_tokens || 0, completion: listingCompletion.usage?.completion_tokens || 0 });
 
-      const listing = listingCompletion.choices[0].message.content;
+      const listing = listingCompletion.choices[0].message.content || '';
       return JSON.parse(listing)
 
     } catch (error) {
