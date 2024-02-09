@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ListingLayout from '@/components/Listing/Layout'
 import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
-import { PictureInput, Form, Input, Textarea } from '@/components/Form'
+import { PictureInput, Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
 
 
 const NewListing = ({ cancel, saveListing, listing }) => {
@@ -10,14 +10,10 @@ const NewListing = ({ cancel, saveListing, listing }) => {
     <ListingLayout
       title={""}
       image={listing.picture}
+      left={listing.description}
       description={
 
         <Form onSubmit={saveListing} defaultValues={listing}>
-          <Textarea
-            name="imageDescription"
-            label="Description"
-            disabled
-          />
           <Input
             name="title"
             label="title"
@@ -40,18 +36,26 @@ const NewListing = ({ cancel, saveListing, listing }) => {
               required: "Entrez des tags",
             }}
           />
+
+          <ListingPriceInput
+            name="price"
+            label="Price"
+            rules={{
+              required: "Entrez un prix",
+            }}
+          />
+
+          <Nav variant="pills" defaultActiveKey="#first">
+            <Nav.Item>
+              <Button variant="link" className="px-0" onClick={cancel}>X Cancel</Button>
+            </Nav.Item>
+            <Nav.Item className="ml-auto">
+              <Button variant="success" type="submit">Publish</Button>
+            </Nav.Item>
+          </Nav>
         </Form>
       }
-      footer={(
-        <Nav variant="pills" defaultActiveKey="#first">
-          <Nav.Item>
-            <Button variant="link" className="px-0" onClick={cancel}>X Cancel</Button>
-          </Nav.Item>
-          <Nav.Item className="ml-auto">
-            <Button variant="success" type="submit">Publish</Button>
-          </Nav.Item>
-        </Nav>
-      )}
+      footer={""}
     />
   );
 

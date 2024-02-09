@@ -35,13 +35,14 @@ const CreateListing = () => {
   }
 
   const saveListing = (data) => {
-
+    console.log('saving listing', data);
+    alert('saved')
   }
 
   return (
     <Container fluid>
       <Row className="justify-content-center">
-        <Col md={12} lg={6} xl={6} style={{ maxWidth: '600px' }}>
+        <Col>
 
           <div className={cn(!!listing ? 'd-none' : 'd-block', 'position-relative')}>
             <Form onSubmit={pictureToListing}>

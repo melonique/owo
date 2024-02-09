@@ -1,6 +1,6 @@
 import { Row, Col, Card } from 'react-bootstrap';
 
-const ListingLayout = ({ title, image, description, footer }) => (
+const ListingLayout = ({ title, image, description, footer, left = "" }) => (
   <Card className="mb-3">
     <Card.Header>
       <Card.Title>
@@ -14,6 +14,7 @@ const ListingLayout = ({ title, image, description, footer }) => (
             <Card.Img
               src={image}
             />
+            {left}
           </Col>
         }
         <Col>
