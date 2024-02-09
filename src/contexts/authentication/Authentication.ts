@@ -48,6 +48,8 @@ export type RegisterRequest = {
     postalcode: string
 }
 
+export type LogoutResponse = NoAuthentication | ErrorWhileAuthenticating
+
 export type RegisterResponse = Authenticated | ErrorWhileAuthenticating
 
 export const fromAuthenticationResponseToUser = (userData: any): User => ({

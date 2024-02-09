@@ -1,5 +1,5 @@
 import { LoginRequest, RegisterRequest, ResponseError, User, labelFrom } from "./Authentication"
-import { login as supabaseLogin, register as supabaseRegister, resumeSession as supabaseResume } from "./AuthenticationClient"
+import { login as supabaseLogin, register as supabaseRegister, resumeSession as supabaseResume, logout as supabaseLogout } from "./AuthenticationClient"
 import { updatePassword as supabaseUpdatePassword } from "./UserInformationClient"
 import { UpdatePasswordRequest } from "./UserInformation"
 import { useAuthenticationContext } from "./AuthenticationContext"
@@ -9,6 +9,7 @@ type UseAuthentication = {
   login: (request: LoginRequest, onSuccess?: () => void) => Promise<void>,
   register: (request: RegisterRequest, onSuccess?: () => void) => Promise<void>,
   updatePassword: (request: UpdatePasswordRequest) => Promise<void>,
+  logout: (onSuccess?: () => void) => Promise<void>,
   user: User | undefined,
   userLabel: string | undefined,
   error: ResponseError | undefined,
@@ -46,11 +47,19 @@ const useAuthentication = (): UseAuthentication => {
       console.log(response)
     }
 
+    const logout = async (onSuccess?: () => void): Promise<void> => {
+      const authState = await supabaseLogout();
+      if (authState.tag === 'NoAuthentication') {
+        onSuccess?.()
+      }
+    }
+
     return {
       resume,
       login,
       register,
       updatePassword,
+      logout,
       user: state.tag === 'Authenticated' ? state.user : undefined,
       userLabel: state.tag === 'Authenticated' ? labelFrom(state.user) : undefined,
       error: state.tag === 'ErrorWhileAuthenticating' ? state.error : undefined,
