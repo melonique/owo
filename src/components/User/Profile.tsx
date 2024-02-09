@@ -5,7 +5,7 @@ import useAuthentication from "@/contexts/authentication/useAuthentication"
 import UserListings from './Listings'
 
 const Profile = ({}) => {
-  const { user } = useAuthentication() || {};
+  const { user, logout } = useAuthentication() || {};
   if (!user) { return (<span>LOADING PROFILE</span>) }
 
   return(
@@ -58,7 +58,7 @@ const Profile = ({}) => {
             <ListGroup.Item action href="#my-listings">
               📋 Mes Annonces
             </ListGroup.Item>
-            <ListGroup.Item action href="#logout">
+            <ListGroup.Item action onClick={logout}>
               ⛔ Se déconnecter
             </ListGroup.Item>
           </ListGroup>
