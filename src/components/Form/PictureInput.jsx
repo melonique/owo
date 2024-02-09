@@ -70,7 +70,7 @@ const PictureInput = ({ name, label, rules, placeholder, register, error, setVal
               <Button variant="link" className="px-0" onClick={resetImage}>&lt; Cancel</Button>
             </Nav.Item>
             <Nav.Item className="ml-auto">
-              <Button variant="success" type="submit">Submit &gt;</Button>
+              <Button variant="success" type="submit">Générer une annonce &gt;</Button>
             </Nav.Item>
           </Nav>
         </Card.Footer>

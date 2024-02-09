@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     }
     // TODO: Make the 2 calls a single one when the models alows it. (now there is no vision with json_mode)
     const { picture } = req.body;
-
+/*
     const imageDescription = "this is a pair of shoes :D";
     const listing = {
       title: "Adidas High-Top Sneakers",
@@ -26,9 +26,9 @@ export default async function handler(req, res) {
         "athletic",
       ],
     };
-   // const imageDescription = await openAiApi.visionDescription(picture);
-
-   // const listing = await openAiApi.listingCompletions(imageDescription);
+*/
+    const imageDescription = await openAiApi.visionDescription(picture);
+    const listing = await openAiApi.listingCompletions(imageDescription);
 
     res.status(200).json({ imageDescription, ...listing });
   } catch (error) {

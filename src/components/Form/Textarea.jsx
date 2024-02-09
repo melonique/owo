@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap';
 import cn from 'classnames'
 
-const Textarea = ({ name, label, rules, placeholder, register, error, exemple, rows = 3 }) => {
+const Textarea = ({ name, label, rules, placeholder, register, error, exemple, rows = 3, ...props }) => {
   return (
     <Form.Group className="mb-3" controlname={name}>
       <Form.Label>{label}</Form.Label>
@@ -12,6 +12,7 @@ const Textarea = ({ name, label, rules, placeholder, register, error, exemple, r
         isInvalid={error}
         placeholder={placeholder}
         {...register(name, rules)}
+        {...props}
       />
       {error && (
         <Form.Text className="text-danger">
