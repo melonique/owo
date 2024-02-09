@@ -51,7 +51,6 @@ const ChatTextInput: React.FC<ChatTextInputProps> = ({ disabled }) => {
         placeholder="Type message"
         onKeyDown={handleKeyDown}
         ref={messageInput}
-        {...keyboard.watchKeyboard}
       />
       <Button className="ms-3" onClick={handleSend}>
         <FaPaperPlane className="icon" />
