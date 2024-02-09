@@ -4,7 +4,7 @@ import { FaWandMagicSparkles } from "react-icons/fa6";
 import { PictureInput, Form, Input, Textarea } from '@/components/Form'
 import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
-import ListingLayout from '@/components/Listing/Layout'
+import NewListing from '@/components/Listing/NewListing'
 
 
 const CreateListing = () => {
@@ -59,53 +59,12 @@ const CreateListing = () => {
           </div>
 
           {
-            !!listing && <>
-            <ListingLayout
-              title={""}
-              image={listing.picture}
-              description={
-
-                <Form onSubmit={saveListing} defaultValues={listing}>
-                  <Input
-                    name="imageDescription"
-                    label="Description"
-                  />
-                  <Input
-                    name="title"
-                    label="title"
-                    rules={{
-                      required: "Entrez un titre",
-                    }}
-                  />
-                  <Textarea
-                    name="description"
-                    label="description"
-                    rules={{
-                      required: "Entrez une description",
-                    }}
-
-                  />
-                  <Input
-                    name="tags"
-                    label="tags"
-                    rules={{
-                      required: "Entrez des tags",
-                    }}
-                  />
-                </Form>
-              }
-              footer={(
-                <Nav variant="pills" defaultActiveKey="#first">
-                  <Nav.Item>
-                    <Button variant="link" className="px-0" onClick={cancel}>X Cancel</Button>
-                  </Nav.Item>
-                  <Nav.Item className="ml-auto">
-                    <Button variant="success" type="submit">Publish</Button>
-                  </Nav.Item>
-                </Nav>
-              )}
+            !!listing &&
+            <NewListing
+              listing={listing}
+              cancel={cancel}
+              saveListing={saveListing}
             />
-            </>
           }
         </Col>
       </Row>

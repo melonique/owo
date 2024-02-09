@@ -46,7 +46,7 @@ class OpenAiAPI {
           {
             role: "user",
             content: [
-              { type: "text", text: "Décrivez l'objet sur cette image en français canadien." },
+              { type: "text", text: "Décrivez l'objet sur cette image en français." },
               {
                 type: "image_url",
                 image_url: {
@@ -81,7 +81,7 @@ class OpenAiAPI {
             content: `
 
       L'Assistant est un chatbot IA qui aide les utilisateurs à convertir un texte en langage naturel en format JSON. Après que les utilisateurs saisissent leurs informations, vous retournez toujours l'objet JSON directement.
-      Je vais te donner des informaitons a propos d'une annonce classée,
+      Je vais te donner des informaitons a propos d'une annonce classée, en francais canadien.
 
           Tes réponses sont toujours composées ainsit:
           - un titre en 5 mots ou moins qui résume le contenu de l'offre
