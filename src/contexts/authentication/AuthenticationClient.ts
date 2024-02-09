@@ -1,5 +1,5 @@
 import { supabase } from '@/config/SupabaseClient'
-import { LoginResponse, LoginRequest, authenticated, errorWhileAuthenticating, RegisterRequest, RegisterResponse, fromAuthenticationResponseToUser, fromAuthErrorToMessage } from './Authentication'
+import { LoginResponse, LoginRequest, authenticated, errorWhileAuthenticating, RegisterRequest, RegisterResponse, fromAuthenticationResponseToUser, fromAuthErrorToMessage, noAuthentication, LogoutResponse } from './Authentication'
 import { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 
 export const resumeSession = async (): Promise<LoginResponse> => {
@@ -14,6 +14,12 @@ export const login = async (request: LoginRequest): Promise<LoginResponse> => {
     const { data, error } = await supabase.auth.signInWithPassword(request)
 
     return error ? errorWhileAuthenticating(fromAuthErrorToMessage(error)) : authenticated(fromAuthenticationResponseToUser(data.user))
+}
+
+export const logout = async (): Promise<LogoutResponse> => {
+    const { error } = await supabase.auth.signOut()
+
+    return error ? errorWhileAuthenticating(fromAuthErrorToMessage(error)) : noAuthentication()
 }
 
 export const register = async (request: RegisterRequest): Promise<RegisterResponse> => {

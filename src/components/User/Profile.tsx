@@ -3,9 +3,11 @@ import Badges from './Badges'
 import UpdatePasswordForm from './UpdatePasswordForm'
 import useAuthentication from "@/contexts/authentication/useAuthentication"
 import UserListings from './Listings'
+import { useRouter } from "next/router";
 
 const Profile = ({}) => {
-  const { user, logout } = useAuthentication() || {};
+  const { user, logout } = useAuthentication();
+  const router = useRouter()
   if (!user) { return (<span>LOADING PROFILE</span>) }
 
   return(
@@ -58,7 +60,7 @@ const Profile = ({}) => {
             <ListGroup.Item action href="#my-listings">
               📋 Mes Annonces
             </ListGroup.Item>
-            <ListGroup.Item action onClick={logout}>
+            <ListGroup.Item action onClick={() => logout(() => router.replace('/'))}>
               ⛔ Se déconnecter
             </ListGroup.Item>
           </ListGroup>
