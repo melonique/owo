@@ -19,9 +19,9 @@ const ListingPriceInput = ({ name, label, rules, register, error, placeholder, s
       <div className="d-flex flex-row">
       <Form.Check
         type="switch"
-        className={cn('px-5 switch-lg', isFree && 'text-success'  )}
+          className={cn('px-5 switch-success switch-lg', isFree && 'text-success'  )}
         id={`switch-${name}`}
-        label={isFree ? 'Gratuit!' : 'Prix: '}
+        label={isFree ? 'Gratuit!' : ''}
         onChange={onSwitchChange}
         checked={isFree}
       />

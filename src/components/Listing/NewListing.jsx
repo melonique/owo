@@ -12,7 +12,7 @@ const NewListing = ({ cancel, saveListing, listing }) => {
       title={""}
       image={listing.picture}
       left={<>
-        <AiFeedback />
+        <AiFeedback /><br />
         {listing.imageDescription}
       </>}
       description={
