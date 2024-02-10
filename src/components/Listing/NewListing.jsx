@@ -3,7 +3,6 @@ import React from 'react';
 import ListingLayout from '@/components/Listing/Layout'
 import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
 import { PictureInput, Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
-import AiFeedback from '@/components/AiFeedback'
 
 
 const NewListing = ({ cancel, saveListing, listing }) => {
@@ -12,7 +11,6 @@ const NewListing = ({ cancel, saveListing, listing }) => {
       title={""}
       image={listing.picture}
       left={<>
-        <AiFeedback /><br />
         {listing.imageDescription}
       </>}
       description={
