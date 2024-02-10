@@ -14,7 +14,9 @@ const ListingPriceInput = ({ name, label, rules, register, error, placeholder, s
   }
 
   return (
-    <div className="d-flex flex-row">
+      <Form.Group className="mp-3" controlname={name}>
+      <Form.Label>{label}</Form.Label>
+      <div className="d-flex flex-row">
       <Form.Check
         type="switch"
         className={cn('px-5 switch-lg', isFree && 'text-success'  )}
@@ -38,14 +40,14 @@ const ListingPriceInput = ({ name, label, rules, register, error, placeholder, s
         />
         <InputGroup.Text>.00</InputGroup.Text>
       </InputGroup>
-
+      </div>
 
       {error && (
         <Form.Text className="text-danger">
           {error.message}
         </Form.Text>
       )}
-    </div>
+    </Form.Group>
   )
 }
 

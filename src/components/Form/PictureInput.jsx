@@ -65,6 +65,7 @@ const PictureInput = ({ name, label, rules, placeholder, register, error, setVal
         <Card.Img
           variant="top"
           src={`${base64String}`}
+          style={{ maxHeight: '80vh' }}
         />
         <Card.Footer>
           <Nav variant="pills" defaultActiveKey="#first">

@@ -3,6 +3,7 @@ import React from 'react';
 import ListingLayout from '@/components/Listing/Layout'
 import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
 import { PictureInput, Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
+import AiFeedback from '@/components/AiFeedback'
 
 
 const NewListing = ({ cancel, saveListing, listing }) => {
@@ -10,20 +11,23 @@ const NewListing = ({ cancel, saveListing, listing }) => {
     <ListingLayout
       title={""}
       image={listing.picture}
-      left={listing.description}
+      left={<>
+        <AiFeedback />
+        {listing.imageDescription}
+      </>}
       description={
 
         <Form onSubmit={saveListing} defaultValues={listing}>
           <Input
             name="title"
-            label="title"
+            label="Titre"
             rules={{
               required: "Entrez un titre",
             }}
           />
           <Textarea
             name="description"
-            label="description"
+            label="Description"
             rules={{
               required: "Entrez une description",
             }}
@@ -31,7 +35,7 @@ const NewListing = ({ cancel, saveListing, listing }) => {
           />
           <Input
             name="tags"
-            label="tags"
+            label="Tags"
             rules={{
               required: "Entrez des tags",
             }}
@@ -39,7 +43,7 @@ const NewListing = ({ cancel, saveListing, listing }) => {
 
           <ListingPriceInput
             name="price"
-            label="Price"
+            label="Prix"
             rules={{
               required: "Entrez un prix",
             }}
@@ -50,7 +54,7 @@ const NewListing = ({ cancel, saveListing, listing }) => {
               <Button variant="link" className="px-0" onClick={cancel}>X Cancel</Button>
             </Nav.Item>
             <Nav.Item className="ml-auto">
-              <Button variant="success" type="submit">Publish</Button>
+              <Button variant="success" type="submit">Publier</Button>
             </Nav.Item>
           </Nav>
         </Form>
