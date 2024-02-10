@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "types": "tsc"
+    "types": "tsc",
+    "supabase-types": "supabase gen types typescript --project-id nchfhnhquozlugyqknuf > ./src/types/database.types.ts"
   },
   "dependencies": {
     "@supabase/auth-ui-react": "^0.4.2",
