@@ -20,13 +20,13 @@ const ConfirmInput: React.FC<ConfirmInputProps> = ({ disabled }) => {
       return;
     }
 
-    const newMessage: Message = {
-      id: "m-" + Math.floor(Math.random() * 10000) , // Replace with a proper ID generation method
-      user: currentUser,
-      content: message,
-      timestamp: new Date().toISOString(),
-      type: 'text',
-    };
+    const newMessage = new Message(
+      currentUser,
+      message,
+      new Date().toISOString(),
+      "m-" + Math.floor(Math.random() * 10000) , // Replace with a proper ID generation method
+      'text'
+    );
 
     addMessage(newMessage);
 

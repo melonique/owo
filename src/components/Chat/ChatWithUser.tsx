@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { Card, Button, Row, Col } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import ChatTextInput from './TextInput';
 import ChatMessage from './Message';
 import ChatMessages from './ChatMessages';
-import { Conversation, Message, User } from '@/types/ChatTypes';
+import { Conversation, User } from '@/types/ChatTypes';
 import { useLiveChat } from '@/contexts/useLiveChat';
 import { IoIosMenu } from 'react-icons/io';
 

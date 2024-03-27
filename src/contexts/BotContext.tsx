@@ -1,30 +1,27 @@
-import React, { useEffect, createContext, useContext, useState, ReactNode, useCallback } from "react";
+import React, { useEffect, createContext, useContext, useState, ReactNode } from "react";
 import { OFFER_BOT_CONFIG } from '@/bots/offer/config'
 import { SEARCH_BOT_CONFIG } from '@/bots/search/config'
 import { Message, BotMessage, BotMode } from "@/types/ChatTypes";
 import { useChat } from "./ChatContext";
 
 interface BotContextData {
-  botMemory: any;
+  botMemory: Record<string, string>;
   botMode: BotMode;
   resetBot: () => void;
 }
 
 const BotContext = createContext<BotContextData | undefined>(undefined);
 
-const DEFAULT_QUESTIONS: { search: BotMessage[], offer: BotMessage[]} = { offer: OFFER_BOT_CONFIG.messages, search: SEARCH_BOT_CONFIG.messages };
+const DEFAULT_QUESTIONS: { search: BotMessage[], offer: BotMessage[] } = { offer: OFFER_BOT_CONFIG.messages, search: SEARCH_BOT_CONFIG.messages };
 
 interface BotProviderProps {
   children: ReactNode;
-  botId: 'offer' | 'search';
+  botId: 'offer' | 'search' | undefined;
 }
 
 export const BotProvider = ({ children, botId }: BotProviderProps) => {
   const [currentBotMessageIndex, setCurrentBotMessageIndex] = useState(0);
-  const [botMemory, setBotMemory] = useState({});
-  const addUserResponse = (label: string, value: string):void => {
-    setBotMemory((botMemory) => ({...botMemory, [label]: value}))
-  }
+  const [botMemory, setBotMemory] = useState<Record<string, string>>({});
   const [botMode, setBotMode] = useState<BotMode>('talk');
 
   const { getMessages, currentUser, addMessage, resetBotConversations: resetConversations } = useChat();
@@ -32,55 +29,38 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
   const currentMessages = getMessages();
 
   const getMessage = (index: number): BotMessage | null => {
-    // si je ne suis pas au bout de ma liste
     if (!botId || !DEFAULT_QUESTIONS[botId]) {
-      return null
+      return null;
     }
-    if (index < DEFAULT_QUESTIONS[botId].length) {
 
-      const nextQuestion = DEFAULT_QUESTIONS[botId][index]
-      // si ma question est pas null ou undefined pareil
-      return nextQuestion || null
+    return DEFAULT_QUESTIONS[botId][index] ?? null;
+  }
+
+  const sendMessageAt = (index: number): void => {
+    const msg = getMessage(index)
+    if (msg) {
+      addMessage(msg.updateMsg(botMemory));
+      setBotMode(msg.mode);
     }
-    return null
   }
 
   const resetBot = () => {
     setBotMemory({})
     setCurrentBotMessageIndex(0)
     resetConversations()
-    const msg = getMessage(0)
-    if (msg) {
-      addMessage(msg.updateMsg({}));
-      setBotMode(msg.mode);
-    }
+    sendMessageAt(0)
   }
 
   const sendBotMessage = () => {
-    const newIndex = currentBotMessageIndex + 1
-    // change for next question
+    const newIndex = currentBotMessageIndex + 1;
     setCurrentBotMessageIndex(newIndex);
-    // delay the sending of the next message
+
     setTimeout(() => {
-      const msg = getMessage(newIndex)
-      if (msg) {
-        setBotMode(msg.mode);
-        addMessage(msg.updateMsg(botMemory));
-      }
+      sendMessageAt(newIndex);
     }, 500);
   }
 
-  // send first message
-  useEffect(() => {
-    const msg = getMessage(0)
-    setCurrentBotMessageIndex(0);
-    if (msg) {
-      resetConversations();
-      setBotMode(msg.mode);
-      addMessage(msg.updateMsg(botMemory));
-    }
-  }, [botId])
-
+  useEffect(resetBot, [botId])
 
   // Actions on new messages added to conversation
   useEffect(() => {
@@ -93,11 +73,10 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
       case 'listen':
       case 'listen-picture':
       case 'listen-confirm':
-        // if message from current user
-        if (lastMessage && lastMessage.user.id === currentUser.id) {
+        if (lastMessage.authorIs(currentUser)) {
           const lastBotMessage = getMessage(currentBotMessageIndex)
           if(lastBotMessage) {
-            addUserResponse(lastBotMessage.label, lastMessage.content);
+            setBotMemory((botMemory) => ({ ...botMemory, [lastBotMessage.label]: lastMessage.content }))
             sendBotMessage();
           }
         }
@@ -106,16 +85,18 @@ export const BotProvider = ({ children, botId }: BotProviderProps) => {
         if (isBotMessage(lastMessage)) {
           sendBotMessage()
         }
+        break;
       case 'process':
         if (isBotMessage(lastMessage)) {
           lastMessage.action?.(botMemory)
             .then((result) => {
               if (result) {
-                addUserResponse(lastMessage.label, result);
+                setBotMemory((botMemory) => ({ ...botMemory, [lastMessage.label]: result }))
                 sendBotMessage();
               }
             })
         }
+        break;
       default:
         break;
     }
