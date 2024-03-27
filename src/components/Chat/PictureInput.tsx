@@ -38,13 +38,13 @@ const PicutreInput: React.FC<PicutreInputProps> = ({ disabled }) => {
 
     const publicBaseUrl = 'https://nchfhnhquozlugyqknuf.supabase.co/storage/v1/object/public/offers'
 
-    const newMessage: Message = {
-      id: uuidv4(),
-      user: currentUser,
-      content: `${publicBaseUrl}/${filePath}`,
-      timestamp: new Date().toISOString(),
-      type: "image"
-    };
+    const newMessage = new Message(
+      currentUser,
+      `${publicBaseUrl}/${filePath}`,
+      new Date().toISOString(),
+      uuidv4(),
+      'image'
+    )
 
     addMessage(newMessage);
 
@@ -55,13 +55,13 @@ const PicutreInput: React.FC<PicutreInputProps> = ({ disabled }) => {
   const handleCancelMessage = () => {
     setFile(null);
 
-    const cancelMessage: Message = {
-      id: uuidv4(),
-      user: currentUser,
-      content: 'NULL',
-      timestamp: new Date().toISOString(),
-      type: 'text',
-    };
+    const cancelMessage = new Message (
+      currentUser,
+      'NULL',
+      new Date().toISOString(),
+      uuidv4(),
+      'text'
+    )
 
     addMessage(cancelMessage);
   }

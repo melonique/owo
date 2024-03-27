@@ -9,13 +9,13 @@ type LiveChatProps = {
 }
 
 const onNewMessage = (syncMessage: (message: Message) => void) => (senderMessage: SenderMessage): void => {
-    const newMessage: Message = {
-        id: senderMessage.id,
-        user: { id: senderMessage.sender, avatar: `https://api.multiavatar.com/${senderMessage.sender}.png` },
-        content: senderMessage.message,
-        timestamp: senderMessage.sent_at,
-        type: senderMessage.type
-    };
+    const newMessage = new Message(
+        { id: senderMessage.sender, avatar: `https://api.multiavatar.com/${senderMessage.sender}.png` },
+        senderMessage.message,
+        senderMessage.sent_at,
+        senderMessage.id,
+        senderMessage.type,
+    )
 
     syncMessage(newMessage)
 }
